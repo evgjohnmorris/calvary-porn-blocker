@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calvary Sexual Immorality Blocker</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- SETUP VIEW (First time) -->
+<div class="view-container" id="setup-view" style="display: none;">
+    <div class="glass-panel auth-box">
+        <h1>Calvary Sexual Immorality Blocker Setup</h1>
+        <p>Create your Admin Account to initialize the system.</p>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="setup-username" placeholder="Admin Username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="setup-password" placeholder="Secure Password">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="
+            Auth.register(
+                document.getElementById('setup-username').value,
+                document.getElementById('setup-password').value
+            ).then(res => {
+                if(res.success) { alert('Setup complete! Please login.'); App.showView('login-view'); }
+                else alert(res.message);
+            })
+        ">Complete Setup</button>
+    </div>
+</div>
+
+<!-- LOGIN VIEW -->
+<div class="view-container" id="login-view" style="display: none;">
+    <div class="glass-panel auth-box">
+        <h1>Calvary Sexual Immorality Blocker Login</h1>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="login-username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Password">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="
+            Auth.login(
+                document.getElementById('login-username').value,
+                document.getElementById('login-password').value
+            ).then(res => {
+                if(res.success) { App.showView('dashboard-view'); }
+                else { 
+                    const err = document.getElementById('login-error');
+                    err.style.display = 'block';
+                    err.innerText = res.message;
+                }
+            })
+        ">Login</button>
+        <div id="login-error" class="alert alert-error" style="margin-top: 1rem;"></div>
+    </div>
+</div>
+
+<!-- DASHBOARD VIEW -->
+<div id="dashboard-view" style="display: none;">
+    <div class="dashboard-wrapper">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Calvary Blocker Admin</h2>
+                <p style="font-size: 0.8rem;">System Administration</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-tab="tab-overview">Overview</div>
+                <div class="nav-item" data-tab="tab-filtering">Filtering & Plugins</div>
+                <div class="nav-item" data-tab="tab-network">Network & VPN</div>
+                <div class="nav-item" data-tab="tab-personalization">Personalization</div>
+                <div class="nav-item" data-tab="tab-accountability">Accountability</div>
+                <div class="nav-item" data-tab="tab-scanner">System Scanner</div>
+                <div class="nav-item" data-tab="tab-logs">Developer & Logs</div>
+            </nav>
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem;">
+                <button class="btn btn-block" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-color); border: 1px solid rgba(139, 92, 246, 0.3);" onclick="Dashboard.openHelpModal()">Ministry Setup Guide</button>
+                <button class="btn btn-block" style="background: rgba(255,255,255,0.1); color: white;" onclick="Auth.logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            
+            <!-- OVERVIEW TAB -->
+            <div id="tab-overview" class="tab-pane active">
+                <h1>System Overview</h1>
+                <div class="card flex-between">
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted);">Current Filter Level</div>
+                        <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.5rem;" id="overview-filter-badge" class="status-badge status-strict">Strict</div>
+                    </div>
+                </div>
+                <div class="card flex-between" style="border-color: var(--danger-color);">
+                    <div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted);">Lockdown Mode</div>
+                        <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.5rem;" id="overview-lockdown-badge" class="status-badge status-off">Inactive</div>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem; margin-bottom: 0;">Locks the system to strict filtering and prevents unauthorized DNS/VPN changes.</p>
+                    </div>
+                    <div>
+                        <button id="overview-lockdown-btn" class="btn btn-danger" onclick="Dashboard.updateSettings({ lockdownMode: !Dashboard.settings.lockdownMode })">Enable Lockdown Mode</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTERING & PLUGINS TAB -->
+            <div id="tab-filtering" class="tab-pane">
+                <h1>Filtering & Plugins</h1>
+                
+                <h2>Global Protection Level</h2>
+                <div class="card">
+                    <div class="form-group">
+                        <label>Filter Level</label>
+                        <select id="filter-select" onchange="Dashboard.updateSettings({ filterLevel: this.value })">
+                            <option value="strict">Strict (Blocks all adult content)</option>
+                            <option value="moderate">Moderate (Filters search results)</option>
+                            <option value="off">Off (No filtering)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h2>Platform Specific Plugins</h2>
+                <div id="plugins-list">
+                    <!-- Plugins injected dynamically -->
+                </div>
+            </div>
+
+            <!-- NETWORK & VPN TAB -->
+            <div id="tab-network" class="tab-pane">
+                <h1>Network & VPN Settings</h1>
+                
+                <div class="card">
+                    <h3>Custom DNS Configuration</h3>
+                    <div class="form-group">
+                        <label>Primary DNS</label>
+                        <input type="text" id="dns-primary" placeholder="e.g., 1.1.1.3">
+                    </div>
+                    <div class="form-group">
+                        <label>Secondary DNS</label>
+                        <input type="text" id="dns-secondary" placeholder="e.g., 1.0.0.3">
+                    </div>
+                    <button class="btn btn-primary" onclick="Dashboard.saveNetwork()">Save Network</button>
+                </div>
+
+                <div class="card">
+                    <h3>SoftEther VPN Gateway</h3>
+                    <div class="form-group">
+                        <label>Hostname / IP</label>
+                        <input type="text" id="vpn-host" placeholder="vpn.example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Virtual Hub</label>
+                        <input type="text" id="vpn-hub" placeholder="DEFAULT">
+                    </div>
+                    <div class="form-group">
+                        <label>Port</label>
+                        <input type="number" id="vpn-port" placeholder="443">
+                    </div>
+                    <button class="btn btn-primary" onclick="Dashboard.saveVPN()">Save VPN</button>
+                </div>
+            </div>
+
+            <!-- PERSONALIZATION TAB -->
+            <div id="tab-personalization" class="tab-pane">
+                <h1>Personalization</h1>
+                
+                <div class="card">
+                    <div class="form-group">
+                        <label>Theme</label>
+                        <select id="theme-select">
+                            <option value="dark">Dark Mode (Default)</option>
+                            <option value="light">Light Mode</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Accent Color</label>
+                        <input type="color" id="accent-color" style="height: 40px; padding: 0.2rem; cursor: pointer;">
+                    </div>
+                    <button class="btn btn-primary" onclick="Dashboard.savePersonalization()">Apply Personalization</button>
+                </div>
+            </div>
+
+            <!-- ACCOUNTABILITY TAB -->
+            <div id="tab-accountability" class="tab-pane">
+                <h1>Accountability Partners & Alerts</h1>
+                <p>Configure partners who will receive alerts for high-severity events.</p>
+                
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="form-group flex-between" style="align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <label style="margin-bottom: 0;">Enable Alerts</label>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Activate email and SMS notifications</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="accountability-enabled" onchange="Dashboard.saveAccountability()">
+                            <span></span>
+                        </label>
+                    </div>
+                    
+                    <h3>Partners List</h3>
+                    <div id="partners-list" style="margin-bottom: 1rem;"></div>
+                    
+                    <div class="form-group" style="display: flex; gap: 10px;">
+                        <input type="email" id="new-partner-email" placeholder="Email Address (partner@example.com)" style="flex: 1;">
+                        <input type="text" id="new-partner-phone" placeholder="Phone Number (+1234567890)" style="flex: 1;">
+                        <button class="btn btn-primary" onclick="Dashboard.addPartner()">Add Partner</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <h3>SMTP Configuration (Email)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Use your own SMTP server for sending alerts. If left blank, a test Ethereal account will be used.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>SMTP Host</label>
+                            <input type="text" id="smtp-host" placeholder="smtp.gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>SMTP Port</label>
+                            <input type="number" id="smtp-port" placeholder="587">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>SMTP User</label>
+                            <input type="text" id="smtp-user" placeholder="alerts@organization.org">
+                        </div>
+                        <div class="form-group">
+                            <label>SMTP Password</label>
+                            <input type="password" id="smtp-pass" placeholder="Secure Password">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="Dashboard.saveAccountability()">Save Credentials</button>
+                </div>
+
+                <div class="card">
+                    <h3>Twilio Configuration (SMS)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Configure Twilio to enable immediate SMS alerts for high-severity events.</p>
+                    <div class="form-group">
+                        <label>Account SID</label>
+                        <input type="text" id="twilio-sid" placeholder="ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Auth Token</label>
+                        <input type="password" id="twilio-auth" placeholder="Your Twilio Auth Token">
+                    </div>
+                    <div class="form-group">
+                        <label>From Phone Number</label>
+                        <input type="text" id="twilio-from" placeholder="+1234567890">
+                    </div>
+                    <button class="btn btn-primary" onclick="Dashboard.saveAccountability()">Save Credentials</button>
+                </div>
+            </div>
+
+            <!-- SYSTEM SCANNER TAB -->
+            <div id="tab-scanner" class="tab-pane">
+                <h1>System Porn Scanner</h1>
+                <p>Scan your device's browser history, files, and network for explicit adult material.</p>
+                <div class="card">
+                    <button class="btn btn-primary" onclick="Dashboard.runSystemScan()" id="scan-btn">Start Deep System Scan</button>
+                    <div id="scan-progress" style="display: none; margin-top: 1rem; color: var(--text-muted); align-items: center; gap: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 11-6.219-8.56"></path></svg>
+                        Scanning system internals for explicit content, Wi-Fi profiles, and explicit subscriptions. This may take a moment...
+                        <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
+                    </div>
+                    
+                    <div id="scan-results" style="margin-top: 2rem; display: none;">
+                        <h3>Scan Results</h3>
+                        <div id="scan-results-list" style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; max-height: 300px; overflow-y: auto;">
+                            <!-- Results go here -->
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-danger" onclick="Dashboard.remediateFiles()">Delete & Quarantine Files</button>
+                            <button class="btn btn-danger" onclick="Dashboard.deleteHistory()">Clear Explicit Browser History</button>
+                            <button class="btn" onclick="Dashboard.cancelMemberships()" style="background: var(--surface-light); color: white;">Cancel Memberships</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGS TAB -->
+            <div id="tab-logs" class="tab-pane">
+                <h1>Developer & Logs</h1>
+                <div class="card">
+                    <h3>Audit Log</h3>
+                    <div id="audit-log-content">Loading logs...</div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="
+                        fetch('/api/logs', { headers: { 'Authorization': `Bearer ${Auth.token}` }})
+                        .then(r => r.json())
+                        .then(data => { document.getElementById('audit-log-content').innerText = data.logs; })
+                    ">Refresh Logs</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- HELP / SETUP GUIDE MODAL -->
+<div class="modal-overlay" id="help-modal">
+    <div class="glass-panel modal-content">
+        <div class="modal-header">
+            <h2 style="margin: 0;">Ministry Setup & Compliance Guide</h2>
+            <button class="modal-close" onclick="Dashboard.closeHelpModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="line-height: 1.6; color: var(--text-muted);">
+            <h3 style="color: var(--text-color); margin-top: 1rem;">1. Accountability Partners</h3>
+            <p>To comply with ministry standards, you must configure at least one accountability partner. Go to the <strong>Accountability</strong> tab, enter their email and phone number, and provide SMTP/Twilio credentials to enable automatic alerts for bypass attempts or lockdown changes.</p>
+            
+            <h3 style="color: var(--text-color); margin-top: 1rem;">2. Lockdown Mode</h3>
+            <p>Enable <strong>Lockdown Mode</strong> from the Overview tab to prevent any unauthorized changes to filtering levels or VPN settings. This enforces a strict environment required for compliance.</p>
+
+            <h3 style="color: var(--text-color); margin-top: 1rem;">3. Deep System Scanning</h3>
+            <p>Use the <strong>System Scanner</strong> to periodically audit the device for explicit material or history. Quarantine or delete flagged files to maintain a pure environment.</p>
+
+            <div class="alert alert-success" style="display: block; margin-top: 1.5rem;">
+                <strong>ISO Compliance Note:</strong> This system enforces logging and alerting. All administrative actions are recorded in the Developer & Logs tab.
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top: 1rem;" onclick="Dashboard.closeHelpModal()">I Understand</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/auth.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/app.js"></script>
+
+</body>
+</html>

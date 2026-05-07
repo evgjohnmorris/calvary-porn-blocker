@@ -1,0 +1,43 @@
+{
+  "name": "pornblockeragent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:smoke": "jest tests/smoke.test.js",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "active-win": "^7.7.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dns2": "^2.1.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.0.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.7",
+    "screenshot-desktop": "^1.15.4",
+    "selfsigned": "^5.5.0",
+    "sqlite3": "^6.0.1",
+    "twilio": "^6.0.1",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "supertest": "^6.3.4"
+  },
+  "overrides": {
+    "ip-address": "^10.2.0"
+  }
+}

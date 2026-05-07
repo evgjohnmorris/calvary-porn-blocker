@@ -1,0 +1,20 @@
+[
+  {
+    "id": "reddit-safe",
+    "name": "Reddit Safe Mode",
+    "description": "Forces Safe Mode on Reddit to blur/block NSFW content.",
+    "enabled": true
+  },
+  {
+    "id": "twitter-safe",
+    "name": "Twitter Media Filter",
+    "description": "Hides sensitive media on Twitter/X.",
+    "enabled": false
+  },
+  {
+    "id": "safesearch",
+    "name": "Global SafeSearch",
+    "description": "Enforces SafeSearch and Restricted Mode on Google, Bing, and YouTube via DNS redirection.",
+    "enabled": false
+  }
+]

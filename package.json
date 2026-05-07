@@ -1,0 +1,8 @@
+{
+  "name": "porn-blocker-workspace",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "clean": "pnpm -r clean"
+  }
+}

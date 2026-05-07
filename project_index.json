@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "name": "@pb/browser-ext",
+      "path": "apps/browser-ext"
+    },
+    {
+      "name": "@pb/desktop-client",
+      "path": "apps/desktop-client"
+    },
+    {
+      "name": "@pb/mobile-client",
+      "path": "apps/mobile-client"
+    }
+  ],
+  "packages": [
+    {
+      "name": "@pb/core-engine",
+      "path": "packages/core-engine"
+    },
+    {
+      "name": "@pb/ml-vision",
+      "path": "packages/ml-vision"
+    }
+  ]
+}
