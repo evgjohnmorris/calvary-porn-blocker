@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "service:install": "node install-service.js",
+    "service:uninstall": "node uninstall-service.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:smoke": "jest tests/smoke.test.js",
+    "test:smoke": "jest tests/*.smoke.test.js tests/smoke.test.js",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,json,md}\""
   },
@@ -24,6 +26,7 @@
     "express-rate-limit": "^8.0.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
+    "node-windows": "^1.0.0-beta.8",
     "nodemailer": "^8.0.7",
     "screenshot-desktop": "^1.15.4",
     "selfsigned": "^5.5.0",

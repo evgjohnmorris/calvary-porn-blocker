@@ -13,12 +13,12 @@ const Auth = {
         }
     },
 
-    async register(username, password) {
+    async register(username, password, name, email, securityQuestion, securityAnswer) {
         try {
             const res = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ username, password, name, email, securityQuestion, securityAnswer })
             });
             return await res.json();
         } catch (e) {
@@ -46,5 +46,27 @@ const Auth = {
     logout() {
         this.token = null;
         App.showView('login-view');
+    },
+
+    async resetPassword(recoveryKey, securityAnswer, newPassword) {
+        try {
+            const res = await fetch('/api/account/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ recoveryKey, securityAnswer, newPassword })
+            });
+            return await res.json();
+        } catch (e) {
+            return { success: false, message: 'Network error' };
+        }
+    },
+
+    async fetchSecurityQuestion() {
+        try {
+            const res = await fetch('/api/account/security-question');
+            return await res.json();
+        } catch (e) {
+            return { success: false };
+        }
     }
 };

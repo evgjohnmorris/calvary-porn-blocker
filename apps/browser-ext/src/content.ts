@@ -54,6 +54,7 @@ function evaluateAndObfuscate() {
 
 // Run initially
 evaluateAndObfuscate();
+enforceRedditSafeSearch();
 
 // Observe for DOM mutations to run on newly added content
 const observer = new MutationObserver((mutations) => {
@@ -71,3 +72,65 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
+
+function enforceRedditSafeSearch() {
+    if (!window.location.hostname.includes('reddit.com')) return;
+
+    // Enforce SafeSearch cookies
+    document.cookie = "over18=0; domain=.reddit.com; path=/; max-age=31536000";
+    document.cookie = "safe_search=1; domain=.reddit.com; path=/; max-age=31536000";
+    
+    // Continuously check for the "Show mature content" toggle in settings
+    setInterval(() => {
+        // Find elements that contain the text
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        let node;
+        const labels = [];
+        while ((node = walker.nextNode())) {
+            if (node.nodeValue?.includes("Show mature content (I'm over 18)") || 
+                node.nodeValue?.includes("Show mature content")) {
+                if (node.parentElement) labels.push(node.parentElement);
+            }
+        }
+        
+        for (const label of labels) {
+            // Traverse up to find the row container
+            let container = label.parentElement;
+            for (let i = 0; i < 4; i++) {
+                if (container && (container.querySelector('button[role="switch"]') || container.querySelector('input[type="checkbox"]'))) {
+                    break;
+                }
+                container = container?.parentElement || null;
+            }
+            
+            if (container) {
+                const switchEl = container.querySelector('button[role="switch"], input[type="checkbox"]');
+                if (switchEl) {
+                    const isChecked = switchEl.getAttribute('aria-checked') === 'true' || (switchEl as HTMLInputElement).checked;
+                    
+                    if (isChecked) {
+                        // Attempt to click it to turn it off
+                        (switchEl as HTMLElement).click();
+                        console.log("Calvary Blocker: Turned off Reddit mature content toggle.");
+                    }
+                    
+                    // Disable user interaction
+                    (switchEl as HTMLElement).style.pointerEvents = 'none';
+                    (switchEl as HTMLElement).style.opacity = '0.5';
+                    
+                    // Add an indicator badge if not already added
+                    if (!container.querySelector('.pb-lock')) {
+                        const lock = document.createElement('span');
+                        lock.className = 'pb-lock';
+                        lock.innerHTML = ' 🔒 (Locked by Calvary Blocker)';
+                        lock.style.color = '#ff4444';
+                        lock.style.fontSize = '12px';
+                        lock.style.fontWeight = 'bold';
+                        lock.style.marginLeft = '8px';
+                        label.appendChild(lock);
+                    }
+                }
+            }
+        }
+    }, 1000);
+}

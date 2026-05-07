@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const { exec } = require('child_process');
 const { applyFilter, verifyDNS } = require('./system/dns');
 const { startDNSServer } = require('./system/dns-server');
@@ -42,6 +43,21 @@ function loadData(filePath, defaultData = {}, isEncrypted = false) {
 function saveData(filePath, data, isEncrypted = false) {
     const payload = isEncrypted ? encryptSettings(data) : data;
     fs.writeFileSync(filePath, JSON.stringify(payload, null, 2), 'utf8');
+}
+
+// Utility to generate a 16-character recovery key
+function generateRecoveryKey() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let key = '';
+    const bytes = crypto.randomBytes(16);
+    for (let i = 0; i < 16; i++) {
+        key += chars[bytes[i] % chars.length];
+    }
+    return key;
+}
+
+function formatRecoveryKey(key) {
+    return key.match(/.{1,4}/g).join('-');
 }
 
 // ISO 27001 Tamper-Evident Audit Logger
@@ -113,16 +129,31 @@ app.post('/api/register', async (req, res) => {
         return res.status(403).json({ success: false, message: 'Already setup' });
     }
     
-    const { username, password } = req.body;
+    const { username, password, name, email, securityQuestion, securityAnswer } = req.body;
     if (!username || !password) return res.status(400).json({ success: false, message: 'Username and password required' });
 
     try {
         const adminHash = await bcrypt.hash(password, 10);
+        const recoveryKey = generateRecoveryKey();
+        const recoveryHash = await bcrypt.hash(recoveryKey, 10);
+        
+        let securityAnswerHash = null;
+        if (securityAnswer) {
+            securityAnswerHash = await bcrypt.hash(securityAnswer.toLowerCase().trim(), 10);
+        }
+
         users.adminUsername = username;
         users.adminHash = adminHash;
+        users.recoveryHash = recoveryHash;
+        users.adminName = name || '';
+        users.adminEmail = email || '';
+        users.securityQuestion = securityQuestion || '';
+        users.securityAnswerHash = securityAnswerHash;
+
         saveData(USERS_FILE, users);
+        
         logAudit('SETUP_COMPLETE', req.ip, `User ${username} created`);
-        res.json({ success: true, message: 'Setup complete' });
+        res.json({ success: true, message: 'Setup complete', recoveryKey: formatRecoveryKey(recoveryKey) });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Error during setup' });
     }
@@ -166,6 +197,165 @@ function authenticateToken(req, res, next) {
         next();
     });
 }
+
+// API: Account Update
+app.post('/api/account/update', authenticateToken, async (req, res) => {
+    const users = loadData(USERS_FILE, {});
+    const { username, password, name, email, securityQuestion, securityAnswer } = req.body;
+    
+    let updated = false;
+    let logMessage = [];
+
+    if (username && username !== users.adminUsername) {
+        users.adminUsername = username;
+        updated = true;
+        logMessage.push('username updated');
+    }
+
+    if (password) {
+        users.adminHash = await bcrypt.hash(password, 10);
+        updated = true;
+        logMessage.push('password updated');
+    }
+    
+    if (name !== undefined && name !== users.adminName) {
+        users.adminName = name;
+        updated = true;
+        logMessage.push('name updated');
+    }
+
+    if (email !== undefined && email !== users.adminEmail) {
+        users.adminEmail = email;
+        updated = true;
+        logMessage.push('email updated');
+    }
+    
+    if (securityQuestion !== undefined && securityAnswer) {
+        users.securityQuestion = securityQuestion;
+        users.securityAnswerHash = await bcrypt.hash(securityAnswer.toLowerCase().trim(), 10);
+        updated = true;
+        logMessage.push('security question updated');
+    }
+
+    if (updated) {
+        saveData(USERS_FILE, users);
+        logAudit('ACCOUNT_UPDATED', req.ip, logMessage.join(', '));
+        res.json({ success: true, message: 'Account updated successfully' });
+    } else {
+        res.json({ success: true, message: 'No changes made' });
+    }
+});
+
+// API: Get Profile Info
+app.get('/api/account/profile', authenticateToken, (req, res) => {
+    const users = loadData(USERS_FILE, {});
+    res.json({
+        success: true,
+        username: users.adminUsername || '',
+        name: users.adminName || '',
+        email: users.adminEmail || '',
+        securityQuestion: users.securityQuestion || ''
+    });
+});
+
+// API: Get Security Question for Recovery
+app.get('/api/account/security-question', (req, res) => {
+    const users = loadData(USERS_FILE, {});
+    if (users.securityQuestion) {
+        res.json({ success: true, securityQuestion: users.securityQuestion });
+    } else {
+        res.json({ success: false, message: 'No security question set' });
+    }
+});
+
+// API: Generate New Recovery Key
+app.get('/api/account/recovery-key', authenticateToken, async (req, res) => {
+    const users = loadData(USERS_FILE, {});
+    try {
+        const recoveryKey = generateRecoveryKey();
+        users.recoveryHash = await bcrypt.hash(recoveryKey, 10);
+        saveData(USERS_FILE, users);
+        logAudit('RECOVERY_KEY_GENERATED', req.ip, 'New recovery key generated by user');
+        res.json({ success: true, recoveryKey: formatRecoveryKey(recoveryKey) });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error generating recovery key' });
+    }
+});
+
+// API: Reset Password
+app.post('/api/account/reset-password', async (req, res) => {
+    const users = loadData(USERS_FILE, {});
+    const { recoveryKey, securityAnswer, newPassword } = req.body;
+
+    if (!newPassword) {
+        return res.status(400).json({ success: false, message: 'New password is required' });
+    }
+
+    try {
+        let match = false;
+
+        if (recoveryKey && users.recoveryHash) {
+            const normalizedKey = recoveryKey.replace(/-/g, '').toUpperCase();
+            match = await bcrypt.compare(normalizedKey, users.recoveryHash);
+        } else if (securityAnswer && users.securityAnswerHash) {
+            match = await bcrypt.compare(securityAnswer.toLowerCase().trim(), users.securityAnswerHash);
+        }
+
+        if (match) {
+            users.adminHash = await bcrypt.hash(newPassword, 10);
+            const newRecoveryKey = generateRecoveryKey();
+            users.recoveryHash = await bcrypt.hash(newRecoveryKey, 10);
+            
+            saveData(USERS_FILE, users);
+            logAudit('PASSWORD_RESET', req.ip, 'Password reset via recovery key or security question');
+            res.json({ success: true, message: 'Password reset successfully', recoveryKey: formatRecoveryKey(newRecoveryKey) });
+        } else {
+            logAudit('PASSWORD_RESET_FAILED', req.ip, 'Invalid recovery method attempted');
+            res.status(401).json({ success: false, message: 'Invalid recovery key or security answer' });
+        }
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error resetting password' });
+    }
+});
+
+// API: Delete Account / Factory Reset
+app.post('/api/account/delete', authenticateToken, async (req, res) => {
+    try {
+        const { password } = req.body;
+        const users = loadData(USERS_FILE, {});
+        
+        if (password) {
+             const match = await bcrypt.compare(password, users.adminHash);
+             if (!match) {
+                 logAudit('ACCOUNT_DELETE_FAILED', req.ip, 'Invalid password provided for account deletion.');
+                 return res.status(401).json({ success: false, message: 'Invalid password for account deletion.' });
+             }
+        } else {
+            return res.status(400).json({ success: false, message: 'Password required to delete account.' });
+        }
+
+        if (fs.existsSync(USERS_FILE)) {
+            fs.unlinkSync(USERS_FILE);
+        }
+        
+        // Reset settings
+        currentSettings = {
+            filterLevel: 'off',
+            lockdownMode: false,
+            network: { dnsPrimary: '', dnsSecondary: '' },
+            vpn: { hostname: '', hub: '', port: '' },
+            personalization: { theme: 'dark', accentColor: '#4f46e5' },
+            accountability: { enabled: false, partners: [] }
+        };
+        saveData(SETTINGS_FILE, currentSettings);
+        applyFilter('off'); // Turn off the filter just in case
+
+        logAudit('ACCOUNT_DELETED', req.ip, 'User deleted account and factory reset system');
+        res.json({ success: true, message: 'Account deleted and system reset.' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Error deleting account' });
+    }
+});
 
 const { loadPlugins, togglePlugin } = require('./plugins');
 

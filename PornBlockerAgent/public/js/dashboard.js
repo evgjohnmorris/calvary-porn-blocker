@@ -14,6 +14,14 @@ const Dashboard = {
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+        // Start auto-refreshing settings
+        this.startPolling();
+        
+        // Fetch profile
+        if (Auth.token) {
+            this.fetchProfile();
+        }
     },
 
     async fetchSettings() {
@@ -22,15 +30,27 @@ const Dashboard = {
                 headers: { 'Authorization': `Bearer ${Auth.token}` }
             });
             if (res.status === 401 || res.status === 403) {
-                Auth.logout();
+                if (Auth.token) Auth.logout();
                 return;
             }
             const data = await res.json();
-            this.settings = data;
-            this.render();
+            // Avoid full re-render if settings haven't changed to prevent UI flicker
+            if (JSON.stringify(this.settings) !== JSON.stringify(data)) {
+                this.settings = data;
+                this.render();
+            }
         } catch (e) {
             console.error('Failed to fetch settings', e);
         }
+    },
+
+    startPolling() {
+        if (this.pollInterval) clearInterval(this.pollInterval);
+        this.pollInterval = setInterval(() => {
+            if (Auth.token) {
+                this.fetchSettings();
+            }
+        }, 5000);
     },
 
     async updateSettings(payload) {
@@ -87,8 +107,10 @@ const Dashboard = {
         }
 
         // Filtering & Plugins Tab
-        const filterSelect = document.getElementById('filter-select');
-        if (filterSelect) filterSelect.value = this.settings.filterLevel;
+        const mainBlockerSwitch = document.getElementById('main-blocker-switch');
+        if (mainBlockerSwitch) {
+            mainBlockerSwitch.checked = (this.settings.filterLevel === 'strict' || this.settings.filterLevel === 'moderate');
+        }
 
         const pluginsContainer = document.getElementById('plugins-list');
         if (pluginsContainer && this.settings.plugins) {
@@ -346,5 +368,128 @@ const Dashboard = {
     closeHelpModal() {
         const modal = document.getElementById('help-modal');
         if(modal) modal.classList.remove('active');
+    },
+
+    async fetchProfile() {
+        try {
+            const res = await fetch('/api/account/profile', {
+                headers: { 'Authorization': `Bearer ${Auth.token}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                const nameInput = document.getElementById('account-name');
+                const emailInput = document.getElementById('account-email');
+                const questionInput = document.getElementById('account-security-question');
+                if (nameInput) nameInput.value = data.name || '';
+                if (emailInput) emailInput.value = data.email || '';
+                if (questionInput) questionInput.value = data.securityQuestion || '';
+            }
+        } catch (e) {
+            console.error('Failed to fetch profile', e);
+        }
+    },
+
+    async updateAccount() {
+        const nameInput = document.getElementById('account-name');
+        const emailInput = document.getElementById('account-email');
+        const usernameInput = document.getElementById('account-username');
+        const passwordInput = document.getElementById('account-password');
+        const secQuestionInput = document.getElementById('account-security-question');
+        const secAnswerInput = document.getElementById('account-security-answer');
+        const msgDiv = document.getElementById('account-update-msg');
+        
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const username = usernameInput ? usernameInput.value.trim() : '';
+        const password = passwordInput ? passwordInput.value : '';
+        const securityQuestion = secQuestionInput ? secQuestionInput.value.trim() : '';
+        const securityAnswer = secAnswerInput ? secAnswerInput.value : '';
+
+        if (!name && !email && !username && !password && !securityQuestion && !securityAnswer) {
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert alert-error';
+            msgDiv.innerText = 'No changes provided.';
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/account/update', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Auth.token}` 
+                },
+                body: JSON.stringify({ name, email, username, password, securityQuestion, securityAnswer })
+            });
+            const data = await res.json();
+            
+            msgDiv.style.display = 'block';
+            if (data.success) {
+                msgDiv.className = 'alert alert-success';
+                msgDiv.innerText = data.message;
+                if (usernameInput) usernameInput.value = '';
+                if (passwordInput) passwordInput.value = '';
+                if (secAnswerInput) secAnswerInput.value = '';
+            } else {
+                msgDiv.className = 'alert alert-error';
+                msgDiv.innerText = data.message;
+            }
+        } catch(e) {
+            msgDiv.style.display = 'block';
+            msgDiv.className = 'alert alert-error';
+            msgDiv.innerText = 'Failed to update account.';
+        }
+    },
+
+    async deleteAccount() {
+        const passwordInput = document.getElementById('delete-account-password');
+        const password = passwordInput ? passwordInput.value : '';
+        
+        if (!password) {
+            alert('Please enter your password to confirm account deletion.');
+            return;
+        }
+
+        if (!confirm('WARNING: This will permanently delete your account, wipe all settings, and factory reset the system. This cannot be undone. Are you absolutely sure?')) return;
+        
+        try {
+            const res = await fetch('/api/account/delete', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Auth.token}` 
+                },
+                body: JSON.stringify({ password })
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+                alert('Account successfully deleted. System reset to factory defaults.');
+                Auth.logout();
+                window.location.reload();
+            } else {
+                alert('Failed to delete account: ' + data.message);
+            }
+        } catch(e) {
+            alert('An error occurred during account deletion.');
+        }
+    },
+
+    async generateRecoveryKey() {
+        if (!confirm('Generating a new Recovery Key will invalidate your old one. Continue?')) return;
+        try {
+            const res = await fetch('/api/account/recovery-key', {
+                headers: { 'Authorization': `Bearer ${Auth.token}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                document.getElementById('display-recovery-key').innerText = data.recoveryKey;
+                document.getElementById('recovery-key-modal').style.display = 'flex';
+            } else {
+                alert('Failed to generate recovery key: ' + data.message);
+            }
+        } catch(e) {
+            alert('Failed to generate recovery key.');
+        }
     }
 };

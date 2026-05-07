@@ -37,7 +37,7 @@ try {
 
 // 2. ISO 27001 - Policy Verification
 console.log(`\n${YELLOW}--> Phase 2: Verifying Documentation & Policy Standards...${RESET}`);
-const policyPath = path.join(__dirname, '..', 'ISO_POLICY.md');
+const policyPath = path.join(__dirname, '..', '..', 'ISO_POLICY.md');
 if (fs.existsSync(policyPath)) {
     printResult('ISO_POLICY.md Exists', true, 'Organizational doctrine is present.');
 } else {

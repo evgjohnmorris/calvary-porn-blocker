@@ -1,4 +1,4 @@
-const { PornBlockerEngine } = require('./dist/index.js');
+import { PornBlockerEngine } from './dist/index.js';
 
 console.log("🔥 Starting Smoke Test...");
 

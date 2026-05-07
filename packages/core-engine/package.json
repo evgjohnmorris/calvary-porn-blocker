@@ -1,6 +1,7 @@
 {
   "name": "@pb/core-engine",
   "version": "1.0.0",
+  "type": "module",
   "description": "Universal blocking and parsing engine.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

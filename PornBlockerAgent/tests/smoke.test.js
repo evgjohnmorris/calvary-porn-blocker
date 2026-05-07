@@ -12,7 +12,7 @@ jest.mock('../system/scanner', () => ({
   cancelMemberships: jest.fn().mockResolvedValue({ message: 'Memberships cancelled' })
 }));
 
-describe('PornBlockerAgent Smoke Tests', () => {
+describe('Calvary Blocker Smoke Tests', () => {
   it('should report setup status successfully', async () => {
     const res = await request(app).get('/api/setup/status');
     expect(res.statusCode).toBe(200);
