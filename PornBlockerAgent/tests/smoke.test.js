@@ -1,8 +1,9 @@
 const request = require('supertest');
+const JWT_SECRET = 'test-secret-for-smoke-tests';
+process.env.JWT_SECRET = JWT_SECRET;
 const app = require('../server');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'placeholder-secret-change-in-prod';
 
 // Mock system/scanner.js to avoid intensive operations during testing
 jest.mock('../system/scanner', () => ({
@@ -68,6 +69,41 @@ describe('Calvary Blocker Smoke Tests', () => {
         .post('/api/settings')
         .set('Authorization', `Bearer ${token}`)
         .send({ ministry_mode: false });
+    });
+
+    it('should update general settings successfully', async () => {
+      const res = await request(app)
+        .post('/api/settings')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          personalization: { theme: 'light', accentColor: '#ff0000' },
+          network: { dnsPrimary: '1.1.1.1', dnsSecondary: '1.0.0.1' },
+          blockedApps: ['TestApp.exe']
+        });
+      
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(res.body.settings.personalization.theme).toBe('light');
+      expect(res.body.settings.network.dnsPrimary).toBe('1.1.1.1');
+      expect(res.body.settings.blockedApps).toContain('TestApp.exe');
+    });
+
+    it('should force strict mode when lockdownMode is enabled', async () => {
+      const res = await request(app)
+        .post('/api/settings')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ lockdownMode: true });
+      
+      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
+      expect(res.body.settings.lockdownMode).toBe(true);
+      expect(res.body.settings.filterLevel).toBe('strict'); // Must be forced to strict
+
+      // Cleanup: disable lockdown mode
+      await request(app)
+        .post('/api/settings')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ lockdownMode: false });
     });
 
     it('should initialize scanner correctly without running actual intensive scans', async () => {

@@ -132,6 +132,19 @@ const Dashboard = {
             pluginsContainer.innerHTML = html;
         }
 
+        const blockedAppsContainer = document.getElementById('blocked-apps-list');
+        if (blockedAppsContainer) {
+            let appHtml = '';
+            (this.settings.blockedApps || []).forEach((app, idx) => {
+                appHtml += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: rgba(255,255,255,0.05); margin-bottom: 0.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-size: 0.9rem; font-family: monospace;">${app}</span>
+                    <button class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="Dashboard.removeBlockedApp(${idx})">Unblock</button>
+                </div>`;
+            });
+            if (appHtml === '') appHtml = '<p style="color: var(--text-muted); font-size: 0.9rem;">No applications blocked.</p>';
+            blockedAppsContainer.innerHTML = appHtml;
+        }
+
         // Network & VPN Tab
         if (this.settings.network) {
             document.getElementById('dns-primary').value = this.settings.network.dnsPrimary || '';
@@ -185,6 +198,13 @@ const Dashboard = {
                 });
                 if (phtml === '') phtml = '<p style="color: var(--text-muted); font-size: 0.9rem;">No partners added.</p>';
                 partnersList.innerHTML = phtml;
+            }
+        }
+        
+        // Cloud Sync 
+        if (this.settings.cloudSync) {
+            if (document.getElementById('cloud-sync-email')) {
+                document.getElementById('cloud-sync-email').value = this.settings.cloudSync.email || '';
             }
         }
     },
@@ -257,6 +277,31 @@ const Dashboard = {
                 twilioSid, twilioAuth, twilioFrom
             } 
         });
+    },
+
+    addBlockedApp() {
+        const input = document.getElementById('new-blocked-app');
+        const appName = input ? input.value.trim() : '';
+        if (!appName) return;
+
+        const currentApps = this.settings.blockedApps ? [...this.settings.blockedApps] : [];
+        if (!currentApps.includes(appName)) {
+            currentApps.push(appName);
+            this.updateSettings({ blockedApps: currentApps });
+        }
+        if (input) input.value = '';
+    },
+
+    removeBlockedApp(index) {
+        const currentApps = this.settings.blockedApps ? [...this.settings.blockedApps] : [];
+        currentApps.splice(index, 1);
+        this.updateSettings({ blockedApps: currentApps });
+    },
+
+    saveCloudSync() {
+        const email = document.getElementById('cloud-sync-email').value.trim();
+        this.updateSettings({ cloudSync: { email } });
+        alert('Cloud sync account updated.');
     },
 
     saveNetwork() {

@@ -34,3 +34,43 @@ jobs:
       working-directory: ./PornBlockerAgent
       env:
         NODE_ENV: test
+
+  desktop-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+    - name: Install pnpm
+      run: npm install -g pnpm
+    - name: Install Dependencies
+      working-directory: ./packages/qa-automation
+      run: pnpm install
+    - name: Install Playwright Browsers
+      working-directory: ./packages/qa-automation
+      run: pnpm exec playwright install --with-deps
+    - name: Run Playwright Desktop Tests
+      working-directory: ./packages/qa-automation
+      run: pnpm test:desktop
+
+  mobile-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+    - name: Install pnpm
+      run: npm install -g pnpm
+    - name: Install Dependencies
+      working-directory: ./packages/qa-automation
+      run: pnpm install
+    - name: Run Appium Mobile/VR Tests
+      working-directory: ./packages/qa-automation
+      # Placeholder for actual Appium invocation, typically requires emulator action
+      run: pnpm test:mobile

@@ -81,12 +81,45 @@ function createTray() {
   }, 5000);
 }
 
-// Make sure the app doesn't quit when all windows are closed
+const { spawn } = require('child_process');
+let agentProcess = null;
+
+function startBackendAgent() {
+  // In production, the path will be relative to resources directory
+  // In dev, it's relative to the project root
+  const isDev = !app.isPackaged;
+  const agentPath = isDev 
+    ? path.join(__dirname, '..', '..', 'PornBlockerAgent', 'server.js')
+    : path.join(process.resourcesPath, 'PornBlockerAgent', 'server.js');
+  const execPath = isDev ? 'node' : process.execPath;
+  const env = isDev ? process.env : { ...process.env, ELECTRON_RUN_AS_NODE: '1' };
+  
+  agentProcess = spawn(execPath, [agentPath], {
+    cwd: path.dirname(agentPath),
+    env
+  });
+
+  agentProcess.stdout.on('data', (data) => console.log(`Agent: ${data}`));
+  agentProcess.stderr.on('data', (data) => console.error(`Agent Error: ${data}`));
+}
+
+// In normal use, keep running in tray when windows close.
+// But allow quit when app.isQuitting is set (e.g. tray Quit or Playwright close()).
 app.on('window-all-closed', (e) => {
-  e.preventDefault();
+  if (!app.isQuitting) {
+    e.preventDefault();
+  }
+});
+
+app.on('before-quit', () => {
+  app.isQuitting = true;
+  if (agentProcess) {
+    agentProcess.kill();
+  }
 });
 
 app.whenReady().then(() => {
+  startBackendAgent();
   createWindow();
   createTray();
 

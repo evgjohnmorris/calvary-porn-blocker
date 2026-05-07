@@ -2,6 +2,14 @@ const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+
+// Fix native module loading when running as a spawned Electron Node process
+if (process.env.ELECTRON_RUN_AS_NODE) {
+  delete process.versions.electron;
+}
+
+
+
 const selfsigned = require('selfsigned');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -12,18 +20,16 @@ const { exec } = require('child_process');
 const { applyFilter, verifyDNS } = require('./system/dns');
 const { startDNSServer } = require('./system/dns-server');
 const { encryptSettings, decryptSettings, generateLogHash } = require('./system/crypto');
+const logger = require('./system/logger');
 const { runSystemScan, startProcessMonitoring } = require('./system/scanner');
 const { sendAlert } = require('./system/alerter');
+const { startAccountabilityMonitor } = require('./system/monitor');
 
 const app = express();
 const PORT = 3456;
-const AUDIT_LOG = path.join(__dirname, 'audit.log');
-const JWT_SECRET = 'placeholder-secret-change-in-prod';
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex');
 const USERS_FILE = path.join(__dirname, 'users.json');
 const SETTINGS_FILE = path.join(__dirname, 'settings.json');
-
-// We need a persistent lastHash for the chain
-let lastLogHash = '0000000000000000000000000000000000000000000000000000000000000000';
 
 function loadData(filePath, defaultData = {}, isEncrypted = false) {
     if (fs.existsSync(filePath)) {
@@ -60,27 +66,9 @@ function formatRecoveryKey(key) {
     return key.match(/.{1,4}/g).join('-');
 }
 
-// ISO 27001 Tamper-Evident Audit Logger
+// ISO 27001 Tamper-Evident Audit Logger via LogOrchestrator
 function logAudit(action, ip, details = '') {
-    const safeDetails = typeof details === 'string' 
-        ? details.replace(/"password":"[^"]+"/gi, '"password":"***"').substring(0, 500) 
-        : details;
-    const timestamp = new Date().toISOString();
-    
-    // Create the raw log line without hash first
-    const rawLine = `[${timestamp}] IP: ${ip} | Action: ${action} | Details: ${safeDetails}`;
-    
-    // Generate HMAC using the previous hash
-    lastLogHash = generateLogHash(lastLogHash, rawLine);
-    
-    const logEntry = `${rawLine} | Hash: ${lastLogHash}\n`;
-    fs.appendFileSync(AUDIT_LOG, logEntry);
-    console.log(logEntry.trim());
-    
-    // Fire off async alert
-    if (typeof currentSettings !== 'undefined') {
-        sendAlert(action, safeDetails, currentSettings).catch(e => console.error(e));
-    }
+    logger.logAudit(action, ip, details, typeof currentSettings !== 'undefined' ? currentSettings : undefined);
 }
 
 // Security Middleware
@@ -106,7 +94,8 @@ let currentSettings = loadData(SETTINGS_FILE, {
     network: { dnsPrimary: '', dnsSecondary: '' },
     vpn: { hostname: '', hub: '', port: '' },
     personalization: { theme: 'dark', accentColor: '#4f46e5' },
-    accountability: { enabled: false, partners: [] }
+    accountability: { enabled: false, partners: [] },
+    blockedApps: []
 });
 saveData(SETTINGS_FILE, currentSettings);
 
@@ -114,6 +103,7 @@ saveData(SETTINGS_FILE, currentSettings);
 if (process.env.NODE_ENV !== 'test') {
     startDNSServer();
     startProcessMonitoring(); // Begin real-time Tor termination
+    startAccountabilityMonitor(() => currentSettings, logAudit); // App killing & Screenshots
 }
 
 // API: Setup Status
@@ -345,7 +335,8 @@ app.post('/api/account/delete', authenticateToken, async (req, res) => {
             network: { dnsPrimary: '', dnsSecondary: '' },
             vpn: { hostname: '', hub: '', port: '' },
             personalization: { theme: 'dark', accentColor: '#4f46e5' },
-            accountability: { enabled: false, partners: [] }
+            accountability: { enabled: false, partners: [] },
+            blockedApps: []
         };
         saveData(SETTINGS_FILE, currentSettings);
         applyFilter('off'); // Turn off the filter just in case
@@ -367,7 +358,7 @@ app.get('/api/settings', authenticateToken, (req, res) => {
 // API: Get Logs
 app.get('/api/logs', authenticateToken, (req, res) => {
     try {
-        const logs = fs.readFileSync(AUDIT_LOG, 'utf8');
+        const logs = logger.getLogs();
         res.json({ success: true, logs });
     } catch (e) {
         res.json({ success: false, logs: 'No logs found or error reading logs.' });
@@ -376,7 +367,7 @@ app.get('/api/logs', authenticateToken, (req, res) => {
 
 // API: Update Settings
 app.post('/api/settings', authenticateToken, (req, res) => {
-    const { filterLevel, lockdownMode, ministry_mode, pluginId, pluginEnabled, network, vpn, personalization, accountability } = req.body;
+    const { filterLevel, lockdownMode, ministry_mode, pluginId, pluginEnabled, network, vpn, personalization, accountability, blockedApps } = req.body;
     
     // Enforce Ministry Mode restrictions
     if (currentSettings.ministry_mode) {
@@ -417,6 +408,7 @@ app.post('/api/settings', authenticateToken, (req, res) => {
     if (vpn) currentSettings.vpn = { ...currentSettings.vpn, ...vpn };
     if (personalization) currentSettings.personalization = { ...currentSettings.personalization, ...personalization };
     if (accountability) currentSettings.accountability = accountability;
+    if (blockedApps !== undefined) currentSettings.blockedApps = blockedApps;
 
     saveData(SETTINGS_FILE, currentSettings);
 
@@ -432,6 +424,12 @@ app.get('/api/scan', authenticateToken, async (req, res) => {
     } catch (e) {
         res.status(500).json({ success: false, message: 'Scan failed' });
     }
+});
+
+// API: Get Logs
+app.get('/api/logs', authenticateToken, (req, res) => {
+    const logs = logger.getLogs();
+    res.json({ success: true, logs });
 });
 
 // API: Remediate / Delete Files
@@ -514,6 +512,9 @@ if (process.env.NODE_ENV !== 'test') {
                         logAudit('MINISTRY_POLICY_SYNC', 'SYSTEM', 'Remote policies applied successfully.');
                     }
                 }
+                
+                // Sync local logs to ministry server
+                await logger.syncToMinistryServer(currentSettings.remote_policy_url);
             } catch (e) {
                 logAudit('MINISTRY_POLICY_SYNC_FAILED', 'SYSTEM', `Error syncing with ${currentSettings.remote_policy_url}: ${e.message}`);
             }
@@ -522,25 +523,26 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Generate Self-Signed Cert and Start HTTPS Server
+// Guard: only bind to port when run directly (node server.js), not when require()'d by tests.
 const attrs = [{ name: 'commonName', value: 'localhost' }];
 
-(async () => {
-    try {
-        const pems = await selfsigned.generate(attrs, { days: 365, keySize: 2048 });
-        const server = https.createServer({
-            key: pems.private,
-            cert: pems.cert
-        }, app);
-        
-        if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
+    (async () => {
+        try {
+            const pems = await selfsigned.generate(attrs, { days: 365, keySize: 2048 });
+            const server = https.createServer({
+                key: pems.private,
+                cert: pems.cert
+            }, app);
+            
             server.listen(PORT, '0.0.0.0', () => {
                 console.log(`Calvary Sexual Immorality Blocker running securely at https://localhost:${PORT}`);
                 logAudit('SERVER_STARTED', '127.0.0.1');
             });
+        } catch (err) {
+            console.error('Failed to generate self-signed cert:', err);
         }
-    } catch (err) {
-        console.error('Failed to generate self-signed cert:', err);
-    }
-})();
+    })();
+}
 
 module.exports = app;

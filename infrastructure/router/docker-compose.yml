@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  calvary-blocker:
+    build: .
+    container_name: calvary_router_dns
+    restart: unless-stopped
+    ports:
+      - "3456:3456"    # HTTPS Management UI / API
+      - "53:53/udp"    # DNS requests (UDP)
+      - "53:53/tcp"    # DNS requests (TCP)
+    volumes:
+      - ./data/settings.json:/usr/src/app/settings.json
+      - ./data/users.json:/usr/src/app/users.json
+      - ./data/blocklist.db:/usr/src/app/blocklist.db
+    environment:
+      - NODE_ENV=production

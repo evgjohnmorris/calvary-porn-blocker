@@ -1,0 +1,179 @@
+{
+  "setup": {
+    "title": "Configuración del Bloqueador de Inmoralidad Sexual Calvary",
+    "subtitle": "Cree su Cuenta de Administrador para inicializar el sistema.",
+    "username": "Nombre de usuario",
+    "usernamePlaceholder": "Usuario Administrador",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Contraseña Segura",
+    "name": "Nombre/Alias",
+    "namePlaceholder": "Opcional",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Opcional",
+    "securityQuestion": "Pregunta de Seguridad",
+    "securityQuestionPlaceholder": "ej., ¿Cuál es el apellido de soltera de su madre? (Opcional)",
+    "securityAnswer": "Respuesta de Seguridad",
+    "securityAnswerPlaceholder": "Respuesta",
+    "btnComplete": "Completar Configuración"
+  },
+  "login": {
+    "title": "Inicio de Sesión del Bloqueador Calvary",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "usernamePlaceholder": "Nombre de usuario",
+    "passwordPlaceholder": "Contraseña",
+    "btnLogin": "Iniciar Sesión",
+    "btnForgot": "¿Olvidó su contraseña?"
+  },
+  "forgot": {
+    "title": "Restablecer Contraseña",
+    "subtitle": "Ingrese su Clave de Recuperación de 16 caracteres para restablecer su contraseña.",
+    "recoveryKey": "Clave de Recuperación (Opción 1)",
+    "recoveryKeyPlaceholder": "XXXX-XXXX-XXXX-XXXX",
+    "or": "O",
+    "securityQuestion": "Pregunta de Seguridad (Opción 2)",
+    "securityAnswerPlaceholder": "Su Respuesta",
+    "newPassword": "Nueva Contraseña",
+    "newPasswordPlaceholder": "Nueva Contraseña Segura",
+    "btnReset": "Restablecer Contraseña",
+    "btnBack": "Volver al Inicio de Sesión"
+  },
+  "dashboard": {
+    "title": "Admin del Bloqueador Calvary",
+    "subtitle": "Administración del Sistema",
+    "nav": {
+      "overview": "Resumen",
+      "filtering": "Filtrado y Plugins",
+      "network": "Red y VPN",
+      "personalization": "Personalización",
+      "accountability": "Rendición de Cuentas",
+      "scanner": "Escáner del Sistema",
+      "account": "Cuenta y Perfil",
+      "logs": "Desarrollador y Registros",
+      "guide": "Guía de Configuración",
+      "logout": "Cerrar Sesión"
+    },
+    "overview": {
+      "title": "Resumen del Sistema",
+      "currentFilter": "Nivel de Filtro Actual",
+      "lockdownMode": "Modo de Bloqueo",
+      "lockdownDesc": "Bloquea el sistema a un filtrado estricto y evita cambios no autorizados.",
+      "btnEnableLockdown": "Habilitar Modo de Bloqueo",
+      "btnDisableLockdown": "Deshabilitar Modo de Bloqueo"
+    },
+    "filtering": {
+      "title": "Filtrado y Plugins",
+      "pornBlocker": "Bloqueador de Porno",
+      "calvaryPornBlocker": "Bloqueador Calvary",
+      "calvaryDesc": "Bloquea todo el contenido adulto y aplica un filtrado estricto.",
+      "pluginsTitle": "Plugins Específicos de Plataforma"
+    },
+    "network": {
+      "title": "Configuración de Red y VPN",
+      "dnsTitle": "Configuración DNS Personalizada",
+      "dnsPrimary": "DNS Primario",
+      "dnsSecondary": "DNS Secundario",
+      "btnSaveNetwork": "Guardar Red",
+      "vpnTitle": "Puerta de enlace VPN SoftEther",
+      "vpnHost": "Nombre de host / IP",
+      "vpnHub": "Hub Virtual",
+      "vpnPort": "Puerto",
+      "btnSaveVPN": "Guardar VPN"
+    },
+    "personalization": {
+      "title": "Personalización",
+      "theme": "Tema",
+      "themeDark": "Modo Oscuro (Predeterminado)",
+      "themeLight": "Modo Claro",
+      "language": "Idioma",
+      "accentColor": "Color de Acento",
+      "btnApply": "Aplicar Personalización"
+    },
+    "accountability": {
+      "title": "Socios de Rendición de Cuentas y Alertas",
+      "desc": "Configure a los socios que recibirán alertas para eventos de alta severidad.",
+      "enableAlerts": "Habilitar Alertas",
+      "enableAlertsDesc": "Activar notificaciones por correo electrónico y SMS",
+      "partnersList": "Lista de Socios",
+      "emailPlaceholder": "Correo Electrónico (socio@ejemplo.com)",
+      "phonePlaceholder": "Número de Teléfono (+1234567890)",
+      "btnAddPartner": "Agregar Socio",
+      "smtpTitle": "Configuración SMTP (Correo)",
+      "smtpDesc": "Utilice su propio servidor SMTP para enviar alertas. Si se deja en blanco, se utilizará una cuenta Ethereal de prueba.",
+      "smtpHost": "Host SMTP",
+      "smtpPort": "Puerto SMTP",
+      "smtpUser": "Usuario SMTP",
+      "smtpPass": "Contraseña SMTP",
+      "btnSaveSMTP": "Guardar Credenciales",
+      "twilioTitle": "Configuración Twilio (SMS)",
+      "twilioDesc": "Configure Twilio para habilitar alertas SMS inmediatas para eventos de alta severidad.",
+      "twilioSid": "SID de la Cuenta",
+      "twilioAuth": "Token de Autenticación",
+      "twilioFrom": "Desde el Número de Teléfono",
+      "btnSaveTwilio": "Guardar Credenciales"
+    },
+    "scanner": {
+      "title": "Escáner de Contenido del Sistema",
+      "desc": "Escanee el historial del navegador, archivos y la red en busca de material adulto explícito.",
+      "btnStart": "Iniciar Escaneo Profundo del Sistema",
+      "scanning": "Escaneando el interior del sistema en busca de contenido explícito, perfiles Wi-Fi y suscripciones explícitas. Esto puede tardar un momento...",
+      "results": "Resultados del Escaneo",
+      "btnDeleteFiles": "Eliminar y Cuarentenar Archivos",
+      "btnClearHistory": "Borrar Historial Explícito",
+      "btnCancelMemberships": "Cancelar Membresías"
+    },
+    "account": {
+      "title": "Cuenta y Perfil",
+      "updateTitle": "Actualizar Perfil y Credenciales",
+      "name": "Nombre / Alias",
+      "email": "Correo electrónico",
+      "newUsername": "Nuevo Usuario",
+      "newUsernamePlaceholder": "Dejar en blanco para mantener el actual",
+      "newPassword": "Nueva Contraseña",
+      "newPasswordPlaceholder": "Dejar en blanco para mantener la actual",
+      "securityQuestion": "Pregunta de Seguridad",
+      "securityAnswer": "Respuesta de Seguridad",
+      "securityAnswerPlaceholder": "Dejar en blanco para mantener la actual",
+      "btnUpdate": "Actualizar Cuenta",
+      "recoveryTitle": "Clave de Recuperación",
+      "recoveryDesc": "Si perdió su Clave de Recuperación, puede generar una nueva aquí. Al generar una nueva clave, la anterior quedará invalidada.",
+      "btnGenerateRecovery": "Generar Nueva Clave de Recuperación",
+      "deleteTitle": "Restablecimiento de Fábrica / Eliminar Cuenta",
+      "deleteDesc": "Esto eliminará completamente su cuenta y restablecerá todos los ajustes a los predeterminados, permitiendo una nueva configuración de usuario.",
+      "currentPassword": "Contraseña Actual",
+      "currentPasswordPlaceholder": "Requerida para autorizar la eliminación",
+      "btnDelete": "Eliminar Cuenta"
+    },
+    "logs": {
+      "title": "Desarrollador y Registros",
+      "auditTitle": "Registro de Auditoría",
+      "loading": "Cargando registros...",
+      "btnRefresh": "Actualizar Registros"
+    }
+  },
+  "help": {
+    "title": "Guía de Configuración Ministerial",
+    "step1Title": "1. Socios de Rendición de Cuentas",
+    "step1Desc": "Para cumplir con los estándares ministeriales, debe configurar al menos un socio. Vaya a la pestaña Rendición de Cuentas, ingrese su correo y número de teléfono, y proporcione las credenciales SMTP/Twilio para habilitar alertas automáticas.",
+    "step2Title": "2. Modo de Bloqueo",
+    "step2Desc": "Habilite el Modo de Bloqueo desde la pestaña Resumen para prevenir cambios no autorizados en los niveles de filtrado o configuración de VPN.",
+    "step3Title": "3. Escaneo Profundo del Sistema",
+    "step3Desc": "Use el Escáner del Sistema para auditar periódicamente el dispositivo. Cuarentene o elimine los archivos marcados para mantener un entorno puro.",
+    "step4Title": "4. Estándares de Cumplimiento Global",
+    "step4Desc": "Para cumplir con los estándares internacionales de protección de datos y regulación de contenido en todos los países (ej., RGPD en la UE, CCPA/COPPA en EE. UU., LGPD en Brasil, PIPEDA en Canadá, APPI en Japón, y estándares globales ISO), asegúrese de que todos los registros, alertas y datos de rendición de cuentas se manejen con estricta confidencialidad. Los mecanismos de bloqueo y registro de este sistema están diseñados para alinearse con los marcos legales universales para el seguimiento administrativo y la seguridad en internet.",
+    "note": "Nota de Cumplimiento ISO: Este sistema obliga al registro y alerta. Todas las acciones administrativas quedan registradas en la pestaña Desarrollador y Registros.",
+    "btnUnderstand": "Entiendo"
+  },
+  "recovery": {
+    "title": "Importante: Clave de Recuperación",
+    "desc1": "Si olvida su contraseña, necesitará la siguiente Clave de Recuperación de 16 caracteres para restablecerla.",
+    "desc2": "Por favor, copie esta clave y guárdela en un lugar seguro. No se volverá a mostrar.",
+    "btnSaved": "He guardado mi clave"
+  },
+  "common": {
+    "strict": "Estricto",
+    "moderate": "Moderado",
+    "off": "Inactivo",
+    "on": "Activo"
+  }
+}

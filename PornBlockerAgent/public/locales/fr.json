@@ -1,0 +1,179 @@
+{
+  "setup": {
+    "title": "Configuration du Bloqueur d'Immoralité Sexuelle Calvary",
+    "subtitle": "Créez votre Compte Administrateur pour initialiser le système.",
+    "username": "Nom d'utilisateur",
+    "usernamePlaceholder": "Utilisateur Administrateur",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Mot de passe sécurisé",
+    "name": "Nom/Alias",
+    "namePlaceholder": "Optionnel",
+    "email": "Email",
+    "emailPlaceholder": "Optionnel",
+    "securityQuestion": "Question de sécurité",
+    "securityQuestionPlaceholder": "ex: Quel est le nom de jeune fille de votre mère ? (Optionnel)",
+    "securityAnswer": "Réponse de sécurité",
+    "securityAnswerPlaceholder": "Réponse",
+    "btnComplete": "Terminer la configuration"
+  },
+  "login": {
+    "title": "Connexion Bloqueur Calvary",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "usernamePlaceholder": "Nom d'utilisateur",
+    "passwordPlaceholder": "Mot de passe",
+    "btnLogin": "Se connecter",
+    "btnForgot": "Mot de passe oublié ?"
+  },
+  "forgot": {
+    "title": "Réinitialiser le mot de passe",
+    "subtitle": "Saisissez votre clé de récupération de 16 caractères pour réinitialiser votre mot de passe.",
+    "recoveryKey": "Clé de Récupération (Option 1)",
+    "recoveryKeyPlaceholder": "XXXX-XXXX-XXXX-XXXX",
+    "or": "OU",
+    "securityQuestion": "Question de Sécurité (Option 2)",
+    "securityAnswerPlaceholder": "Votre Réponse",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Nouveau mot de passe sécurisé",
+    "btnReset": "Réinitialiser",
+    "btnBack": "Retour à la connexion"
+  },
+  "dashboard": {
+    "title": "Admin Bloqueur Calvary",
+    "subtitle": "Administration du Système",
+    "nav": {
+      "overview": "Aperçu",
+      "filtering": "Filtrage et Plugins",
+      "network": "Réseau et VPN",
+      "personalization": "Personnalisation",
+      "accountability": "Responsabilité",
+      "scanner": "Scanner Système",
+      "account": "Compte & Profil",
+      "logs": "Développeur & Logs",
+      "guide": "Guide de Configuration",
+      "logout": "Déconnexion"
+    },
+    "overview": {
+      "title": "Aperçu du Système",
+      "currentFilter": "Niveau de Filtre Actuel",
+      "lockdownMode": "Mode Verrouillage",
+      "lockdownDesc": "Verrouille le système avec un filtrage strict et empêche les modifications DNS/VPN non autorisées.",
+      "btnEnableLockdown": "Activer le Mode Verrouillage",
+      "btnDisableLockdown": "Désactiver le Mode Verrouillage"
+    },
+    "filtering": {
+      "title": "Filtrage et Plugins",
+      "pornBlocker": "Bloqueur de Porno",
+      "calvaryPornBlocker": "Bloqueur Calvary",
+      "calvaryDesc": "Bloque tout le contenu pour adultes et applique un filtrage strict.",
+      "pluginsTitle": "Plugins Spécifiques aux Plateformes"
+    },
+    "network": {
+      "title": "Paramètres Réseau et VPN",
+      "dnsTitle": "Configuration DNS Personnalisée",
+      "dnsPrimary": "DNS Primaire",
+      "dnsSecondary": "DNS Secondaire",
+      "btnSaveNetwork": "Sauvegarder le Réseau",
+      "vpnTitle": "Passerelle VPN SoftEther",
+      "vpnHost": "Nom d'hôte / IP",
+      "vpnHub": "Hub Virtuel",
+      "vpnPort": "Port",
+      "btnSaveVPN": "Sauvegarder le VPN"
+    },
+    "personalization": {
+      "title": "Personnalisation",
+      "theme": "Thème",
+      "themeDark": "Mode Sombre (Défaut)",
+      "themeLight": "Mode Clair",
+      "language": "Langue",
+      "accentColor": "Couleur d'accent",
+      "btnApply": "Appliquer la Personnalisation"
+    },
+    "accountability": {
+      "title": "Partenaires de Responsabilité et Alertes",
+      "desc": "Configurez les partenaires qui recevront des alertes pour les événements de haute gravité.",
+      "enableAlerts": "Activer les Alertes",
+      "enableAlertsDesc": "Activer les notifications par e-mail et SMS",
+      "partnersList": "Liste des Partenaires",
+      "emailPlaceholder": "Adresse E-mail (partenaire@exemple.com)",
+      "phonePlaceholder": "Numéro de Téléphone (+1234567890)",
+      "btnAddPartner": "Ajouter un Partenaire",
+      "smtpTitle": "Configuration SMTP (E-mail)",
+      "smtpDesc": "Utilisez votre propre serveur SMTP pour l'envoi des alertes. Si laissé vide, un compte de test Ethereal sera utilisé.",
+      "smtpHost": "Hôte SMTP",
+      "smtpPort": "Port SMTP",
+      "smtpUser": "Utilisateur SMTP",
+      "smtpPass": "Mot de Passe SMTP",
+      "btnSaveSMTP": "Sauvegarder les Identifiants",
+      "twilioTitle": "Configuration Twilio (SMS)",
+      "twilioDesc": "Configurez Twilio pour activer des alertes SMS immédiates pour les événements critiques.",
+      "twilioSid": "SID du Compte",
+      "twilioAuth": "Jeton d'authentification",
+      "twilioFrom": "Numéro de Téléphone Expéditeur",
+      "btnSaveTwilio": "Sauvegarder les Identifiants"
+    },
+    "scanner": {
+      "title": "Scanner de Contenu Système",
+      "desc": "Analysez l'historique de votre navigateur, les fichiers et le réseau pour détecter du matériel adulte explicite.",
+      "btnStart": "Démarrer l'Analyse Profonde du Système",
+      "scanning": "Analyse des internes du système pour le contenu explicite, les profils Wi-Fi et les abonnements explicites. Cela peut prendre un moment...",
+      "results": "Résultats de l'Analyse",
+      "btnDeleteFiles": "Supprimer et Mettre en Quarantaine",
+      "btnClearHistory": "Effacer l'Historique Explicite",
+      "btnCancelMemberships": "Annuler les Abonnements"
+    },
+    "account": {
+      "title": "Compte & Profil",
+      "updateTitle": "Mettre à jour le Profil et les Identifiants",
+      "name": "Nom / Alias",
+      "email": "Email",
+      "newUsername": "Nouveau Nom d'utilisateur",
+      "newUsernamePlaceholder": "Laissez vide pour conserver l'actuel",
+      "newPassword": "Nouveau Mot de passe",
+      "newPasswordPlaceholder": "Laissez vide pour conserver l'actuel",
+      "securityQuestion": "Question de sécurité",
+      "securityAnswer": "Réponse de sécurité",
+      "securityAnswerPlaceholder": "Laissez vide pour conserver l'actuel",
+      "btnUpdate": "Mettre à jour le Compte",
+      "recoveryTitle": "Clé de Récupération",
+      "recoveryDesc": "Si vous avez perdu votre clé de récupération, vous pouvez en générer une nouvelle ici. Générer une nouvelle clé annulera l'ancienne.",
+      "btnGenerateRecovery": "Générer une Nouvelle Clé de Récupération",
+      "deleteTitle": "Réinitialisation d'Usine / Supprimer le Compte",
+      "deleteDesc": "Ceci supprimera complètement votre compte et réinitialisera tous les paramètres par défaut, permettant une nouvelle configuration utilisateur.",
+      "currentPassword": "Mot de passe Actuel",
+      "currentPasswordPlaceholder": "Requis pour autoriser la suppression",
+      "btnDelete": "Supprimer le Compte"
+    },
+    "logs": {
+      "title": "Développeur & Logs",
+      "auditTitle": "Journal d'Audit",
+      "loading": "Chargement des logs...",
+      "btnRefresh": "Rafraîchir les Logs"
+    }
+  },
+  "help": {
+    "title": "Guide de Configuration Ministériel",
+    "step1Title": "1. Partenaires de Responsabilité",
+    "step1Desc": "Afin de se conformer aux normes ministérielles, vous devez configurer au moins un partenaire. Allez dans l'onglet Responsabilité, entrez son e-mail et son téléphone, et fournissez les identifiants SMTP/Twilio pour activer les alertes.",
+    "step2Title": "2. Mode Verrouillage",
+    "step2Desc": "Activez le Mode Verrouillage dans l'onglet Aperçu pour empêcher toute modification non autorisée des niveaux de filtrage ou paramètres VPN.",
+    "step3Title": "3. Analyse Profonde du Système",
+    "step3Desc": "Utilisez le Scanner Système pour auditer périodiquement l'appareil. Mettez en quarantaine ou supprimez les fichiers signalés pour maintenir un environnement pur.",
+    "step4Title": "4. Normes de Conformité Mondiales",
+    "step4Desc": "Pour se conformer aux normes internationales de protection des données et de régulation du contenu dans tous les pays (ex. RGPD dans l'UE, CCPA/COPPA aux États-Unis, LGPD au Brésil, LPRPDE au Canada, APPI au Japon, et normes ISO mondiales), assurez-vous que tous les journaux, alertes et données de responsabilité sont traités avec une stricte confidentialité. Les mécanismes de verrouillage et de journalisation de ce système sont conçus pour s'aligner sur des cadres légaux universels de suivi administratif et de sécurité sur Internet.",
+    "note": "Note de conformité ISO: Ce système impose l'enregistrement et l'alerte. Toutes les actions administratives sont enregistrées dans l'onglet Développeur & Logs.",
+    "btnUnderstand": "Je Comprends"
+  },
+  "recovery": {
+    "title": "Important : Clé de Récupération",
+    "desc1": "Si vous oubliez votre mot de passe, vous aurez besoin de cette clé de récupération de 16 caractères pour le réinitialiser.",
+    "desc2": "Veuillez copier cette clé et la conserver en lieu sûr. Elle ne sera plus affichée.",
+    "btnSaved": "J'ai sauvegardé ma clé"
+  },
+  "common": {
+    "strict": "Strict",
+    "moderate": "Modéré",
+    "off": "Inactif",
+    "on": "Actif"
+  }
+}

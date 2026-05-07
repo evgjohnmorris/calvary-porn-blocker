@@ -1,0 +1,179 @@
+{
+  "setup": {
+    "title": "Calvary Sexual Immorality Blocker Setup",
+    "subtitle": "Create your Admin Account to initialize the system.",
+    "username": "Username",
+    "usernamePlaceholder": "Admin Username",
+    "password": "Password",
+    "passwordPlaceholder": "Secure Password",
+    "name": "Name/Alias",
+    "namePlaceholder": "Optional",
+    "email": "Email",
+    "emailPlaceholder": "Optional",
+    "securityQuestion": "Security Question",
+    "securityQuestionPlaceholder": "e.g., What is your mother's maiden name? (Optional)",
+    "securityAnswer": "Security Answer",
+    "securityAnswerPlaceholder": "Answer",
+    "btnComplete": "Complete Setup"
+  },
+  "login": {
+    "title": "Calvary Sexual Immorality Blocker Login",
+    "username": "Username",
+    "password": "Password",
+    "usernamePlaceholder": "Username",
+    "passwordPlaceholder": "Password",
+    "btnLogin": "Login",
+    "btnForgot": "Forgot Password?"
+  },
+  "forgot": {
+    "title": "Reset Password",
+    "subtitle": "Enter your 16-character Recovery Key to reset your password.",
+    "recoveryKey": "Recovery Key (Option 1)",
+    "recoveryKeyPlaceholder": "XXXX-XXXX-XXXX-XXXX",
+    "or": "OR",
+    "securityQuestion": "Security Question (Option 2)",
+    "securityAnswerPlaceholder": "Your Answer",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "New Secure Password",
+    "btnReset": "Reset Password",
+    "btnBack": "Back to Login"
+  },
+  "dashboard": {
+    "title": "Calvary Blocker Admin",
+    "subtitle": "System Administration",
+    "nav": {
+      "overview": "Overview",
+      "filtering": "Filtering & Plugins",
+      "network": "Network & VPN",
+      "personalization": "Personalization",
+      "accountability": "Accountability",
+      "scanner": "System Scanner",
+      "account": "Account & Profile",
+      "logs": "Developer & Logs",
+      "guide": "Ministry Setup Guide",
+      "logout": "Logout"
+    },
+    "overview": {
+      "title": "System Overview",
+      "currentFilter": "Current Filter Level",
+      "lockdownMode": "Lockdown Mode",
+      "lockdownDesc": "Locks the system to strict filtering and prevents unauthorized DNS/VPN changes.",
+      "btnEnableLockdown": "Enable Lockdown Mode",
+      "btnDisableLockdown": "Disable Lockdown Mode"
+    },
+    "filtering": {
+      "title": "Filtering & Plugins",
+      "pornBlocker": "Porn Blocker",
+      "calvaryPornBlocker": "Calvary Porn Blocker",
+      "calvaryDesc": "Blocks all adult content and enforces strict filtering.",
+      "pluginsTitle": "Platform Specific Plugins"
+    },
+    "network": {
+      "title": "Network & VPN Settings",
+      "dnsTitle": "Custom DNS Configuration",
+      "dnsPrimary": "Primary DNS",
+      "dnsSecondary": "Secondary DNS",
+      "btnSaveNetwork": "Save Network",
+      "vpnTitle": "SoftEther VPN Gateway",
+      "vpnHost": "Hostname / IP",
+      "vpnHub": "Virtual Hub",
+      "vpnPort": "Port",
+      "btnSaveVPN": "Save VPN"
+    },
+    "personalization": {
+      "title": "Personalization",
+      "theme": "Theme",
+      "themeDark": "Dark Mode (Default)",
+      "themeLight": "Light Mode",
+      "language": "Language",
+      "accentColor": "Accent Color",
+      "btnApply": "Apply Personalization"
+    },
+    "accountability": {
+      "title": "Accountability Partners & Alerts",
+      "desc": "Configure partners who will receive alerts for high-severity events.",
+      "enableAlerts": "Enable Alerts",
+      "enableAlertsDesc": "Activate email and SMS notifications",
+      "partnersList": "Partners List",
+      "emailPlaceholder": "Email Address (partner@example.com)",
+      "phonePlaceholder": "Phone Number (+1234567890)",
+      "btnAddPartner": "Add Partner",
+      "smtpTitle": "SMTP Configuration (Email)",
+      "smtpDesc": "Use your own SMTP server for sending alerts. If left blank, a test Ethereal account will be used.",
+      "smtpHost": "SMTP Host",
+      "smtpPort": "SMTP Port",
+      "smtpUser": "SMTP User",
+      "smtpPass": "SMTP Password",
+      "btnSaveSMTP": "Save Credentials",
+      "twilioTitle": "Twilio Configuration (SMS)",
+      "twilioDesc": "Configure Twilio to enable immediate SMS alerts for high-severity events.",
+      "twilioSid": "Account SID",
+      "twilioAuth": "Auth Token",
+      "twilioFrom": "From Phone Number",
+      "btnSaveTwilio": "Save Credentials"
+    },
+    "scanner": {
+      "title": "System Content Scanner",
+      "desc": "Scan your device's browser history, files, and network for explicit adult material.",
+      "btnStart": "Start Deep System Scan",
+      "scanning": "Scanning system internals for explicit content, Wi-Fi profiles, and explicit subscriptions. This may take a moment...",
+      "results": "Scan Results",
+      "btnDeleteFiles": "Delete & Quarantine Files",
+      "btnClearHistory": "Clear Explicit Browser History",
+      "btnCancelMemberships": "Cancel Memberships"
+    },
+    "account": {
+      "title": "Account & Profile",
+      "updateTitle": "Update Profile & Credentials",
+      "name": "Name / Alias",
+      "email": "Email",
+      "newUsername": "New Username",
+      "newUsernamePlaceholder": "Leave blank to keep current",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Leave blank to keep current",
+      "securityQuestion": "Security Question",
+      "securityAnswer": "Security Answer",
+      "securityAnswerPlaceholder": "Leave blank to keep current",
+      "btnUpdate": "Update Account",
+      "recoveryTitle": "Recovery Key",
+      "recoveryDesc": "If you lost your Recovery Key, you can generate a new one here. Generating a new key will invalidate the old one.",
+      "btnGenerateRecovery": "Generate New Recovery Key",
+      "deleteTitle": "Factory Reset / Delete Account",
+      "deleteDesc": "This will completely delete your account and reset all settings to defaults, allowing a new user setup.",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Required to authorize deletion",
+      "btnDelete": "Delete Account"
+    },
+    "logs": {
+      "title": "Developer & Logs",
+      "auditTitle": "Audit Log",
+      "loading": "Loading logs...",
+      "btnRefresh": "Refresh Logs"
+    }
+  },
+  "help": {
+    "title": "Ministry Setup & Compliance Guide",
+    "step1Title": "1. Accountability Partners",
+    "step1Desc": "To comply with ministry standards, you must configure at least one accountability partner. Go to the Accountability tab, enter their email and phone number, and provide SMTP/Twilio credentials to enable automatic alerts for bypass attempts or lockdown changes.",
+    "step2Title": "2. Lockdown Mode",
+    "step2Desc": "Enable Lockdown Mode from the Overview tab to prevent any unauthorized changes to filtering levels or VPN settings. This enforces a strict environment required for compliance.",
+    "step3Title": "3. Deep System Scanning",
+    "step3Desc": "Use the System Scanner to periodically audit the device for explicit material or history. Quarantine or delete flagged files to maintain a pure environment.",
+    "step4Title": "4. Global Compliance Standards",
+    "step4Desc": "To comply with international data protection and content regulation standards across all countries (e.g., GDPR in the EU, CCPA/COPPA in the US, LGPD in Brazil, PIPEDA in Canada, APPI in Japan, and global ISO standards), ensure that all collected logs, alerts, and accountability data are handled with strict confidentiality. This system's lockdown and logging mechanisms are designed to align with universal legal frameworks for administrative tracking and internet safety.",
+    "note": "ISO Compliance Note: This system enforces logging and alerting. All administrative actions are recorded in the Developer & Logs tab.",
+    "btnUnderstand": "I Understand"
+  },
+  "recovery": {
+    "title": "Important: Recovery Key",
+    "desc1": "If you ever forget your password, you will need the following 16-character Recovery Key to reset it.",
+    "desc2": "Please copy this key and store it in a safe place. It will not be shown again.",
+    "btnSaved": "I have saved my key"
+  },
+  "common": {
+    "strict": "Strict",
+    "moderate": "Moderate",
+    "off": "Inactive",
+    "on": "Active"
+  }
+}

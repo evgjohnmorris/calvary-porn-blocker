@@ -1,8 +1,23 @@
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
-// In a real enterprise application, this key should be loaded securely via DPAPI or KMS.
-// For this prototype, we use a static derived 32-byte key.
-const AES_KEY = crypto.scryptSync('AllySecretEnterpriseKey', 'salt', 32);
+const CRED_FILE = path.join(__dirname, 'credentials.key');
+let AES_KEY;
+
+if (fs.existsSync(CRED_FILE)) {
+    AES_KEY = fs.readFileSync(CRED_FILE);
+} else {
+    AES_KEY = crypto.randomBytes(32);
+    fs.writeFileSync(CRED_FILE, AES_KEY);
+    try {
+        const { execSync } = require('child_process');
+        // Restrict file permissions using Windows ACLs to current user and SYSTEM
+        execSync(`icacls "${CRED_FILE}" /inheritance:r /grant:r "%USERNAME%:(F)" "SYSTEM:(F)"`, { stdio: 'ignore' });
+    } catch (e) {
+        console.warn('[CRYPTO] Warning: Could not set strict file permissions on credentials.key.');
+    }
+}
 
 function encryptSettings(jsonObject) {
     const iv = crypto.randomBytes(16);

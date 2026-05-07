@@ -3,7 +3,10 @@
   "private": true,
   "scripts": {
     "build": "pnpm -r build",
-    "clean": "pnpm -r clean"
+    "clean": "pnpm -r clean",
+    "package:desktop": "pnpm --filter @pb/desktop-client package",
+    "package:android": "pnpm --filter @pb/mobile-client build:android",
+    "package:ios": "pnpm --filter @pb/mobile-client build:ios"
   },
   "pnpm": {
     "overrides": {

@@ -1,0 +1,35 @@
+name: Build Desktop Client
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9
+
+    - name: Install Dependencies
+      run: pnpm install
+
+    - name: Build Electron App
+      run: pnpm --filter @pb/desktop-client package
+      env:
+        GH_TOKEN: ${{ secrets.github_token }}
