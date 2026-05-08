@@ -19,6 +19,7 @@
   "dependencies": {
     "active-win": "^7.7.2",
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dns2": "^2.1.0",
     "dotenv": "^17.4.2",

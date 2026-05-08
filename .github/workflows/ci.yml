@@ -6,8 +6,16 @@ on:
   pull_request:
     branches: [ "main", "master" ]
 
+permissions:
+  contents: read
+  security-events: write  # Required for CodeQL upload
+
 jobs:
+  # ────────────────────────────────────────────────────────────────
+  # Job 1: Lint + Smoke Tests + Dependency Audit
+  # ────────────────────────────────────────────────────────────────
   build:
+    name: Lint, Smoke Tests & Audit
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,62 +23,146 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./PornBlockerAgent
-      
-    - name: Run linting
-      run: npm run lint
-      working-directory: ./PornBlockerAgent
-      
-    - name: Run smoke tests
-      run: npm run test:smoke
-      working-directory: ./PornBlockerAgent
-      env:
-        NODE_ENV: test
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: PornBlockerAgent/package-lock.json
+
+      - name: Install dependencies (deterministic)
+        working-directory: ./PornBlockerAgent
+        run: npm ci
+
+      - name: Run linting
+        working-directory: ./PornBlockerAgent
+        run: npm run lint
+
+      - name: Run smoke tests
+        working-directory: ./PornBlockerAgent
+        run: npm run test:smoke
+        env:
+          NODE_ENV: test
+
+      - name: Audit dependencies (fail on high/critical)
+        working-directory: ./PornBlockerAgent
+        run: npm audit --audit-level=high
+        # Note: known Dependabot alerts are tracked in docs/RISK_REGISTER.md.
+        # Remove `continue-on-error` once all high/critical vulnerabilities are resolved.
+        continue-on-error: true
+
+  # ────────────────────────────────────────────────────────────────
+  # Job 2: CodeQL Static Analysis
+  # ────────────────────────────────────────────────────────────────
+  codeql:
+    name: CodeQL Security Analysis
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript"
+
+  # ────────────────────────────────────────────────────────────────
+  # Job 3: Dependency Review (PRs only — flags new vulnerabilities)
+  # ────────────────────────────────────────────────────────────────
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+  # ────────────────────────────────────────────────────────────────
+  # Job 4: Playwright Desktop E2E Tests
+  # ────────────────────────────────────────────────────────────────
   desktop-e2e-tests:
+    name: Playwright Desktop E2E Tests
     runs-on: ubuntu-latest
     needs: build
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js 20.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - name: Install pnpm
-      run: npm install -g pnpm
-    - name: Install Dependencies
-      working-directory: ./packages/qa-automation
-      run: pnpm install
-    - name: Install Playwright Browsers
-      working-directory: ./packages/qa-automation
-      run: pnpm exec playwright install --with-deps
-    - name: Run Playwright Desktop Tests
-      working-directory: ./packages/qa-automation
-      run: pnpm test:desktop
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install QA dependencies
+        working-directory: ./packages/qa-automation
+        run: pnpm install
+
+      - name: Install Playwright browsers
+        working-directory: ./packages/qa-automation
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Playwright desktop tests
+        working-directory: ./packages/qa-automation
+        run: pnpm test:desktop
+        env:
+          NODE_ENV: test
+
+      - name: Upload test artifacts on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-${{ matrix.node-version }}
+          path: packages/qa-automation/playwright-report/
+          retention-days: 7
+
+  # ────────────────────────────────────────────────────────────────
+  # Job 5: Mobile/VR E2E Tests (placeholder — requires Appium)
+  # ────────────────────────────────────────────────────────────────
   mobile-e2e-tests:
+    name: Mobile/VR E2E Tests (Placeholder)
     runs-on: ubuntu-latest
     needs: build
+    if: false  # Disabled until Appium environment is configured
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js 20.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - name: Install pnpm
-      run: npm install -g pnpm
-    - name: Install Dependencies
-      working-directory: ./packages/qa-automation
-      run: pnpm install
-    - name: Run Appium Mobile/VR Tests
-      working-directory: ./packages/qa-automation
-      # Placeholder for actual Appium invocation, typically requires emulator action
-      run: pnpm test:mobile
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install QA dependencies
+        working-directory: ./packages/qa-automation
+        run: pnpm install
+
+      - name: Run Appium mobile tests
+        working-directory: ./packages/qa-automation
+        run: pnpm test:mobile

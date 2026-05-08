@@ -19,18 +19,16 @@ const Dashboard = {
         this.startPolling();
         
         // Fetch profile
-        if (Auth.token) {
-            this.fetchProfile();
-        }
+        this.fetchProfile();
     },
 
     async fetchSettings() {
         try {
             const res = await fetch('/api/settings', {
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                credentials: 'same-origin',
             });
             if (res.status === 401 || res.status === 403) {
-                if (Auth.token) Auth.logout();
+                Auth.logout();
                 return;
             }
             const data = await res.json();
@@ -46,22 +44,16 @@ const Dashboard = {
 
     startPolling() {
         if (this.pollInterval) clearInterval(this.pollInterval);
-        this.pollInterval = setInterval(() => {
-            if (Auth.token) {
-                this.fetchSettings();
-            }
-        }, 5000);
+        this.pollInterval = setInterval(() => this.fetchSettings(), 5000);
     },
 
     async updateSettings(payload) {
         try {
             const res = await fetch('/api/settings', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Auth.token}` 
-                },
-                body: JSON.stringify(payload)
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
+                body:        JSON.stringify(payload),
             });
             if (res.status === 401 || res.status === 403) {
                 Auth.logout();
@@ -69,7 +61,7 @@ const Dashboard = {
             }
             const data = await res.json();
             if (data.success) {
-                // If it's a plugin toggle, we need to re-fetch to get the updated plugins array
+                // If it's a plugin toggle, re-fetch to get the updated plugins array
                 if (payload.pluginId !== undefined) {
                     await this.fetchSettings();
                 } else {
@@ -334,7 +326,7 @@ const Dashboard = {
         btn.disabled = true;
 
         try {
-            const res = await fetch('/api/scan', { headers: { 'Authorization': `Bearer ${Auth.token}` } });
+            const res = await fetch('/api/scan', { credentials: 'same-origin' });
             const data = await res.json();
             
             progress.style.display = 'none';
@@ -364,8 +356,9 @@ const Dashboard = {
         if (!confirm('Are you sure you want to permanently delete these files?')) return;
         try {
             const res = await fetch('/api/scan/remediate', {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
             });
             const data = await res.json();
             alert(data.message);
@@ -378,8 +371,9 @@ const Dashboard = {
         if (!confirm('Are you sure you want to clear explicit browser history entries?')) return;
         try {
             const res = await fetch('/api/scan/delete_history', {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
             });
             const data = await res.json();
             alert(data.message);
@@ -391,8 +385,9 @@ const Dashboard = {
     async cancelMemberships() {
         try {
             const res = await fetch('/api/scan/cancel_memberships', {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
             });
             const data = await res.json();
             if(data.success && data.links.length > 0) {
@@ -418,7 +413,7 @@ const Dashboard = {
     async fetchProfile() {
         try {
             const res = await fetch('/api/account/profile', {
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                credentials: 'same-origin',
             });
             const data = await res.json();
             if (data.success) {
@@ -459,12 +454,10 @@ const Dashboard = {
 
         try {
             const res = await fetch('/api/account/update', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Auth.token}` 
-                },
-                body: JSON.stringify({ name, email, username, password, securityQuestion, securityAnswer })
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
+                body:        JSON.stringify({ name, email, username, password }),
             });
             const data = await res.json();
             
@@ -499,12 +492,10 @@ const Dashboard = {
         
         try {
             const res = await fetch('/api/account/delete', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Auth.token}` 
-                },
-                body: JSON.stringify({ password })
+                method:      'POST',
+                credentials: 'same-origin',
+                headers:     Auth.mutatingHeaders(),
+                body:        JSON.stringify({ password }),
             });
             const data = await res.json();
             
@@ -524,7 +515,7 @@ const Dashboard = {
         if (!confirm('Generating a new Recovery Key will invalidate your old one. Continue?')) return;
         try {
             const res = await fetch('/api/account/recovery-key', {
-                headers: { 'Authorization': `Bearer ${Auth.token}` }
+                credentials: 'same-origin',
             });
             const data = await res.json();
             if (data.success) {
