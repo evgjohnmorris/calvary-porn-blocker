@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <filter id="glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="drop-shadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes scanline {
+      0% { transform: translateY(-200px); opacity: 0; }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(400px); opacity: 0; }
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .glass-card {
+      fill: rgba(255, 255, 255, 0.03);
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 1;
+    }
+    .text-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      fill: url(#primary);
+    }
+    .text-subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 24px;
+      fill: #94a3b8;
+      letter-spacing: 2px;
+    }
+    .pulse-shield {
+      transform-origin: center;
+      animation: pulse 3s infinite ease-in-out;
+    }
+    .floating-element {
+      animation: float 6s infinite ease-in-out;
+    }
+    .scan-line {
+      animation: scanline 4s linear infinite;
+    }
+    .status-dot {
+      animation: pulse 2s infinite;
+    }
+    .ring-rotate {
+      transform-origin: 200px 200px;
+      animation: spin 20s linear infinite;
+    }
+    .ring-rotate-reverse {
+      transform-origin: 200px 200px;
+      animation: spin 30s linear infinite reverse;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bg)" rx="24" />
+  
+  <!-- Subtle Grid Background -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <path d="M 0 50 L 1200 50 M 0 100 L 1200 100 M 0 150 L 1200 150 M 0 200 L 1200 200 M 0 250 L 1200 250 M 0 300 L 1200 300 M 0 350 L 1200 350" />
+    <path d="M 100 0 L 100 400 M 200 0 L 200 400 M 300 0 L 300 400 M 400 0 L 400 400 M 500 0 L 500 400 M 600 0 L 600 400 M 700 0 L 700 400 M 800 0 L 800 400 M 900 0 L 900 400 M 1000 0 L 1000 400 M 1100 0 L 1100 400" />
+  </g>
+
+  <!-- Animated Scanline -->
+  <rect x="0" y="0" width="1200" height="4" fill="#38bdf8" class="scan-line" filter="url(#neon-glow)" />
+
+  <!-- Shield Icon Graphic -->
+  <g class="floating-element" transform="translate(100, 0)">
+    <!-- Rotating tech rings -->
+    <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="2" stroke-dasharray="10 20 40 10" class="ring-rotate" />
+    <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(129, 140, 248, 0.15)" stroke-width="1" stroke-dasharray="50 10" class="ring-rotate-reverse" />
+    
+    <g class="pulse-shield" filter="url(#drop-shadow)">
+      <path d="M200 80 L280 110 L280 190 C280 250 245 305 200 330 C155 305 120 250 120 190 L120 110 Z" fill="rgba(15, 23, 42, 0.8)" stroke="url(#primary)" stroke-width="4" filter="url(#glass)" />
+      <path d="M200 130 L200 290" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" filter="url(#neon-glow)" />
+      <path d="M160 210 L200 250 L250 180" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon-glow)" />
+    </g>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <g transform="translate(480, 180)">
+    <text x="0" y="0" class="text-title">Calvary Porn Blocker</text>
+    <text x="5" y="40" class="text-subtitle">MINISTRY-GRADE SYSTEM PROTECTION</text>
+  </g>
+
+  <!-- Interactive "React-style" Code / Status Panel -->
+  <g transform="translate(480, 250)" class="floating-element" style="animation-delay: 1s;">
+    <rect x="0" y="0" width="450" height="80" rx="12" class="glass-card" filter="url(#drop-shadow)" />
+    <circle cx="30" cy="40" r="8" fill="#10b981" class="status-dot" filter="url(#neon-glow)" />
+    <text x="60" y="35" font-family="monospace" font-size="14" fill="#38bdf8">&lt;LockdownProvider&gt;</text>
+    <text x="60" y="55" font-family="monospace" font-size="14" fill="#a7f3d0">  status: "secure &amp; active"</text>
+    
+    <!-- Mini network bars -->
+    <g transform="translate(380, 30)">
+      <rect x="0" y="20" width="4" height="10" fill="#10b981" rx="2" class="pulse-shield" style="animation-delay: 0s" />
+      <rect x="8" y="15" width="4" height="15" fill="#10b981" rx="2" class="pulse-shield" style="animation-delay: 0.2s" />
+      <rect x="16" y="10" width="4" height="20" fill="#10b981" rx="2" class="pulse-shield" style="animation-delay: 0.4s" />
+      <rect x="24" y="0" width="4" height="30" fill="#10b981" rx="2" class="pulse-shield" style="animation-delay: 0.6s" />
+    </g>
+  </g>
+
+  <!-- Decorative floating particles -->
+  <circle cx="450" cy="100" r="3" fill="#818cf8" class="floating-element" style="animation-delay: 0.5s" filter="url(#neon-glow)" />
+  <circle cx="1050" cy="150" r="4" fill="#38bdf8" class="floating-element" style="animation-delay: 1.5s" filter="url(#neon-glow)" />
+  <circle cx="950" cy="300" r="2" fill="#10b981" class="floating-element" style="animation-delay: 2.5s" filter="url(#neon-glow)" />
+</svg>

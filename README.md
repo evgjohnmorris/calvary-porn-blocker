@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/hero-banner.png" alt="Calvary Porn Blocker" width="100%" style="border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); margin-bottom: 24px;" />
+<img src="./assets/hero-banner.svg" alt="Calvary Porn Blocker" width="100%" style="border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); margin-bottom: 24px;" />
 
 # 🛡️ Calvary Porn Blocker
 
