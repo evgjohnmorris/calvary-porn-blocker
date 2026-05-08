@@ -23,11 +23,29 @@ node server.js
 
 The server must be running at `https://localhost:3456` before executing any test suite.
 
-**Default test credentials** (set in `PornBlockerAgent/users.json`):
+**Test fixture credentials:**
 - Username: `admin`
 - Password: `admin1234`
 
-> ⚠️ Never deploy with default credentials. Change the password immediately after initial setup via the Account tab.
+> ⚠️ **These are test fixture credentials only.** They exist solely so the automated E2E suite
+> can authenticate without a live interactive setup. `users.json` is listed in `.gitignore`
+> and is **never** committed to the repository.
+>
+> In production, `users.json` is created during the first-run onboarding wizard and contains
+> the admin's chosen credentials. There is no default password shipped with the product.
+>
+> If you need to run the E2E suite against a fresh server, create a test `users.json` via:
+> ```bash
+> # From PornBlockerAgent/
+> node -e "
+>   const bcrypt = require('bcrypt');
+>   bcrypt.hash('admin1234', 10).then(h => {
+>     const fs = require('fs');
+>     fs.writeFileSync('users.json', JSON.stringify({ adminUsername: 'admin', adminHash: h }, null, 2));
+>     console.log('Test users.json created.');
+>   });
+> "
+> ```
 
 ---
 

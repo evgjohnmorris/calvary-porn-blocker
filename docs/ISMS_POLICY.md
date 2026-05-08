@@ -1,6 +1,11 @@
 # Information Security Management System (ISMS) Policy
 **Calvary Blocker — Calvary Sexual Immorality Blocker Project**
-Version: 1.1.0 | Effective: 2026-05-08 | Review: Annually or after material change
+Version: 1.2.0 | Effective: 2026-05-08 | Review: Annually or after material change
+
+> **Alignment Notice:** This policy is written with reference to ISO/IEC 27001:2022 principles.
+> The Calvary Blocker project is **ISO 27001-aligned, not certified**. No formal third-party
+> certification audit has been conducted. Controls described here reflect design intent and
+> current implementation; open items are tracked in [`docs/RISK_REGISTER.md`](./RISK_REGISTER.md).
 
 ---
 
@@ -69,7 +74,7 @@ All contributors, maintainers, and deployers of this software are bound by this 
 |---|---|---|
 | Data at Rest | `settings.json` encrypted with AES-256-GCM | `server.js` encryption module |
 | Transport Security | All dashboard traffic served over HTTPS/TLS (self-signed cert for local; CA-signed for hosted) | `cert.cer`, `server.js` |
-| Log Integrity | `audit.log` uses HMAC-SHA256 append-only chain; broken chain = tamper evidence | Audit subsystem |
+| Log Integrity | `audit.log` uses HMAC-SHA256 append-only chain; designed so any deletion or modification breaks the chain | Audit subsystem |
 | Password Hashing | `bcrypt` with minimum cost factor 10 | `server.js`, `users.json` |
 
 **Policy:** No MD5 or SHA-1 for any security purpose. AES-256 minimum for symmetric encryption. RSA-2048 or ECDSA P-256 minimum for asymmetric operations.
@@ -82,8 +87,8 @@ All contributors, maintainers, and deployers of this software are bound by this 
 |---|---|---|
 | Dependency Management | `pnpm` with lockfile; Dependabot alerts monitored on GitHub | `pnpm-lock.yaml`, `.github/` |
 | HTTP Security Headers | `helmet` middleware applied to all responses | `server.js` |
-| XSS Prevention | Content Security Policy via helmet; no `innerHTML` from untrusted input | `public/js/` audit |
-| CSRF Protection | JWT-based stateless auth eliminates CSRF surface | `auth.js` |
+| XSS Prevention | Content Security Policy (CSP) enabled via helmet with `default-src 'self'`; no `innerHTML` from untrusted input | `server.js` CSP directives |
+| CSRF Protection | JWT-based stateless auth reduces CSRF surface; Bearer token required on all state-mutating endpoints | `auth.js` |
 | Process Hardening | Active process monitor terminates proxy browsers (e.g., Tor Browser) every 5 seconds | `PornBlockerAgent/` |
 | Vulnerability Scanning | GitHub Dependabot; manual `npm audit` before releases | CI/CD pipeline |
 
@@ -107,7 +112,7 @@ All contributors, maintainers, and deployers of this software are bound by this 
 | Control | Implementation | Evidence |
 |---|---|---|
 | Audit Logging | All auth events, config changes, scan results, bypass attempts logged | `audit.log` |
-| Tamper Evidence | HMAC-SHA256 chain; any deletion or modification breaks chain integrity | Audit subsystem |
+| Tamper Evidence | HMAC-SHA256 chain; designed so any deletion or modification of log entries breaks chain integrity | Audit subsystem |
 | Real-Time Review | Logs accessible via admin dashboard Logs tab | `public/js/logs.js` |
 | Accountability Alerts | Bypass attempts trigger SMS (Twilio) and email (SMTP) to designated ally | Notification subsystem |
 | Retention | Logs retained indefinitely locally; no automatic purge without admin action | Policy default |
@@ -203,4 +208,4 @@ By deploying, operating, or contributing to the Calvary Blocker system, you ackn
 
 ---
 
-*Policy Version: 1.1.0 | Effective: 2026-05-08 | Built with faith, for freedom.*
+*Policy Version: 1.2.0 | Effective: 2026-05-08 | Built with faith, for freedom.*
