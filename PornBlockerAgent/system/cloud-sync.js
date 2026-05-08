@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+// const fs = require('fs');
+// const path = require('path');
+// const https = require('https');
 
-const SYNC_LOG = path.join(__dirname, '..', 'audit.log');
-const SETTINGS_FILE = path.join(__dirname, '..', 'settings.json');
+// const SYNC_LOG = path.join(__dirname, '..', 'audit.log');
+// const SETTINGS_FILE = path.join(__dirname, '..', 'settings.json');
 
 // Placeholder for future cloud sync functionality
 class CloudSync {
@@ -47,15 +47,10 @@ class CloudSync {
         }
     }
 
-    async fetchOverrides(settings, logAudit) {
+    async fetchOverrides() {
         // Logic to fetch any remote overrides set by an accountability partner
-        try {
-            // Mock fetching overrides
-            return []; 
-        } catch (error) {
-            logAudit('CLOUD_SYNC_ERROR', 'SYSTEM', `Failed to fetch overrides: ${error.message}`);
-            return [];
-        }
+        // Mock fetching overrides
+        return []; 
     }
 }
 

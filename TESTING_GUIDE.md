@@ -1,5 +1,5 @@
 # Testing Guide
-**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+**Calvary Porn Blocker — Calvary Porn Blocker Project**
 Version: 2.0.0 | Updated: 2026-05-08
 
 > This guide describes how to run the automated E2E test suite, perform manual smoke checks, and verify ISO compliance through testing.

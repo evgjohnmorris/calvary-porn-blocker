@@ -253,7 +253,7 @@ async function startDNSServer() {
 
     dnsServer = dns2.createServer({
         udp: true,
-        handle: async (request, send, rinfo) => {
+        handle: async (request, send) => {
             const response = Packet.createResponseFromRequest(request);
             const [ question ] = request.questions;
             

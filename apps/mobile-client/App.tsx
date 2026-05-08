@@ -49,7 +49,7 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Text style={styles.title}>Calvary Blocker</Text>
+          <Text style={styles.title}>Calvary Porn Blocker</Text>
           <Text style={styles.subtitle}>Protection is currently {isEnabled ? 'Active' : 'Inactive'}</Text>
         </View>
 

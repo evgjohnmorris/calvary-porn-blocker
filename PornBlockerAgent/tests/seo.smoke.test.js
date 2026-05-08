@@ -19,7 +19,7 @@ describe('SEO Smoke Tests', () => {
     expect(content).toMatch(/<meta name="twitter:description" content=".*?"\s*\/?>/i);
   };
 
-  it('should have SEO tags in Calvary Blocker/public/index.html', () => {
+  it('should have SEO tags in Calvary Porn Blocker/public/index.html', () => {
     const p = path.join(__dirname, '../public/index.html');
     if (fs.existsSync(p)) {
       checkSEO(p);

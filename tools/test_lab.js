@@ -39,11 +39,9 @@ function request(method, endpoint, body = null, token = null) {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
-                try {
-                    resolve({ status: res.statusCode, data: JSON.parse(data) });
-                } catch (e) {
-                    resolve({ status: res.statusCode, data });
-                }
+                let parsed = data;
+                try { parsed = JSON.parse(data); } catch (e) {}
+                resolve({ status: res.statusCode, data: parsed, headers: res.headers });
             });
         });
 
@@ -54,7 +52,7 @@ function request(method, endpoint, body = null, token = null) {
 }
 
 async function runTestLab() {
-    console.log('--- Calvary Blocker Test Lab ---');
+    console.log('--- Calvary Porn Blocker Test Lab ---');
     cleanupState();
     
     console.log('Starting Agent...');
@@ -84,7 +82,13 @@ async function runTestLab() {
         console.log('3. Logging in...');
         res = await request('POST', '/login', { username: 'admin', password: 'securepassword123' });
         console.log('Login response:', res.data);
-        const token = res.data.token;
+        let token = null;
+        if (res.headers && res.headers['set-cookie']) {
+            const tokenCookie = res.headers['set-cookie'].find(c => c.startsWith('token='));
+            if (tokenCookie) {
+                token = tokenCookie.split(';')[0].split('=')[1];
+            }
+        }
         if (!token) throw new Error('Failed to login.');
 
         console.log('4. Changing Settings (Activating Lockdown Mode)...');
@@ -97,11 +101,12 @@ async function runTestLab() {
 
         console.log('6. Verifying Logs...');
         res = await request('GET', '/logs', null, token);
-        const logs = res.data.logs || '';
-        const logLines = logs.trim().split('\n');
+        const logs = res.data.logs || [];
+        const logLines = logs;
         console.log(`Log entries fetched: ${logLines.length} lines`);
         
-        if (!logs.includes('LOCKDOWN_ACTIVATED')) {
+        const logsText = logLines.join('\n');
+        if (!logsText.includes('LOCKDOWN_ACTIVATED')) {
              throw new Error('Lockdown log missing');
         }
 
@@ -138,8 +143,9 @@ async function runTestLab() {
 
         console.log('9. Re-verifying Logs against Ministry Server stored hash...');
         res = await request('GET', '/logs', null, token);
-        const tamperedLogs = res.data.logs || '';
-        const tamperedLines = tamperedLogs.trim().split('\n');
+        const tamperedLogs = res.data.logs || [];
+        const tamperedLines = tamperedLogs;
+        const tamperedLogsText = tamperedLines.join('\n');
         
         // Let's verify from the beginning. 
         // The file's internal chain will be "valid" because the agent resumes from the new last line.
@@ -149,7 +155,7 @@ async function runTestLab() {
         // Simulating ministry server verification:
         // We know what the last state was `lastValidHash`. 
         // We check if the new logs contain a line matching `lastValidHash`. If not, someone deleted history!
-        const historyIntact = tamperedLogs.includes(lastValidHash);
+        const historyIntact = tamperedLogsText.includes(lastValidHash);
         console.log('Ministry Server check - History Intact:', historyIntact);
         if (!historyIntact) {
             console.log('TAMPERING DETECTED SUCCESS: The agent was tampered with and the ministry server detected the truncated history.');

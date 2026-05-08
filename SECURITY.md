@@ -7,7 +7,7 @@
 | Latest (`master`) | ✅ Active development |
 | All prior releases | ❌ No security fixes backported |
 
-Calvary Blocker is currently pre-1.0. Only the `master` branch receives security attention.
+Calvary Porn Blocker is currently pre-1.0. Only the `master` branch receives security attention.
 
 ---
 
@@ -15,12 +15,14 @@ Calvary Blocker is currently pre-1.0. Only the `master` branch receives security
 
 **Please do not open a public GitHub issue for security vulnerabilities.**
 
-Report security issues by emailing:
+Report security issues by opening a **private GitHub Security Advisory** on this repository.
 
-> **security@calvary-blocker.org** *(or open a private GitHub Security Advisory)*
+1. Go to the **Security** tab of this repository.
+2. Click **Advisories** in the left sidebar.
+3. Click **Report a vulnerability**.
 
 If you do not receive a response within **72 hours**, follow up via a GitHub issue
-referencing that you sent a security report.
+referencing that you submitted a security advisory.
 
 ### What to Include
 

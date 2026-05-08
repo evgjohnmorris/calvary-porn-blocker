@@ -17,7 +17,7 @@ jest.mock('../system/dns-server', () => ({
     startDNSServer: jest.fn()
 }));
 
-describe('Calvary Blocker Break, Bottlenecks, Loopholes, Deadends, Deadzones Tests', () => {
+describe('Calvary Porn Blocker Break, Bottlenecks, Loopholes, Deadends, Deadzones Tests', () => {
   let token;
 
   beforeAll(() => {

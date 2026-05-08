@@ -11,7 +11,7 @@ const BLUE = '\x1b[34m';
 const YELLOW = '\x1b[33m';
 
 console.log(`${BOLD}${BLUE}=================================================${RESET}`);
-console.log(`${BOLD}${BLUE}   Calvary Blocker - ISO Compliance Smoke Check  ${RESET}`);
+console.log(`${BOLD}${BLUE}   Calvary Porn Blocker - ISO Compliance Smoke Check  ${RESET}`);
 console.log(`${BOLD}${BLUE}=================================================${RESET}\n`);
 
 let passCount = 0;

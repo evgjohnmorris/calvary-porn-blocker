@@ -111,7 +111,7 @@ function enforceRedditSafeSearch() {
                     if (isChecked) {
                         // Attempt to click it to turn it off
                         (switchEl as HTMLElement).click();
-                        console.log("Calvary Blocker: Turned off Reddit mature content toggle.");
+                        console.log("Calvary Porn Blocker: Turned off Reddit mature content toggle.");
                     }
                     
                     // Disable user interaction
@@ -122,7 +122,7 @@ function enforceRedditSafeSearch() {
                     if (!container.querySelector('.pb-lock')) {
                         const lock = document.createElement('span');
                         lock.className = 'pb-lock';
-                        lock.innerHTML = ' 🔒 (Locked by Calvary Blocker)';
+                        lock.innerHTML = ' 🔒 (Locked by Calvary Porn Blocker)';
                         lock.style.color = '#ff4444';
                         lock.style.fontSize = '12px';
                         lock.style.fontWeight = 'bold';

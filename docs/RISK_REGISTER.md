@@ -1,5 +1,5 @@
 # Risk Register
-**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+**Calvary Porn Blocker — Calvary Porn Blocker Project**
 Version: 1.1.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 
 ---

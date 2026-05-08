@@ -11,5 +11,20 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["public/**/*.js", "apps/browser-ext/**/*.js"],
+      "env": {
+        "browser": true,
+        "webextensions": true
+      },
+      "globals": {
+        "Auth": "readonly",
+        "Dashboard": "readonly",
+        "App": "readonly",
+        "COUNTRIES": "readonly"
+      }
+    }
+  ]
 }

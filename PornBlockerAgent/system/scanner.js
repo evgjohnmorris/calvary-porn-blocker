@@ -79,10 +79,12 @@ function scanDirectory(dir, maxDepth = 2, currentDepth = 0) {
                 }
             } catch (e) {
                 // Ignore permission errors
+                /* ignore */
             }
         }
     } catch (e) {
         // Ignore permission errors
+        /* ignore */
     }
     return findings;
 }
@@ -165,7 +167,7 @@ function scanBrowserHistory() {
                     }
 
                     db.close(() => {
-                        try { fs.unlinkSync(tempPath); } catch(e) {}
+                        try { fs.unlinkSync(tempPath); } catch(e) { /* ignore */ }
                         res();
                     });
                 });
@@ -188,7 +190,7 @@ function deleteSuspiciousFiles() {
                 try {
                     fs.unlinkSync(f.details);
                     deletedCount++;
-                } catch (e) {}
+                } catch (e) { /* ignore */ }
             }
         });
         resolve({ success: true, message: `Deleted ${deletedCount} suspicious files.` });
@@ -212,6 +214,7 @@ function clearBrowserHistory() {
                     clearedCount++;
                 } catch (e) {
                     // Usually means browser is open and holding a lock
+                    /* ignore */
                 }
             }
         });

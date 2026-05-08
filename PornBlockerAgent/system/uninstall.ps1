@@ -1,7 +1,7 @@
-# Calvary Sexual Immorality Blocker - Ministry Uninstall Script
+# Calvary Porn Blocker - Ministry Uninstall Script
 # This script removes the background Windows Service and reverts DoH interception.
 
-Write-Host "Starting Uninstallation of Calvary Blocker..." -ForegroundColor Cyan
+Write-Host "Starting Uninstallation of Calvary Porn Blocker..." -ForegroundColor Cyan
 
 # 1. Require Administrator
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -22,9 +22,9 @@ if (Test-Path $dohScript) {
 }
 
 # 3. Remove Windows Scheduled Task
-Write-Host "Removing Calvary Blocker background service..."
+Write-Host "Removing Calvary Porn Blocker background service..."
 
-$taskName = "CalvaryBlockerService"
+$taskName = "CalvaryPornBlockerService"
 if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
     Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
@@ -33,4 +33,4 @@ if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
     Write-Host "  [WARN] Service not found." -ForegroundColor Yellow
 }
 
-Write-Host "Uninstallation Complete. Calvary Blocker has been removed." -ForegroundColor Green
+Write-Host "Uninstallation Complete. Calvary Porn Blocker has been removed." -ForegroundColor Green

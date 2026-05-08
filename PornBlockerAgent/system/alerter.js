@@ -76,8 +76,8 @@ async function sendAlert(eventName, details, settings) {
         return; // We don't alert for this event
     }
 
-    const subject = `[ALERT] Calvary Blocker: High-Severity Event Detected`;
-    const text = `Accountability Alert\n\nA high-severity event was logged on the monitored device.\nEvent Type: ${eventName}\nDetails: ${details}\nTime: ${new Date().toISOString()}\n\nPlease check in with your accountability partner.\n\n- Calvary Sexual Immorality Blocker`;
+    const subject = `[ALERT] Calvary Porn Blocker: High-Severity Event Detected`;
+    const text = `Accountability Alert\n\nA high-severity event was logged on the monitored device.\nEvent Type: ${eventName}\nDetails: ${details}\nTime: ${new Date().toISOString()}\n\nPlease check in with your accountability partner.\n\n- Calvary Porn Blocker`;
 
     try {
         const mailTransporter = await getTransporter(settings.accountability);
@@ -87,7 +87,7 @@ async function sendAlert(eventName, details, settings) {
             if (partner.email) {
                 try {
                     const info = await mailTransporter.sendMail({
-                        from: '"Calvary Blocker Alert" <alerts@calvaryblocker.local>',
+                        from: '"Calvary Porn Blocker Alert" <alerts@calvarypornblocker.local>',
                         to: partner.email,
                         subject: subject,
                         text: text,

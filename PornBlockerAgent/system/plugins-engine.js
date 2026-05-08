@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 const { exec } = require('child_process');
 
 const HOSTS_PATH = 'C:\\Windows\\System32\\drivers\\etc\\hosts';
@@ -32,7 +31,7 @@ const pluginRules = {
 
 function runPowerShell(command) {
     return new Promise((resolve, reject) => {
-        exec(`powershell -NoProfile -ExecutionPolicy Bypass -Command "${command}"`, (error, stdout, stderr) => {
+        exec(`powershell -NoProfile -ExecutionPolicy Bypass -Command "${command}"`, (error, stdout) => {
             if (error) {
                 console.error(`PowerShell Error: ${error.message}`);
                 return reject(error);

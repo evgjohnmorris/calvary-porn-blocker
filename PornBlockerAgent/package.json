@@ -1,7 +1,7 @@
 {
   "name": "calvary-porn-blocker-agent",
   "version": "2.3.0",
-  "description": "Calvary Sexual Immorality Blocker — server-side agent",
+  "description": "Calvary Porn Blocker — server-side agent",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

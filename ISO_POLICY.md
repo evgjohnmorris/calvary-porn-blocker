@@ -1,4 +1,4 @@
-# ISO Policy — Calvary Blocker
+# ISO Policy — Calvary Porn Blocker
 
 > ⚠️ **This file has been superseded.**
 >

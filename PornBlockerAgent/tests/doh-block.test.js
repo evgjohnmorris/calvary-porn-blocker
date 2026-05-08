@@ -20,17 +20,17 @@ describe('doh-block.ps1 Security Policies', () => {
     it('should check for preexisting unmanaged keys', () => {
         // Look for the check that ensures we don't overwrite org policies
         expect(scriptContent).toMatch(/\$isManaged = \$false/);
-        expect(scriptContent).toMatch(/\$keyProps\.CalvaryManaged -eq 1/);
+        expect(scriptContent).toMatch(/\$keyProps\.CalvaryPornBlockerManaged -eq 1/);
     });
 
-    it('should tag managed keys with CalvaryManaged marker', () => {
+    it('should tag managed keys with CalvaryPornBlockerManaged marker', () => {
         // Ensures that when we set a key, we tag it
-        expect(scriptContent).toMatch(/Set-ItemProperty .* -Name "CalvaryManaged" -Value 1 -Type DWord/);
+        expect(scriptContent).toMatch(/Set-ItemProperty .* -Name "CalvaryPornBlockerManaged" -Value 1 -Type DWord/);
     });
 
-    it('should skip removal if CalvaryManaged marker is missing', () => {
+    it('should skip removal if CalvaryPornBlockerManaged marker is missing', () => {
         // Ensures that Remove logic checks for marker
-        expect(scriptContent).toMatch(/if \(\$null -ne \$keyProps\.CalvaryManaged -and \$keyProps\.CalvaryManaged -eq 1\)/);
+        expect(scriptContent).toMatch(/if \(\$null -ne \$keyProps\.CalvaryPornBlockerManaged -and \$keyProps\.CalvaryPornBlockerManaged -eq 1\)/);
         expect(scriptContent).toMatch(/Registry value .* is not managed by Calvary\. Skipping removal\./);
     });
 });

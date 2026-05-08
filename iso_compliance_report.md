@@ -1,6 +1,6 @@
 # ISO/IEC 27001 Alignment Summary
 
-**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+**Calvary Porn Blocker — Calvary Porn Blocker Project**
 Version: 2.2.0 | Updated: 2026-05-08
 
 > ⚠️ **This project is ISO 27001-aligned, not certified.**
@@ -12,7 +12,7 @@ Version: 2.2.0 | Updated: 2026-05-08
 
 ## Overview
 
-This document provides a concise executive summary of the Calvary Blocker project's security
+This document provides a concise executive summary of the Calvary Porn Blocker project's security
 posture as it relates to ISO/IEC 27001:2022. It is intended for ministry supervisors, pastoral
 leadership, and technical stakeholders. The language used reflects actual implementation status
 and does not imply certification.

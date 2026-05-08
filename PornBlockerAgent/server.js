@@ -129,6 +129,7 @@ function logAudit(action, ip, details = '') {
 // Routes
 // ---------------------------------------------------------------------------
 app.use('/api',            csrfRouter);
+app.use('/api/login',      loginLimiter);
 app.use('/api',            authRouter);
 
 // Apply rate limiter to recovery endpoints
@@ -182,7 +183,7 @@ if (require.main === module) {
             const server = https.createServer({ key: pems.private, cert: pems.cert }, app);
 
             server.listen(PORT, '0.0.0.0', () => {
-                console.log(`Calvary Sexual Immorality Blocker running securely at https://localhost:${PORT}`);
+                console.log(`Calvary Porn Blocker running securely at https://localhost:${PORT}`);
                 logAudit('SERVER_STARTED', '127.0.0.1');
             });
         } catch (err) {

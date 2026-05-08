@@ -1,4 +1,4 @@
-# Calvary Sexual Immorality Blocker: Comprehensive Outline
+# Calvary Porn Blocker: Comprehensive Outline
 
 This outline details the architecture, features, and technical stack required to build a robust, cross-platform pornography blocker and remover across all major operating systems, browsers, and mobile devices.
 

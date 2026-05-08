@@ -4,8 +4,8 @@ const { removeDoHBlock } = require('./system/dns');
 
 // Create a new service object
 const svc = new Service({
-  name: 'CalvaryBlockerCore',
-  description: 'Background service for the Calvary Sexual Immorality Blocker.',
+  name: 'CalvaryPornBlockerCore',
+  description: 'Background service for the Calvary Porn Blocker.',
   script: path.join(__dirname, 'server.js')
 });
 
@@ -21,7 +21,7 @@ svc.on('error', function(err) {
 
 // Uninstall the service.
 (async () => {
-    console.log('Attempting to revert DoH block and uninstall CalvaryBlockerCore Service...');
+    console.log('Attempting to revert DoH block and uninstall CalvaryPornBlockerCore Service...');
     await removeDoHBlock();
     svc.uninstall();
 })();

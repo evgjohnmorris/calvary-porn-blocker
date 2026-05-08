@@ -1,6 +1,15 @@
-# Contributing to Calvary Blocker
+# Contributing to Calvary Porn Blocker
 
-First off, thank you for considering contributing to Calvary Blocker. This tool exists to help people break free from pornography addiction and protect families, ministries, and schools. Every contribution — from bug reports to features to documentation — matters.
+First off, thank you for considering contributing to Calvary Porn Blocker. This tool exists to help people break free from pornography addiction and protect families, ministries, and schools. Every contribution — from bug reports to features to documentation — matters.
+
+---
+
+## 🌐 Community & Support
+
+Before opening an issue or PR, consider asking for help or discussing your idea with the community:
+- **GitHub Discussions**: [Join the conversation](https://github.com/evgjohnmorris/calvary-porn-blocker/discussions) for Q&A, feature ideas, and general support.
+- **Reddit**: [r/CalvaryPornBlocker](https://reddit.com/r/CalvaryPornBlocker) for community discussions and news.
+- **Facebook Group**: [Calvary Porn Blocker Community](https://facebook.com/groups/calvarypornblocker) for accountability and support.
 
 ---
 

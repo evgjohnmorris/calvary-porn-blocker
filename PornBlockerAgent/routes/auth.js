@@ -6,7 +6,7 @@ const jwt      = require('jsonwebtoken');
 const crypto   = require('crypto');
 const router   = express.Router();
 
-const { JWT_SECRET, NODE_ENV, USERS_FILE, SETTINGS_FILE } = require('../config/env');
+const { JWT_SECRET, USERS_FILE } = require('../config/env');
 const { loadData, saveData }  = require('../storage/store');
 const logger                  = require('../system/logger');
 

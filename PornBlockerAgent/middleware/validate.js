@@ -29,6 +29,7 @@ function isPlainObject(val) {
  * that have no place in user-supplied text fields.
  */
 function hasDangerousBytes(str) {
+    // eslint-disable-next-line no-control-regex
     return /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(str);
 }
 

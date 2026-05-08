@@ -55,7 +55,7 @@ function createTray() {
     }
   ]);
 
-  tray.setToolTip('Calvary Blocker - Checking Status...');
+  tray.setToolTip('Calvary Porn Blocker - Checking Status...');
   tray.setContextMenu(contextMenu);
 
   tray.on('click', () => {
@@ -71,12 +71,12 @@ function createTray() {
     const agent = new https.Agent({ rejectUnauthorized: false });
     https.get('https://localhost:3456/api/setup/status', { agent }, (res) => {
       if (res.statusCode === 200) {
-        tray.setToolTip('Calvary Blocker - Active');
+        tray.setToolTip('Calvary Porn Blocker - Active');
       } else {
-        tray.setToolTip('Calvary Blocker - Issue Detected');
+        tray.setToolTip('Calvary Porn Blocker - Issue Detected');
       }
     }).on('error', (err) => {
-      tray.setToolTip('Calvary Blocker - Offline');
+      tray.setToolTip('Calvary Porn Blocker - Offline');
     });
   }, 5000);
 }

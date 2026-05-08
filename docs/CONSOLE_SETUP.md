@@ -1,10 +1,10 @@
-# Calvary Blocker: Console Protection Guide
+# Calvary Porn Blocker: Console Protection Guide
 
 Gaming consoles like the Nintendo Switch, PlayStation Vita, PlayStation 4/5, and Xbox present a unique challenge. Because these devices run closed, proprietary operating systems, it is impossible to install native background applications (like our Mobile VPN or Desktop agent) to filter content, unless the console has been heavily modified (jailbroken/homebrewed).
 
 To protect users on these devices, we must enforce filtering at the **Network Level**.
 
-This guide explains how to configure your gaming consoles to use the Calvary Blocker DNS Sinkhole.
+This guide explains how to configure your gaming consoles to use the Calvary Porn Blocker DNS Sinkhole.
 
 ## The Strategy: DNS Filtering
 
@@ -14,7 +14,7 @@ By changing the Domain Name System (DNS) server settings on the console, we forc
 
 You need the IP addresses of your Secure DNS. This is either:
 1. **The Cloud DNS:** (e.g., Cloudflare Families: `1.1.1.3` and `1.0.0.3`)
-2. **Your Local Network Agent:** If you are running the Calvary Blocker agent on a local PC/Raspberry Pi that acts as a DNS sinkhole, use the local IP address of that machine (e.g., `192.168.1.50`).
+2. **Your Local Network Agent:** If you are running the Calvary Porn Blocker agent on a local PC/Raspberry Pi that acts as a DNS sinkhole, use the local IP address of that machine (e.g., `192.168.1.50`).
 
 ---
 

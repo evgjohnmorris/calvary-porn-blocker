@@ -6,8 +6,6 @@ const logger = require('./logger');
 // Embedded Local Proxy IP
 const LOCAL_DNS = '127.0.0.1';
 
-// CleanBrowsing Adult Filter (Fallback if embedded is disabled)
-const DNS_STRICT = '185.228.168.10,185.228.169.11';
 // CleanBrowsing Family Filter
 const DNS_MODERATE = '185.228.168.168,185.228.169.168';
 

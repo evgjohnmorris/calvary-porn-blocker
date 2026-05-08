@@ -1,4 +1,4 @@
-# Calvary Sexual Immorality Blocker - System Hardening Script
+# Calvary Porn Blocker - System Hardening Script
 # This script applies strict NTFS permissions to the application directory
 # to prevent unauthorized users from tampering with settings or logs.
 

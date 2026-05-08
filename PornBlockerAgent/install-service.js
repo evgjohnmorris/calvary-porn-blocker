@@ -3,8 +3,8 @@ const path = require('path');
 
 // Create a new service object
 const svc = new Service({
-  name: 'CalvaryBlockerCore',
-  description: 'Background service for the Calvary Sexual Immorality Blocker.',
+  name: 'CalvaryPornBlockerCore',
+  description: 'Background service for the Calvary Porn Blocker.',
   script: path.join(__dirname, 'server.js'),
   env: [{
     name: "NODE_ENV",
@@ -15,9 +15,9 @@ const svc = new Service({
 // Listen for the "install" event, which indicates the
 // process is available as a service.
 svc.on('install', function() {
-  console.log('CalvaryBlockerCore Service Installed Successfully.');
+  console.log('CalvaryPornBlockerCore Service Installed Successfully.');
   svc.start();
-  console.log('CalvaryBlockerCore Service Started.');
+  console.log('CalvaryPornBlockerCore Service Started.');
 });
 
 svc.on('alreadyinstalled', function() {
@@ -29,5 +29,5 @@ svc.on('error', function(err) {
 });
 
 // Install the script as a service
-console.log('Attempting to install CalvaryBlockerCore as a Windows Service...');
+console.log('Attempting to install CalvaryPornBlockerCore as a Windows Service...');
 svc.install();

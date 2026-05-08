@@ -27,7 +27,7 @@ function makeToken(role = 'ally') {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-describe('Calvary Blocker — Core Smoke Tests', () => {
+describe('Calvary Porn Blocker — Core Smoke Tests', () => {
 
   it('GET /api/setup/status → reports setup state', async () => {
     const res = await request(app).get('/api/setup/status');
@@ -65,7 +65,7 @@ describe('Calvary Blocker — Core Smoke Tests', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-describe('Calvary Blocker — Ally Mode', () => {
+describe('Calvary Porn Blocker — Ally Mode', () => {
   let token;
 
   beforeAll(() => { token = makeToken('ally'); });
@@ -182,7 +182,7 @@ describe('Calvary Blocker — Ally Mode', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-describe('Calvary Blocker — Family Mode', () => {
+describe('Calvary Porn Blocker — Family Mode', () => {
   let token;
 
   beforeAll(() => { token = makeToken('ally'); });
@@ -248,14 +248,14 @@ describe('Calvary Blocker — Family Mode', () => {
     const res = await request(app)
       .post('/api/settings')
       .set('Authorization', `Bearer ${token}`)
-      .send({ blockedApps: ['FamilyBlockedApp.exe'] });
+      .send({ blockedApps: ['ExplicitApp.exe'] });
     expect(res.statusCode).toBe(200);
-    expect(res.body.settings.blockedApps).toContain('FamilyBlockedApp.exe');
+    expect(res.body.settings.blockedApps).toContain('ExplicitApp.exe');
   });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-describe('Calvary Blocker — Ministry Mode', () => {
+describe('Calvary Porn Blocker — Ministry Mode', () => {
   let token;
 
   beforeAll(() => { token = makeToken('ally'); });
@@ -346,7 +346,7 @@ describe('Calvary Blocker — Ministry Mode', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-describe('Calvary Blocker — Lockdown Escalation Scenario', () => {
+describe('Calvary Porn Blocker — Lockdown Escalation Scenario', () => {
   let token;
 
   beforeAll(() => { token = makeToken('ally'); });

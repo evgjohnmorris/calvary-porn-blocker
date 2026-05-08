@@ -1,9 +1,9 @@
 # Information Security Management System (ISMS) Policy
-**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+**Calvary Porn Blocker — Calvary Porn Blocker Project**
 Version: 1.3.0 | Effective: 2026-05-08 | Review: Annually or after material change
 
 > **Alignment Notice:** This policy is written with reference to ISO/IEC 27001:2022 principles.
-> The Calvary Blocker project is **ISO 27001-aligned, not certified**. No formal third-party
+> The Calvary Porn Blocker project is **ISO 27001-aligned, not certified**. No formal third-party
 > certification audit has been conducted. Controls described here reflect design intent and
 > current implementation; open items are tracked in [`docs/RISK_REGISTER.md`](./RISK_REGISTER.md).
 
@@ -11,9 +11,9 @@ Version: 1.3.0 | Effective: 2026-05-08 | Review: Annually or after material chan
 
 ## 1. Purpose and Scope
 
-This document defines the Information Security Management System (ISMS) for the Calvary Blocker software project. It establishes the security controls, responsibilities, and review processes that govern how the system protects user data, system integrity, and administrative access.
+This document defines the Information Security Management System (ISMS) for the Calvary Porn Blocker software project. It establishes the security controls, responsibilities, and review processes that govern how the system protects user data, system integrity, and administrative access.
 
-**Scope:** All components of the Calvary Blocker system, including:
+**Scope:** All components of the Calvary Porn Blocker system, including:
 - The local Node.js/Express server (`PornBlockerAgent/`)
 - The SPA web dashboard (`public/`)
 - DNS-level content filtering subsystem
@@ -41,7 +41,7 @@ This document defines the Information Security Management System (ISMS) for the 
 
 ## 3. Information Security Policy Statement
 
-The Calvary Blocker project is committed to:
+The Calvary Porn Blocker project is committed to:
 - Protecting the confidentiality, integrity, and availability of all system components and user data.
 - Operating with full transparency — no hidden data collection, no undisclosed transmission.
 - Maintaining audit trails that are tamper-evident and independently verifiable.
@@ -206,7 +206,7 @@ Changes must be committed to the repository with a version bump and dated change
 
 ## 9. Acceptance
 
-By deploying, operating, or contributing to the Calvary Blocker system, you acknowledge that you have read and agree to operate within the bounds of this policy.
+By deploying, operating, or contributing to the Calvary Porn Blocker system, you acknowledge that you have read and agree to operate within the bounds of this policy.
 
 ---
 

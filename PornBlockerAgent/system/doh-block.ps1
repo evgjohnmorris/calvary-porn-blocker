@@ -1,4 +1,4 @@
-# Calvary Sexual Immorality Blocker — DoH Interception Script
+# Calvary Porn Blocker — DoH Interception Script
 # R-005: Blocks DNS-over-HTTPS bypass at three layers:
 #   1. Windows Firewall outbound rules blocking known DoH provider IPs (TCP+UDP 443)
 #   2. DNS sinkhole entries for DoH hostnames (handled in dns-server.js)
@@ -99,7 +99,7 @@ if (-not $RemoveOnly) {
         -Action Block `
         -Profile Any `
         -Enabled True `
-        -Description 'Calvary Blocker: Block DNS-over-HTTPS (DoH) to known providers (TCP)' `
+        -Description 'Calvary Porn Blocker: Block DNS-over-HTTPS (DoH) to known providers (TCP)' `
         | Out-Null
     Write-OK "Firewall rule created: $ruleName_TCP ($($ipv4IPs.Count) IPv4 addresses)"
 
@@ -113,7 +113,7 @@ if (-not $RemoveOnly) {
         -Action Block `
         -Profile Any `
         -Enabled True `
-        -Description 'Calvary Blocker: Block DNS-over-HTTPS (DoH) to known providers (UDP/QUIC)' `
+        -Description 'Calvary Porn Blocker: Block DNS-over-HTTPS (DoH) to known providers (UDP/QUIC)' `
         | Out-Null
     Write-OK "Firewall rule created: $ruleName_UDP ($($ipv4IPs.Count) IPv4 addresses)"
 } else {
@@ -134,13 +134,13 @@ if ($dohIPs | Where-Object { $_ -match ':' }) {
                 -DisplayName $ruleName_TCP6 `
                 -Direction Outbound -Protocol TCP -RemotePort 443 `
                 -RemoteAddress $ipv6IPs -Action Block -Profile Any -Enabled True `
-                -Description 'Calvary Blocker: Block DoH to known providers (TCP IPv6)' `
+                -Description 'Calvary Porn Blocker: Block DoH to known providers (TCP IPv6)' `
                 | Out-Null
             New-NetFirewallRule `
                 -DisplayName $ruleName_UDP6 `
                 -Direction Outbound -Protocol UDP -RemotePort 443 `
                 -RemoteAddress $ipv6IPs -Action Block -Profile Any -Enabled True `
-                -Description 'Calvary Blocker: Block DoH to known providers (UDP IPv6)' `
+                -Description 'Calvary Porn Blocker: Block DoH to known providers (UDP IPv6)' `
                 | Out-Null
             Write-OK "IPv6 firewall rules created ($($ipv6IPs.Count) addresses)"
         } else {
@@ -165,7 +165,7 @@ function Set-ManagedRegValue($path, $name, $value, $type = 'String') {
         if ($null -ne $keyProps.$name) {
             $existingValue = $keyProps.$name
         }
-        if ($null -ne $keyProps.CalvaryManaged -and $keyProps.CalvaryManaged -eq 1) {
+        if ($null -ne $keyProps.CalvaryPornBlockerManaged -and $keyProps.CalvaryPornBlockerManaged -eq 1) {
             $isManaged = $true
         }
     }
@@ -185,15 +185,15 @@ function Set-ManagedRegValue($path, $name, $value, $type = 'String') {
         New-Item -Path $path -Force | Out-Null
     }
     Set-ItemProperty -Path $path -Name $name -Value $value -Type $type -Force
-    Set-ItemProperty -Path $path -Name "CalvaryManaged" -Value 1 -Type DWord -Force
+    Set-ItemProperty -Path $path -Name "CalvaryPornBlockerManaged" -Value 1 -Type DWord -Force
 }
 
 function Remove-ManagedRegValue($path, $name) {
     if (Test-Path $path) {
         $keyProps = Get-ItemProperty -Path $path -ErrorAction SilentlyContinue
-        if ($null -ne $keyProps.CalvaryManaged -and $keyProps.CalvaryManaged -eq 1) {
+        if ($null -ne $keyProps.CalvaryPornBlockerManaged -and $keyProps.CalvaryPornBlockerManaged -eq 1) {
             Remove-ItemProperty -Path $path -Name $name -ErrorAction SilentlyContinue
-            Remove-ItemProperty -Path $path -Name "CalvaryManaged" -ErrorAction SilentlyContinue
+            Remove-ItemProperty -Path $path -Name "CalvaryPornBlockerManaged" -ErrorAction SilentlyContinue
         } else {
             # Don't touch if not managed by us.
             if ($null -ne $keyProps.$name) {

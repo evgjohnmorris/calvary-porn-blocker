@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea or enhancement for Calvary Blocker
+about: Suggest an idea or enhancement for Calvary Porn Blocker
 title: '[FEATURE] '
 labels: 'enhancement, triage'
 assignees: ''

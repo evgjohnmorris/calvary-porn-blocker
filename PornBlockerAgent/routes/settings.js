@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 
 const { SETTINGS_FILE }     = require('../config/env');
-const { loadData, saveData } = require('../storage/store');
+const { saveData } = require('../storage/store');
 const { applyFilter, applyDoHBlock, removeDoHBlock } = require('../system/dns');
 const { loadPlugins, togglePlugin } = require('../plugins');
 const logger                 = require('../system/logger');

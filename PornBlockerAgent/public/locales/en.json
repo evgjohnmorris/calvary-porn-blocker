@@ -1,6 +1,6 @@
 {
   "setup": {
-    "title": "Calvary Sexual Immorality Blocker Setup",
+    "title": "Calvary Porn Blocker Setup",
     "subtitle": "Create your Admin Account to initialize the system.",
     "username": "Username",
     "usernamePlaceholder": "Admin Username",
@@ -17,7 +17,7 @@
     "btnComplete": "Complete Setup"
   },
   "login": {
-    "title": "Calvary Sexual Immorality Blocker Login",
+    "title": "Calvary Porn Blocker Login",
     "username": "Username",
     "password": "Password",
     "usernamePlaceholder": "Username",
@@ -39,7 +39,7 @@
     "btnBack": "Back to Login"
   },
   "dashboard": {
-    "title": "Calvary Blocker Admin",
+    "title": "Calvary Porn Blocker Admin",
     "subtitle": "System Administration",
     "nav": {
       "overview": "Overview",

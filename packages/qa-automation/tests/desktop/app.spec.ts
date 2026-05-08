@@ -1,5 +1,5 @@
 /**
- * Calvary Blocker — Full User Experience Play Test Lab
+ * Calvary Porn Blocker — Full User Experience Play Test Lab
  *
  * Tests the complete user journey against the live HTTPS dashboard at
  * https://localhost:3456 using a real Chromium browser (the same engine
