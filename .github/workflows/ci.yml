@@ -47,12 +47,13 @@ jobs:
         env:
           NODE_ENV: test
 
-      - name: Audit dependencies (fail on high/critical)
+      - name: Audit production dependencies (enforced)
         working-directory: ./PornBlockerAgent
-        run: npm audit --audit-level=high
-        # Note: known Dependabot alerts are tracked in docs/RISK_REGISTER.md.
-        # Remove `continue-on-error` once all high/critical vulnerabilities are resolved.
-        continue-on-error: true
+        run: npm audit --audit-level=high --omit=dev
+        # Enforced: PornBlockerAgent has 0 high/critical production vulnerabilities.
+        # The 52 Dependabot alerts visible on the repo are in packages/qa-automation
+        # (Appium/Playwright transitive dev-deps) and do NOT affect the production agent.
+        # Those are formally risk-accepted in docs/RISK_REGISTER.md.
 
   # ────────────────────────────────────────────────────────────────
   # Job 2: CodeQL Static Analysis

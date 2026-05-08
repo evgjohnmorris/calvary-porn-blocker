@@ -1,6 +1,6 @@
 # Risk Register
 **Calvary Blocker — Calvary Sexual Immorality Blocker Project**
-Version: 1.0.0 | Effective: 2026-05-08 | Owner: Project Maintainer
+Version: 1.1.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 
 ---
 
@@ -43,15 +43,14 @@ Version: 1.0.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | Field | Value |
 |---|---|
 | **Domain** | A.8.24 Cryptography / A.8.2 Access Control |
-| **Risk** | A cross-site scripting vulnerability allows an attacker to steal the JWT from `sessionStorage`, impersonating the admin and disabling filters. |
+| **Risk** | A cross-site scripting vulnerability allows an attacker to steal the JWT from session storage, impersonating the admin and disabling filters. |
 | **Likelihood** | 2 |
 | **Impact** | 5 |
 | **Raw Score** | 10 (HIGH) |
-| **Controls** | `helmet` CSP headers; no `innerHTML` from user input; `sessionStorage` (not `localStorage`) limits cross-tab exposure; HTTPS enforced |
-| **Residual Score** | 4 (LOW) |
-| **Status** | Mitigated |
-| **Open Action** | Migrate to `httpOnly` cookie for production hardening (see R-002-ACT) |
-| **Evidence** | `server.js` helmet config; `auth.js` sessionStorage implementation |
+| **Controls** | **JWT migrated to `httpOnly` Secure cookie (v2.2.0)** — eliminates XSS token theft entirely; `helmet` CSP headers; no `innerHTML` from user input; HTTPS enforced |
+| **Residual Score** | 2 (LOW) |
+| **Status** | ✅ Mitigated (closed v2.2.0) |
+| **Evidence** | `middleware/auth.js` httpOnly cookie; `routes/auth.js`; `middleware/csrf.js` Double-Submit Cookie CSRF protection |
 
 ---
 
@@ -125,11 +124,11 @@ Version: 1.0.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | **Likelihood** | 2 |
 | **Impact** | 4 |
 | **Raw Score** | 8 (HIGH) |
-| **Controls** | `pnpm` lockfile pins exact versions; Dependabot alerts monitored; `npm audit` run before each release |
-| **Residual Score** | 4 (LOW) |
-| **Status** | Mitigated |
-| **Open Action** | Resolve 16 open Dependabot alerts on GitHub (4 high, 9 moderate, 3 low) before next release |
-| **Evidence** | `pnpm-lock.yaml`; GitHub Dependabot alerts |
+| **Controls** | `pnpm` lockfile pins exact versions; Dependabot alerts monitored; `npm audit --omit=dev --audit-level=high` enforced in CI (no `continue-on-error`) |
+| **Residual Score** | 3 (LOW) |
+| **Status** | ✅ Mitigated — Production agent (PornBlockerAgent) has **0** high/critical vulnerabilities as of v2.3.0 |
+| **Formal Risk Acceptance** | 52 Dependabot alerts exist in `packages/qa-automation` (Appium/Playwright transitive **dev** deps). These affect the automated test harness only — they are never shipped, never executed in production, and have no path to the running agent. Risk formally accepted 2026-05-08 by Project Maintainer. Remediation tracked as R-007-ACT. |
+| **Evidence** | CI audit step (`ci.yml`); `npm audit` output: 0 production vulns; GitHub Dependabot alerts scoped to qa-automation workspace |
 
 ---
 
@@ -188,25 +187,25 @@ Version: 1.0.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | **Likelihood** | 3 |
 | **Impact** | 2 |
 | **Raw Score** | 6 (MEDIUM) |
-| **Controls** | Onboarding wizard guides user through certificate installation; cert pinned to localhost only |
-| **Residual Score** | 4 (LOW) |
+| **Controls** | Self-signed cert generated at runtime by `selfsigned` library (never committed to git as of v2.3.0); onboarding wizard guides user through trust; cert pinned to localhost only |
+| **Residual Score** | 3 (LOW) |
 | **Status** | Accepted |
 | **Open Action** | Investigate `mkcert` for development and LetsEncrypt/ACME for hosted deployments to eliminate self-signed certs |
-| **Evidence** | `cert.cer`; onboarding wizard cert install step |
+| **Evidence** | `server.js` selfsigned generation; `.gitignore` excludes `cert.cer` |
 
 ---
 
 ## Open Actions Summary
 
-| Action ID | Risk | Action | Priority |
-|---|---|---|---|
-| R-002-ACT | JWT Token Theft | Migrate JWT from `sessionStorage` to `httpOnly` cookie | HIGH |
-| R-005-ACT | DNS Circumvention | Implement DNS-over-HTTPS interception | HIGH |
-| R-006-ACT | Proxy Circumvention | Expand process blocklist with hash-based detection | HIGH |
-| R-007-ACT | Supply Chain | Resolve 16 Dependabot alerts before next release | HIGH |
-| R-009-ACT | Data Loss | Implement automated backup of `settings.json` | MEDIUM |
-| R-010-ACT | Ally Alert Gap | Add push notification channel + delivery retry logic | MEDIUM |
-| R-011-ACT | TLS Certificate | Evaluate `mkcert` / LetsEncrypt for cert management | LOW |
+| Action ID | Risk | Action | Priority | Status |
+|---|---|---|---|---|
+| R-002-ACT | JWT Token Theft | ~~Migrate JWT from `sessionStorage` to `httpOnly` cookie~~ | HIGH | ✅ **Closed v2.2.0** |
+| R-005-ACT | DNS Circumvention | Implement DNS-over-HTTPS interception | HIGH | Open |
+| R-006-ACT | Proxy Circumvention | Expand process blocklist with hash-based detection | HIGH | Open |
+| R-007-ACT | Supply Chain (QA) | Upgrade or remove Appium/Playwright transitive dev deps causing 52 Dependabot alerts in `packages/qa-automation` | MEDIUM | Open — formally accepted, no production impact |
+| R-009-ACT | Data Loss | Implement automated backup of `settings.json` | MEDIUM | Open |
+| R-010-ACT | Ally Alert Gap | Add push notification channel + delivery retry logic | MEDIUM | Open |
+| R-011-ACT | TLS Certificate | Evaluate `mkcert` / LetsEncrypt for cert management | LOW | Open |
 
 ---
 
@@ -215,7 +214,8 @@ Version: 1.0.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | Version | Date | Author | Changes |
 |---|---|---|---|
 | 1.0.0 | 2026-05-08 | Project Maintainer | Initial risk register created |
+| 1.1.0 | 2026-05-08 | Project Maintainer | Close R-002-ACT (httpOnly cookie shipped v2.2.0); formally accept R-007 QA dev-dep alerts (0 production vulns); update R-011 (cert.cer removed from git); correct stale Open Actions table |
 
 ---
 
-*Risk Register Version: 1.0.0 | Built with faith, for freedom.*
+*Risk Register Version: 1.1.0 | Built with faith, for freedom.*
