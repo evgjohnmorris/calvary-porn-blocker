@@ -1,61 +1,166 @@
-# Calvary Sexual Immorality Blocker - Testing & Smoke Check Guide
+# Testing Guide
+**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+Version: 2.0.0 | Updated: 2026-05-08
 
-This document provides instructions for performing regular smoke checks and lab trials to ensure the system remains compliant with ISO standards for Security, Infrastructure, Organization, User Satisfaction, Beauty, Design, and Functionality.
+> This guide describes how to run the automated E2E test suite, perform manual smoke checks, and verify ISO compliance through testing.
+> For the formal security policy, see [`docs/ISMS_POLICY.md`](./docs/ISMS_POLICY.md).
+> For the risk register, see [`docs/RISK_REGISTER.md`](./docs/RISK_REGISTER.md).
 
-## 1. UI & Design Smoke Check (ISO: User Satisfaction, Beauty, Design)
+---
 
-To ensure the UI remains premium, functional, and aesthetically pleasing:
+## 1. Prerequisites
 
-1. **Start the server** in the `PornBlockerAgent` directory:
-   ```bash
-   npm start
-   ```
-2. **Open the Dashboard**: Navigate to `https://localhost:3456` in your browser.
-3. **Usability & Design Verification**:
-   - Check the **Glassmorphism** layout for correct rendering (blur effects, transparency, and dark gradients).
-   - Ensure the "Login" screen handles bad credentials cleanly, showing descriptive errors rather than hanging.
-   - Upon logging in with the default credentials (`admin` / `password123` if set up), verify that the Ministry Setup Guide modal triggers properly if accountability partners are not yet set.
-4. **Organization**: Verify that tabs (Dashboard, Filtering, Accountability, System Scanner, Logs) are correctly organized and logically structured for ease of use.
+Before running any tests, ensure the following are in place:
 
-## 2. Infrastructure & Architecture Labs (ISO: Security, Infrastructure)
+```bash
+# Install all dependencies (from repo root)
+pnpm install
 
-To verify the robust backend architecture and ministry-mode security lockouts:
+# Start the PornBlockerAgent server (leave running in a separate terminal)
+cd PornBlockerAgent
+node server.js
+```
 
-1. **Run the API Lab Trials**:
-   ```bash
-   cd PornBlockerAgent
-   node tests/api_labs.js
-   ```
-   **What this checks**:
-   - Authentication endpoint functionality.
-   - **Ministry Mode Architecture**: Ensures that when a remote policy is applied (Ministry Mode), no local admin can override the `filterLevel` or disable `lockdownMode`.
-   - **Scanner Infrastructure**: Validates the functionality of the deep system scanner.
+The server must be running at `https://localhost:3456` before executing any test suite.
 
-2. **Run the Smoke Test Suite**:
-   ```bash
-   npm run test:smoke
-   ```
-   **What this checks**:
-   - Core API endpoints return expected HTTP status codes.
-   - Unauthorized access attempts to `/api/settings` are strictly rejected with a `401 Unauthorized` or `403 Forbidden`.
+**Default test credentials** (set in `PornBlockerAgent/users.json`):
+- Username: `admin`
+- Password: `admin1234`
 
-## 3. ISO Policy Standards Implementation
+> ⚠️ Never deploy with default credentials. Change the password immediately after initial setup via the Account tab.
 
-When performing these checks, adhere to the following ISO 27001 policies:
-* **A.12.1.1 (Documented Operating Procedures)**: All tests must be run using these documented steps to ensure consistency.
-* **A.14.2.8 (System Acceptance Testing)**: The API Labs script must pass successfully before any update to the application is deployed to production.
-* **A.12.4.1 (Event Logging)**: Review the `audit.log` file post-testing to ensure that the testing actions themselves (e.g., failed logins, scanner runs) were properly logged and hashed.
+---
 
-## 4. Future Testing & Development Recommendations
+## 2. Automated E2E Test Suite (Playwright)
 
-To further enhance the application's ISO compliance and robustness, the following areas should be tested and developed:
+The primary test suite covers the full 18-step user journey: authentication, dashboard, settings, scan, logs, and account management.
 
-1. **Performance & Load Testing**: 
-   - Develop tests to measure the response time of the embedded DNS server under heavy query loads (e.g., 10,000 requests/second) to ensure it doesn't become a network bottleneck.
-2. **Penetration Testing**:
-   - Test for JWT token vulnerabilities (e.g., token expiration enforcement, replay attacks).
-   - Attempt to bypass the `lockdownMode` by manually modifying registry keys or OS-level network adapters to verify the interval-based enforcer catches it.
-3. **Cross-Browser & Responsive UI Tests**:
-   - Develop automated UI tests (e.g., using Playwright or Puppeteer) to verify the glassmorphism design degrades gracefully on older browsers or mobile devices.
-4. **Resilience Testing (Chaos Engineering)**:
-   - Simulate a crash of the NodeJS process to ensure it is automatically restarted by the OS service manager without leaking DNS requests.
+### Run all tests
+
+```bash
+# From repo root
+pnpm test
+```
+
+or equivalently:
+
+```bash
+cd packages/qa-automation
+pnpm exec playwright test
+```
+
+### Run with UI (interactive mode)
+
+```bash
+cd packages/qa-automation
+pnpm exec playwright test --ui
+```
+
+### Run a specific test file
+
+```bash
+cd packages/qa-automation
+pnpm exec playwright test tests/desktop/app.spec.ts
+```
+
+### View the test report
+
+```bash
+cd packages/qa-automation
+pnpm exec playwright show-report
+```
+
+### Expected output (all passing)
+
+```
+18 passed (2.2m)
+Exit code: 0
+```
+
+---
+
+## 3. What the E2E Suite Validates
+
+| Test # | Area | What is Checked |
+|---|---|---|
+| 01 | Authentication | Login form renders; valid credentials accepted |
+| 02 | Dashboard | Dashboard loads after login |
+| 03 | Filtering | Filter controls render and respond |
+| 04 | Accountability | Ally/partner config section visible |
+| 05–13 | Settings | All setting controls (DNS, app block, lockdown, family, ministry, etc.) render |
+| 14 | Scanner | Scan trigger is accessible and initiates |
+| 15 | Logs | Audit log section renders with entries |
+| 16–17 | Account | Profile and recovery fields render |
+| 18 | Stability | App is responsive after full journey |
+
+---
+
+## 4. Manual Smoke Check
+
+Run this after any significant code change to verify the UI and key flows manually.
+
+### 4.1 Authentication
+
+1. Open `https://localhost:3456` in Chrome.
+2. Confirm the login form renders with Glassmorphism styling (dark navy + violet).
+3. Submit incorrect credentials → verify inline error message appears (no native browser alert).
+4. Submit correct credentials → verify redirect to dashboard.
+5. Reload the page → verify dashboard remains (session persists via `sessionStorage`).
+
+### 4.2 Filtering Controls
+
+1. Navigate to the **Filtering** tab.
+2. Verify filter level selector or toggle is visible and operable.
+3. Toggle family mode and ministry mode → verify state is saved.
+
+### 4.3 Lockdown Mode
+
+1. Navigate to **Settings**.
+2. Toggle Lockdown Mode → verify the UI reflects the locked state.
+3. Attempt to change a locked setting → verify the change is rejected (Ministry Mode).
+
+### 4.4 Audit Log
+
+1. Navigate to the **Logs** tab.
+2. Verify log entries are present and timestamped.
+3. Confirm the HMAC chain indicator shows as valid (not broken).
+
+### 4.5 Account Management
+
+1. Navigate to the **Account** tab.
+2. Verify profile fields (username, email) render.
+3. Verify password change fields and recovery options are present.
+
+---
+
+## 5. ISO 27001 Compliance Verification Checklist
+
+Run these checks before any production deployment.
+
+| Control | Verification Method | Pass Criteria |
+|---|---|---|
+| A.5.15 — Access Control | Run E2E suite test 01; attempt unauthenticated API call | 401 returned; login required |
+| A.8.15 — Audit Logging | Navigate to Logs tab after E2E run | Entries present; chain intact |
+| A.8.24 — Cryptography | Inspect `settings.json` on disk | File is encrypted (not plaintext JSON) |
+| A.8.20 — Network Security | Attempt to resolve a blocked domain | DNS returns `0.0.0.0` |
+| A.5.24 — Incident Management | Trigger a failed login × 11 | Rate limiter returns 429; ally notified |
+| ISO 25010 — Software Quality | Run full E2E suite | 18/18 pass, exit code 0 |
+
+---
+
+## 6. Recommended Additional Testing (Roadmap)
+
+These tests are planned but not yet automated:
+
+| Area | Method | Priority |
+|---|---|---|
+| **DNS load testing** | Simulate 10,000 queries/sec against embedded proxy | HIGH |
+| **JWT penetration** | Test token expiry enforcement and replay attacks | HIGH |
+| **Process rename bypass** | Rename Tor Browser binary; confirm process monitor catches it | HIGH |
+| **Cross-browser UI** | Run Playwright suite against Firefox and WebKit | MEDIUM |
+| **Chaos / crash recovery** | Kill the Node.js process; confirm OS service restarts it cleanly | MEDIUM |
+| **DNS-over-HTTPS bypass** | Test DoH resolver override; verify VPN layer intercepts | MEDIUM |
+
+---
+
+*Testing Guide Version: 2.0.0 | Built with faith, for freedom.*

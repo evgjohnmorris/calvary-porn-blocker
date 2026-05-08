@@ -1,24 +1,62 @@
-# ISO/IEC 27001 Compliance & Accountability Report
-**Calvary Sexual Immorality Blocker Project**
+# ISO/IEC 27001 Compliance Summary
+**Calvary Blocker — Calvary Sexual Immorality Blocker Project**
+Version: 2.0.0 | Updated: 2026-05-08
 
-## 1. Executive Summary
-This document serves as the compliance audit framework for the Calvary Sexual Immorality Blocker. As a system designed for strict ministry accountability, it conforms to essential Information Security Management (ISO/IEC 27001) principles, specifically concerning Access Control, Logging & Monitoring, and Incident Management.
+---
 
-## 2. Access Control (ISO/IEC 27001: A.9)
-The system strictly enforces role-based access to network settings and filter configurations.
-*   **Authentication**: All administrative dashboard endpoints are protected by strong JWT authentication.
-*   **Lockdown Mode**: When enabled, DNS configurations, VPN gateways, and filter levels are locked down. Any attempt to modify these settings outside of authorized maintenance windows triggers a high-severity alert.
+## Overview
 
-## 3. Logging & Monitoring (ISO/IEC 27001: A.12.4)
-Comprehensive auditing ensures that no action goes unnoticed.
-*   **Tamper-Evident Logs**: The `audit.log` system records all authentication events, configuration changes, and system scans. 
-*   **Real-Time Review**: Logs are directly accessible via the Developer & Logs tab to provide total transparency.
+This document provides a concise executive summary of the Calvary Blocker project's compliance posture against ISO/IEC 27001:2022. It is intended as a high-level overview for ministry supervisors, pastoral leadership, and technical stakeholders.
 
-## 4. Incident Management & Accountability (ISO/IEC 27001: A.16)
-Accountability is a core pillar, mitigating insider threat risks and ensuring personal purity compliance.
-*   **Immediate Alerting**: Via integrated Twilio (SMS) and SMTP (Email) services, accountability partners are immediately notified of any `BYPASS_ATTEMPT_DETECTED` or `LOCKDOWN_DISABLED` events.
-*   **System Scanner**: Deep system scanning ensures ongoing compliance by actively searching for unauthorized explicit content or history, generating logs and providing rapid remediation (deletion/quarantine).
+For full detail, see:
+- **[`docs/ISMS_POLICY.md`](./docs/ISMS_POLICY.md)** — Complete ISMS policy with control-by-control implementation mapping
+- **[`docs/RISK_REGISTER.md`](./docs/RISK_REGISTER.md)** — Full risk register with likelihood/impact scoring and residual risk
 
-## 5. Ongoing Review
-*   **UI Integration**: The dashboard incorporates a "Ministry Setup Guide" to mandate configuration of accountability partners before the system is considered "Compliant".
-*   **Review Schedule**: It is recommended that this policy and the corresponding logs be reviewed by a technical elder or ministry supervisor quarterly.
+---
+
+## Compliance Status Summary
+
+| ISO/IEC 27001:2022 Domain | Status | Notes |
+|---|---|---|
+| A.5.15 — Access Control | ✅ Implemented | JWT auth, bcrypt, rate limiting, NTFS ACL |
+| A.8.2 — Privileged Access | ✅ Implemented | SYSTEM account enforcement; Ministry Mode lock |
+| A.8.24 — Cryptography | ✅ Implemented | AES-256-GCM at rest; HTTPS/TLS in transit |
+| A.8.15 — Logging & Monitoring | ✅ Implemented | HMAC-SHA256 audit chain; tamper-evident |
+| A.8.20 — Network Security | ✅ Implemented | DNS null-routing; VPN layer; process monitor |
+| A.5.24 — Incident Management | ✅ Implemented | Dual-channel ally alerts (SMS + email) |
+| A.8.8 — Vulnerability Management | 🟡 Partial | 16 Dependabot alerts open — resolve before release |
+| A.8.13 — Information Backup | 🟡 Partial | Manual only; automated backup not yet implemented |
+
+**ISO/IEC 29101 — Privacy Architecture:** ✅ Local-first; no cloud telemetry; full admin data control.
+
+**ISO/IEC 25010 — Software Quality:** ✅ 18/18 Playwright E2E tests passing (exit code 0).
+
+**ISO 9241-210 — Human-Centered Design:** ✅ Glassmorphism UI; WCAG 2.1 AA contrast; 30+ language onboarding.
+
+---
+
+## Outstanding Actions Before Full Compliance
+
+| Priority | Action | Owner |
+|---|---|---|
+| 🔴 HIGH | Resolve 16 Dependabot vulnerabilities (4 high, 9 moderate, 3 low) | Maintainer |
+| 🔴 HIGH | Migrate JWT from `sessionStorage` to `httpOnly` cookie | Maintainer |
+| 🔴 HIGH | Implement DNS-over-HTTPS interception to close DNS bypass gap | Maintainer |
+| 🟡 MEDIUM | Add automated `settings.json` backup on each save | Maintainer |
+| 🟡 MEDIUM | Add push notification as tertiary ally alert channel | Maintainer |
+| 🟢 LOW | Evaluate `mkcert` / LetsEncrypt to replace self-signed TLS cert | Maintainer |
+
+---
+
+## Review Schedule
+
+| Review Type | Frequency | Responsible Party |
+|---|---|---|
+| Audit log review | Monthly | Ministry Supervisor |
+| Risk register review | Quarterly | Project Maintainer |
+| Full ISMS review | Annually | Project Maintainer |
+| Security incident review | As needed | Maintainer + Ministry Supervisor |
+
+---
+
+*Compliance Summary Version: 2.0.0 | Built with faith, for freedom.*
