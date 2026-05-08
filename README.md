@@ -1,4 +1,10 @@
-# Calvary Blocker
+# Calvary Blocker 🛡️
+
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Privacy First](https://img.shields.io/badge/Privacy-100%25%20Local-success.svg)
+![Open Source](https://img.shields.io/badge/Open_Source-%E2%9D%A4-red.svg)
+![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)
+![DNS Filtering](https://img.shields.io/badge/Filtering-DNS--Level-orange.svg)
 
 > **A free, open-source content filter built for individuals, families, ministries, and schools — designed to help people break free from pornography addiction and protect those they love.**
 
@@ -60,7 +66,7 @@ Calvary Blocker is a local, privacy-first content filtering tool with:
 ### Supported Profiles
 
 | Profile | Description |
-|---|---|
+| --- | --- |
 | 🙋 Individual | Personal accountability, strict filtering |
 | 👨‍👩‍👧 Family | Safe environment for children and spouses |
 | ⛪ Ministry | Church, pastoral, and counseling contexts |
