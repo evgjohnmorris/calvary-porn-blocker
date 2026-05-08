@@ -88,16 +88,51 @@ Calvary Blocker is a local, privacy-first content filtering tool with:
 
 ---
 
-## Getting Started
+## Installation & Specific Instructions
+
+Calvary Blocker consists of multiple components that work together to protect your device. Follow these specific instructions to get everything running.
+
+### 1. Setting up the Ally Dashboard
+
+The Ally Dashboard provides real-time monitoring, alerts, and settings configuration.
 
 ```bash
-git clone https://github.com/evgjohnmorris/calvary-porn-blocker.git
-cd calvary-porn-blocker/PornBlockerAgent
+# Navigate to the dashboard directory
+cd AllyDashboard
+
+# Install dependencies and start the dashboard
+npm install
+node index.js
+```
+
+The dashboard will run locally at `http://localhost:4000`.
+
+### 2. Running the Blocker Agent
+
+The Blocker Agent enforces rules and communicates with the dashboard.
+
+```bash
+# Navigate to the agent directory
+cd PornBlockerAgent
+
+# Install dependencies and start the agent
 npm install
 node server.js
 ```
 
-Then visit `https://localhost:3456` in your browser.
+### 3. Deploying the DNS Blocker (Windows Only)
+
+To enforce system-wide DNS blocking, you need to run the PowerShell deployment script as an Administrator.
+
+1. Open PowerShell as **Administrator**.
+2. Navigate to the root directory of the project.
+3. Run the deployment script:
+
+   ```powershell
+   .\Deploy-DNSBlocker.ps1
+   ```
+
+4. Follow the prompts to configure your primary and secondary filtered DNS servers.
 
 > **First run:** You will be guided through a setup wizard to create your admin account and configure your filtering profile.
 
