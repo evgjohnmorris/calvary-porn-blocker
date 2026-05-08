@@ -1,6 +1,6 @@
 // Auth Logic: Registration and Login flows
 const Auth = {
-    token: null,
+    token: sessionStorage.getItem('calvary_jwt') || null,
 
     async checkSetupStatus() {
         try {
@@ -36,6 +36,7 @@ const Auth = {
             const data = await res.json();
             if (data.success) {
                 this.token = data.token;
+                sessionStorage.setItem('calvary_jwt', data.token);
             }
             return data;
         } catch (e) {
@@ -45,6 +46,7 @@ const Auth = {
 
     logout() {
         this.token = null;
+        sessionStorage.removeItem('calvary_jwt');
         App.showView('login-view');
     },
 

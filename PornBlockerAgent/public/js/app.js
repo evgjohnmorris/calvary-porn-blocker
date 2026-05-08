@@ -2,10 +2,15 @@
 const App = {
     async init() {
         const isSetup = await Auth.checkSetupStatus();
-        if (isSetup) {
-            this.showView('login-view');
-        } else {
+        if (!isSetup) {
             this.showView('setup-view');
+            return;
+        }
+        // If a JWT is already in memory (restored from sessionStorage), go straight to dashboard
+        if (Auth.token) {
+            this.showView('dashboard-view');
+        } else {
+            this.showView('login-view');
         }
         Dashboard.init();
     },

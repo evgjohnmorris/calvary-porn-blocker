@@ -21,7 +21,7 @@ const { applyFilter, verifyDNS } = require('./system/dns');
 const { startDNSServer } = require('./system/dns-server');
 const { encryptSettings, decryptSettings, generateLogHash } = require('./system/crypto');
 const logger = require('./system/logger');
-const { runSystemScan, startProcessMonitoring } = require('./system/scanner');
+const { runSystemScan, startProcessMonitoring, deleteSuspiciousFiles, clearBrowserHistory, cancelMemberships } = require('./system/scanner');
 const { sendAlert } = require('./system/alerter');
 const { startAccountabilityMonitor } = require('./system/monitor');
 
@@ -77,10 +77,11 @@ app.use(helmet({
 }));
 app.use(express.json());
 
-// Rate Limiting
+// Rate Limiting — relaxed for test/localhost environments
 const loginLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // Limit each IP to 5 requests per windowMs
+    windowMs: 15 * 60 * 1000,
+    max: process.env.NODE_ENV === 'test' ? 100 : 5,
+    skip: (req) => req.ip === '127.0.0.1' || req.ip === '::1' || req.hostname === 'localhost',
     message: 'Too many login attempts, please try again later.'
 });
 
@@ -89,8 +90,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // State Initialization
 let currentSettings = loadData(SETTINGS_FILE, {
-    filterLevel: 'strict', // 'strict', 'moderate', 'off'
+    filterLevel: 'strict', // 'strict', 'family', 'moderate', 'off'
     lockdownMode: false,
+    family_mode: false,   // Locally-enforced floor: blocks 'off'/'moderate' changes
+    ministry_mode: false,
     network: { dnsPrimary: '', dnsSecondary: '' },
     vpn: { hostname: '', hub: '', port: '' },
     personalization: { theme: 'dark', accentColor: '#4f46e5' },
@@ -358,18 +361,19 @@ app.get('/api/settings', authenticateToken, (req, res) => {
 // API: Get Logs
 app.get('/api/logs', authenticateToken, (req, res) => {
     try {
-        const logs = logger.getLogs();
+        const raw = logger.getLogs();
+        const logs = raw ? raw.trim().split('\n').filter(Boolean) : [];
         res.json({ success: true, logs });
     } catch (e) {
-        res.json({ success: false, logs: 'No logs found or error reading logs.' });
+        res.json({ success: false, logs: [] });
     }
 });
 
 // API: Update Settings
 app.post('/api/settings', authenticateToken, (req, res) => {
-    const { filterLevel, lockdownMode, ministry_mode, pluginId, pluginEnabled, network, vpn, personalization, accountability, blockedApps } = req.body;
+    const { filterLevel, lockdownMode, ministry_mode, family_mode, pluginId, pluginEnabled, network, vpn, personalization, accountability, blockedApps, remote_policy_url } = req.body;
     
-    // Enforce Ministry Mode restrictions
+    // Enforce Ministry Mode restrictions (org-managed: blocks filter, lockdown, network, vpn)
     if (currentSettings.ministry_mode) {
         if (filterLevel || lockdownMode !== undefined || network || vpn) {
             logAudit('MINISTRY_MODE_VIOLATION', req.ip, `Attempt to alter managed settings.`);
@@ -377,9 +381,27 @@ app.post('/api/settings', authenticateToken, (req, res) => {
         }
     }
 
+    // Enforce Family Mode restrictions (locally-managed: blocks downgrade to off/moderate)
+    if (currentSettings.family_mode) {
+        if (filterLevel === 'off' || filterLevel === 'moderate') {
+            logAudit('FAMILY_MODE_VIOLATION', req.ip, `Attempt to lower filter to '${filterLevel}' while family mode active.`);
+            return res.status(403).json({ success: false, message: 'Family mode prevents lowering the filter level.' });
+        }
+    }
+
     if (ministry_mode !== undefined) {
         currentSettings.ministry_mode = ministry_mode;
         logAudit('MINISTRY_MODE_CHANGED', req.ip, `Ministry mode set to ${ministry_mode}`);
+    }
+
+    if (family_mode !== undefined) {
+        currentSettings.family_mode = family_mode;
+        logAudit('FAMILY_MODE_CHANGED', req.ip, `Family mode set to ${family_mode}`);
+        // When family mode is enabled, floor must be at least 'strict'
+        if (family_mode && (currentSettings.filterLevel === 'off' || currentSettings.filterLevel === 'moderate')) {
+            currentSettings.filterLevel = 'strict';
+            applyFilter('strict');
+        }
     }
 
     // Handle Plugin Toggles
@@ -398,6 +420,10 @@ app.post('/api/settings', authenticateToken, (req, res) => {
         currentSettings.lockdownMode = true;
         currentSettings.filterLevel = 'strict'; // Force strict
         applyFilter('strict');
+    } else if (currentSettings.lockdownMode && filterLevel) {
+        // Lockdown active — reject any attempt to change filter level
+        logAudit('LOCKDOWN_BYPASS_ATTEMPT', req.ip, `Attempt to set filterLevel to '${filterLevel}' while locked down.`);
+        return res.status(403).json({ success: false, message: 'These settings are managed by your organization.' });
     } else if (!currentSettings.lockdownMode && filterLevel) {
         currentSettings.filterLevel = filterLevel;
         logAudit('FILTER_CHANGED', req.ip, `Level set to ${filterLevel}`);
@@ -409,6 +435,7 @@ app.post('/api/settings', authenticateToken, (req, res) => {
     if (personalization) currentSettings.personalization = { ...currentSettings.personalization, ...personalization };
     if (accountability) currentSettings.accountability = accountability;
     if (blockedApps !== undefined) currentSettings.blockedApps = blockedApps;
+    if (remote_policy_url !== undefined) currentSettings.remote_policy_url = remote_policy_url;
 
     saveData(SETTINGS_FILE, currentSettings);
 

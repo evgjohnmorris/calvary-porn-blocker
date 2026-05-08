@@ -1,6 +1,57 @@
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Environment / Secrets
 .env
+.env.*
 users.json
 settings.json
 audit.log
+PornBlockerAgent/system/credentials.key
+PornBlockerAgent/system/credentials.json
+cert.key
+*.pem
+
+# Runtime / Logs
+PornBlockerAgent/daemon/*.log
+PornBlockerAgent/daemon/*.out.log
+PornBlockerAgent/daemon/*.wrapper.log
+*.log
+
+# Blocklists (large, auto-fetched at runtime)
+PornBlockerAgent/oisd-nsfw.txt
+PornBlockerAgent/stevenblack-porn-hosts.txt
+PornBlockerAgent/hagezi-nsfw-hosts.txt
+PornBlockerAgent/blocklist.db
+
+# Temp / Cache
+PornBlockerAgent/.tmp/
+.tmp/
+.cache/
+
+# Build outputs
+apps/desktop-client/dist/
+apps/mobile-client/android/
+apps/mobile-client/ios/
+dist/
+build/
+out/
+
+# Test artifacts
+test-results/
+packages/qa-automation/test-results/
+playwright-report/
+packages/qa-automation/playwright-report/
+
+# SQLite databases
 *.sqlite
+*.db
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
