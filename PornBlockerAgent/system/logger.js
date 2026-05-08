@@ -70,18 +70,37 @@ class LogOrchestrator {
         }
     }
 
-    async syncToMinistryServer(url) {
-        // Stub implementation for Ministry Server Sync
+    async syncToMinistryServer(url, token) {
+        if (!url) return false;
+        
         console.log(`[LogOrchestrator] Attempting to sync logs to Ministry Server at ${url}...`);
         try {
             // Read all logs
-            const logs = fs.existsSync(this.auditLogPath) ? fs.readFileSync(this.auditLogPath, 'utf8') : '';
-            // In a real scenario, we would compress and send the logs, then mark them as synced.
-            // await fetch(url + '/api/logs/ingest', { method: 'POST', body: logs });
-            console.log(`[LogOrchestrator] Successfully synced logs to Ministry Server.`);
-            return true;
+            const logsContent = fs.existsSync(this.auditLogPath) ? fs.readFileSync(this.auditLogPath, 'utf8') : '';
+            if (!logsContent.trim()) return true; // Nothing to sync
+
+            // Parse into an array of lines, reversing to get newest first (or keep natural order)
+            // The dashboard expects an array of strings
+            const logsArray = logsContent.trim().split('\n').filter(line => line.length > 0);
+
+            const response = await fetch(url + '/api/logs/ingest', { 
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token || 'calvary-secure-token-123'}`
+                },
+                body: JSON.stringify({ logs: logsArray }) 
+            });
+
+            if (response.ok) {
+                console.log(`[LogOrchestrator] Successfully synced logs to Ministry Server.`);
+                return true;
+            } else {
+                console.error(`[LogOrchestrator] Ministry Server returned ${response.status}: ${await response.text()}`);
+                return false;
+            }
         } catch (err) {
-            console.error(`[LogOrchestrator] Failed to sync logs to Ministry Server.`, err);
+            console.error(`[LogOrchestrator] Failed to sync logs to Ministry Server.`, err.message);
             return false;
         }
     }

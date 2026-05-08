@@ -5,7 +5,7 @@ const router  = express.Router();
 
 const { SETTINGS_FILE }     = require('../config/env');
 const { loadData, saveData } = require('../storage/store');
-const { applyFilter, applyDoHBlock } = require('../system/dns');
+const { applyFilter, applyDoHBlock, removeDoHBlock } = require('../system/dns');
 const { loadPlugins, togglePlugin } = require('../plugins');
 const logger                 = require('../system/logger');
 const validate               = require('../middleware/validate');
@@ -75,6 +75,7 @@ router.post('/', validate.settings, (req, res) => {
             s.filterLevel = 'strict';
             applyFilter('strict');
             applyDoHBlock(); // Re-enforce DoH block when family mode activates
+            logAudit('doh_block_apply_requested', req.ip, 'source: family_mode_activated');
         }
     }
 
@@ -92,6 +93,7 @@ router.post('/', validate.settings, (req, res) => {
         s.filterLevel   = 'strict';
         applyFilter('strict');
         applyDoHBlock(); // Re-enforce DoH block on lockdown
+        logAudit('doh_block_apply_requested', req.ip, 'source: lockdown_activated');
     } else if (s.lockdownMode && filterLevel) {
         logAudit('LOCKDOWN_BYPASS_ATTEMPT', req.ip, `Attempt to set filterLevel to '${filterLevel}' while locked down.`);
         return res.status(403).json({ success: false, message: 'These settings are managed by your organization.' });
@@ -99,8 +101,13 @@ router.post('/', validate.settings, (req, res) => {
         s.filterLevel = filterLevel;
         logAudit('FILTER_CHANGED', req.ip, `Level set to ${filterLevel}`);
         applyFilter(filterLevel);
-        if (filterLevel === 'strict') {
-            applyDoHBlock(); // Re-enforce DoH block whenever strict mode is applied
+        
+        if (filterLevel !== 'off') {
+            applyDoHBlock();
+            logAudit('doh_block_apply_requested', req.ip, `source: settings_update, filterLevel: ${filterLevel}`);
+        } else {
+            removeDoHBlock();
+            logAudit('doh_block_remove_requested', req.ip, `source: settings_update, filterLevel: off`);
         }
     }
 

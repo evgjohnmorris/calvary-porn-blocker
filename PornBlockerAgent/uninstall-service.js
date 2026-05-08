@@ -1,5 +1,6 @@
 const Service = require('node-windows').Service;
 const path = require('path');
+const { removeDoHBlock } = require('./system/dns');
 
 // Create a new service object
 const svc = new Service({
@@ -19,5 +20,8 @@ svc.on('error', function(err) {
 });
 
 // Uninstall the service.
-console.log('Attempting to uninstall CalvaryBlockerCore Service...');
-svc.uninstall();
+(async () => {
+    console.log('Attempting to revert DoH block and uninstall CalvaryBlockerCore Service...');
+    await removeDoHBlock();
+    svc.uninstall();
+})();

@@ -1,6 +1,7 @@
 const request = require('supertest');
 const JWT_SECRET = 'test-secret-for-smoke-tests';
 process.env.JWT_SECRET = JWT_SECRET;
+process.env.NODE_ENV = 'test';
 const app = require('../server');
 const jwt = require('jsonwebtoken');
 
@@ -11,6 +12,13 @@ jest.mock('../system/scanner', () => ({
   clearBrowserHistory: jest.fn().mockResolvedValue({ message: 'History cleared' }),
   cancelMemberships: jest.fn().mockResolvedValue({ message: 'Memberships cancelled' }),
   startProcessMonitoring: jest.fn()
+}));
+
+jest.mock('../system/dns', () => ({
+  applyFilter: jest.fn().mockResolvedValue(true),
+  applyDoHBlock: jest.fn().mockResolvedValue(true),
+  removeDoHBlock: jest.fn().mockResolvedValue(true),
+  verifyDNS: jest.fn().mockResolvedValue(true)
 }));
 
 // Shared token factory

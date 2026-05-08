@@ -26,10 +26,14 @@ const dbGetAsync = util.promisify(db.get.bind(db));
 db.serialize(() => {
     const stmt = db.prepare('INSERT OR IGNORE INTO blocked_domains (domain) VALUES (?)');
     const corporateDomains = getCorporateNetworkDomains();
-    console.log(`[DNS] Seeding ${corporateDomains.length} corporate network / ad network domains...`);
+    if (process.env.NODE_ENV !== 'test') {
+        console.log(`[DNS] Seeding ${corporateDomains.length} corporate network / ad network domains...`);
+    }
     corporateDomains.forEach(domain => stmt.run(domain));
     stmt.finalize(() => {
-        console.log('[DNS] Corporate network blocklist loaded into DB.');
+        if (process.env.NODE_ENV !== 'test') {
+            console.log('[DNS] Corporate network blocklist loaded into DB.');
+        }
     });
 });
 

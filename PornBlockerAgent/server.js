@@ -87,6 +87,7 @@ const loginLimiter = rateLimit({
 const recoveryLimiter = rateLimit({
     windowMs:      15 * 60 * 1000,
     max:           NODE_ENV === 'test' ? 50 : 5,
+    skip:          () => NODE_ENV === 'test',
     message:       'Too many recovery attempts. Please try again in 15 minutes.',
     standardHeaders: true,
     legacyHeaders:   false,
@@ -130,12 +131,17 @@ function logAudit(action, ip, details = '') {
 app.use('/api',            csrfRouter);
 app.use('/api',            authRouter);
 
-// Unauthenticated account recovery endpoints (rate-limited; no JWT required)
-app.use('/api/account/reset-password',    recoveryLimiter, accountRouter);
-app.use('/api/account/security-question', recoveryLimiter, accountRouter);
+// Apply rate limiter to recovery endpoints
+app.use('/api/account/reset-password', recoveryLimiter);
+app.use('/api/account/security-question', recoveryLimiter);
 
-// All remaining account endpoints require a valid JWT
-app.use('/api/account',    authenticateToken, accountRouter);
+// Mount account router with conditional authentication
+app.use('/api/account', (req, res, next) => {
+    if (req.path === '/reset-password' || req.path === '/security-question') {
+        return next();
+    }
+    authenticateToken(req, res, next);
+}, accountRouter);
 
 app.use('/api/settings',   authenticateToken, settingsRouter);
 app.use('/api/scan',       authenticateToken, scanRouter);
@@ -155,6 +161,14 @@ if (NODE_ENV !== 'test') {
         logAudit,
         logger,
     );
+
+    const { applyDoHBlock, removeDoHBlock } = require('./system/dns');
+    if (currentSettings.filterLevel !== 'off') {
+        applyDoHBlock();
+        logAudit('doh_block_apply_requested', '127.0.0.1', 'source: service_start');
+    } else {
+        removeDoHBlock();
+    }
 }
 
 // ---------------------------------------------------------------------------

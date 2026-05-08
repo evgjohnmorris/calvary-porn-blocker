@@ -105,6 +105,23 @@ async function sendAlert(eventName, details, settings) {
             if (partner.phone) {
                 await sendSMSAlert(partner, subject, text, settings.accountability);
             }
+            // Send Webhook to Ministry Server / Ally Dashboard
+            if (settings.ministryServerUrl) {
+                try {
+                    const token = settings.ministryServerToken || 'calvary-secure-token-123';
+                    await fetch(settings.ministryServerUrl + '/api/alerts', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ eventName, details })
+                    });
+                    console.log(`[Alerter] Webhook alert pushed to Ministry Server.`);
+                } catch (webhookErr) {
+                    console.error(`[Alerter] Failed to push webhook to Ministry Server:`, webhookErr.message);
+                }
+            }
         }
     } catch (err) {
         console.error(`[Alerter] Failed to initialize mail transporter or send alerts:`, err);

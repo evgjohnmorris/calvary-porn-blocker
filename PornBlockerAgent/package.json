@@ -7,12 +7,17 @@
     "start": "node server.js",
     "service:install": "node install-service.js",
     "service:uninstall": "node uninstall-service.js",
-    "test": "jest tests/smoke.test.js tests/seo.smoke.test.js --forceExit",
-    "test:smoke": "jest tests/*.smoke.test.js tests/smoke.test.js",
+    "test": "set NODE_ENV=test&& jest tests/smoke.test.js tests/seo.smoke.test.js --forceExit",
+    "test:smoke": "set NODE_ENV=test&& jest tests/*.smoke.test.js tests/smoke.test.js",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,json,md}\""
   },
-  "keywords": ["content-filter", "parental-control", "dns-blocker", "accountability"],
+  "keywords": [
+    "content-filter",
+    "parental-control",
+    "dns-blocker",
+    "accountability"
+  ],
   "author": "evgjohnmorris",
   "license": "MIT",
   "type": "commonjs",

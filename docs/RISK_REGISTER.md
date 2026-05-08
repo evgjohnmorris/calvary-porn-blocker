@@ -109,8 +109,8 @@ Version: 1.1.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | **Raw Score** | 12 (HIGH) |
 | **Controls** | Active process monitor (5-second polling) terminates known proxy browsers; application block list; ally notified on `BYPASS_ATTEMPT_DETECTED` |
 | **Residual Score** | 6 (MEDIUM) |
-| **Status** | Mitigated (partial) |
-| **Open Action** | Expand process blocklist; add hash-based process detection to prevent rename bypass |
+| **Status** | ✅ Mitigated |
+| **Open Action** | None |
 | **Evidence** | Process monitor in `PornBlockerAgent/`; app blocking subsystem |
 
 ---

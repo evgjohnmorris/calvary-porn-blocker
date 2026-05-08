@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ally Dashboard - Calvary Blocker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="shield-check" class="icon-brand"></i>
+                <h2>Calvary Ally</h2>
+            </div>
+            <nav>
+                <a href="#" class="nav-item active"><i data-lucide="layout-dashboard"></i> Overview</a>
+                <a href="#" class="nav-item"><i data-lucide="list"></i> Audit Logs</a>
+                <a href="#" class="nav-item"><i data-lucide="bell"></i> Alerts</a>
+                <a href="#" class="nav-item"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+            <div class="user-status">
+                <div class="status-indicator online"></div>
+                <span>Agent Connected</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome, Ally</h1>
+                <p class="subtitle">Monitoring accountability for John Doe.</p>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Alerts Widget -->
+                <section class="widget alerts-widget">
+                    <div class="widget-header">
+                        <h3><i data-lucide="alert-triangle"></i> Recent Alerts</h3>
+                        <span class="badge" id="alert-count">0</span>
+                    </div>
+                    <div class="widget-body" id="alerts-container">
+                        <!-- Alerts injected by JS -->
+                        <div class="empty-state">No recent alerts. Everything looks good.</div>
+                    </div>
+                </section>
+
+                <!-- Status Widget -->
+                <section class="widget status-widget">
+                    <div class="widget-header">
+                        <h3><i data-lucide="activity"></i> System Status</h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="status-item">
+                            <span class="label">Protection Level:</span>
+                            <span class="value safe">Ministry Mode Active</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Last Sync:</span>
+                            <span class="value" id="last-sync-time">Just now</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Events Logged (24h):</span>
+                            <span class="value" id="log-count">0</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Audit Logs Widget -->
+                <section class="widget logs-widget full-width">
+                    <div class="widget-header">
+                        <h3><i data-lucide="file-text"></i> Audit Trail</h3>
+                        <button class="btn-refresh" onclick="fetchState()"><i data-lucide="refresh-cw"></i></button>
+                    </div>
+                    <div class="widget-body table-container">
+                        <table id="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Action</th>
+                                    <th>IP Address</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logs-body">
+                                <!-- Logs injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

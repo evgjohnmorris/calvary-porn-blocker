@@ -15,6 +15,47 @@ const screenshot = require('screenshot-desktop');
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const os = require('os');
+
+// Hardcoded names of known circumvention tools
+const KNOWN_PROXIES = [
+    'tor browser', 'tor.exe', 'psiphon', 'ultrasurf', 'hotspot shield', 
+    'protonvpn', 'nordvpn', 'expressvpn', 'mullvad', 'cyberghost', 
+    'windscribe', 'hide.me', 'tunnelbear', 'surfshark', 'pia', 
+    'private internet access', 'lantern', 'outline'
+];
+
+// Map of known malicious/bypass executable hashes (SHA-256)
+// This can be expanded. Example: Tor Browser's specific hashes.
+const KNOWN_BYPASS_HASHES = new Set([
+    // Add known hashes here
+]);
+
+const hashCache = new Map(); // path -> { hash, timestamp }
+
+function getFileHash(filePath) {
+    return new Promise((resolve) => {
+        if (!fs.existsSync(filePath)) return resolve(null);
+        
+        const cached = hashCache.get(filePath);
+        // Cache for 1 hour to avoid re-hashing the same file constantly
+        if (cached && (Date.now() - cached.timestamp < 3600000)) {
+            return resolve(cached.hash);
+        }
+
+        const hash = crypto.createHash('sha256');
+        const stream = fs.createReadStream(filePath);
+        
+        stream.on('data', data => hash.update(data));
+        stream.on('end', () => {
+            const digest = hash.digest('hex');
+            hashCache.set(filePath, { hash: digest, timestamp: Date.now() });
+            resolve(digest);
+        });
+        stream.on('error', () => resolve(null));
+    });
+}
 
 const SCREENSHOT_DIR = path.join(__dirname, '..', '.tmp', 'screenshots');
 
@@ -41,6 +82,11 @@ function takeScreenshot(reason = 'routine') {
 }
 
 function startAccountabilityMonitor(getSettings, logAudit) {
+    if (os.platform() !== 'win32') {
+        console.warn('[Monitor] Process monitoring is currently only supported on Windows.');
+        return;
+    }
+
     console.log('[Monitor] Starting screen accountability & app monitor...');
     
     // Take an initial screenshot on startup if enabled
@@ -68,29 +114,40 @@ function startAccountabilityMonitor(getSettings, logAudit) {
             if (!window) return;
 
             // App killing logic
-            if (blockedApps.length > 0) {
-                const appName = window.owner.name.toLowerCase();
-                const windowTitle = window.title.toLowerCase();
-                
-                const isBlocked = blockedApps.some(app => {
-                    const term = app.toLowerCase();
-                    return appName.includes(term) || windowTitle.includes(term);
-                });
+            const appName = window.owner.name ? window.owner.name.toLowerCase() : '';
+            const windowTitle = window.title ? window.title.toLowerCase() : '';
+            const appPath = window.owner.path || '';
+            
+            const combinedBlocklist = [...blockedApps, ...KNOWN_PROXIES];
+            
+            let isBlocked = combinedBlocklist.length > 0 && combinedBlocklist.some(app => {
+                if (!app) return false;
+                const term = app.toLowerCase();
+                return appName.includes(term) || windowTitle.includes(term);
+            });
 
-                if (isBlocked) {
-                    console.log(`[Monitor] Blocked application detected: ${window.owner.name} (${window.title})`);
-                    // Kill process
-                    exec(`taskkill /F /PID ${window.owner.processId}`, (err) => {
-                        if (!err) {
-                            logAudit('APP_KILLED', 'SYSTEM', `Killed blocked app: ${window.owner.name} (${window.title})`);
-                            if (accountabilityEnabled) {
-                                takeScreenshot('violation');
-                            }
-                        } else {
-                            console.error('[Monitor] Failed to kill process', err);
-                        }
-                    });
+            // Hash-based detection for rename bypasses
+            if (!isBlocked && appPath && KNOWN_BYPASS_HASHES.size > 0) {
+                const hash = await getFileHash(appPath);
+                if (hash && KNOWN_BYPASS_HASHES.has(hash)) {
+                    isBlocked = true;
+                    console.log(`[Monitor] Blocked application detected via Hash: ${hash}`);
                 }
+            }
+
+            if (isBlocked) {
+                console.log(`[Monitor] Blocked application detected: ${window.owner.name} (${window.title})`);
+                // Kill process
+                exec(`taskkill /F /PID ${window.owner.processId}`, (err) => {
+                    if (!err) {
+                        logAudit('BYPASS_ATTEMPT_DETECTED', 'SYSTEM', `Killed blocked app/proxy: ${window.owner.name} (${window.title})`);
+                        if (accountabilityEnabled) {
+                            takeScreenshot('violation');
+                        }
+                    } else {
+                        console.error('[Monitor] Failed to kill process', err);
+                    }
+                });
             }
 
             // Routine Screenshot logic

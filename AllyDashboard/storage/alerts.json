@@ -1,0 +1,8 @@
+[
+  {
+    "eventName": "BYPASS_ATTEMPT_DETECTED",
+    "details": "User attempted to terminate the system proxy process.",
+    "timestamp": "2026-05-08T21:32:08.142Z",
+    "id": "177827592814230tia2j"
+  }
+]

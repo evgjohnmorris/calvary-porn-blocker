@@ -1,5 +1,7 @@
 const { exec } = require('child_process');
 const path = require('path');
+const os = require('os');
+const logger = require('./logger');
 
 // Embedded Local Proxy IP
 const LOCAL_DNS = '127.0.0.1';
@@ -26,6 +28,10 @@ function runPowerShell(command) {
 }
 
 async function applyFilter(level) {
+    if (os.platform() !== 'win32') {
+        console.log(`[DNS] Skipping DNS filter application on non-Windows platform: ${os.platform()}`);
+        return true;
+    }
     try {
         if (level === 'strict') {
             // Point Windows DNS to our embedded server
@@ -51,6 +57,8 @@ async function applyFilter(level) {
 }
 
 async function verifyDNS(level) {
+    if (os.platform() !== 'win32') return true;
+
     try {
         const stdout = await runPowerShell(`(Get-DnsClientServerAddress -AddressFamily IPv4 | Where-Object { $_.ServerAddresses -ne $null }).ServerAddresses -join ','`);
         let expected = '';
@@ -72,17 +80,47 @@ async function verifyDNS(level) {
  * Non-blocking — fires and forgets with a warning on failure.
  */
 async function applyDoHBlock() {
+    if (os.platform() !== 'win32') {
+        console.log(`[DNS] Skipping DoH block on non-Windows platform: ${os.platform()}`);
+        return true;
+    }
+
     const scriptPath = path.join(__dirname, 'doh-block.ps1');
     const cmd = `powershell -NoProfile -ExecutionPolicy Bypass -File "${scriptPath}"`;
     return new Promise((resolve) => {
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
                 console.warn(`[DoH-Block] Script error: ${error.message}`);
+                logger.logAudit('doh_block_apply_failed', 'SYSTEM', error.message);
                 // Non-fatal — log and continue. DNS filtering still active.
                 return resolve(false);
             }
             if (stdout) console.log(`[DoH-Block] ${stdout.trim()}`);
             if (stderr) console.warn(`[DoH-Block] stderr: ${stderr.trim()}`);
+            logger.logAudit('doh_block_apply_success', 'SYSTEM', 'DoH block enforced successfully.');
+            resolve(true);
+        });
+    });
+}
+
+/**
+ * Removes all three layers of DoH mitigation by running doh-block.ps1 -RemoveOnly.
+ */
+async function removeDoHBlock() {
+    if (os.platform() !== 'win32') return true;
+
+    const scriptPath = path.join(__dirname, 'doh-block.ps1');
+    const cmd = `powershell -NoProfile -ExecutionPolicy Bypass -File "${scriptPath}" -RemoveOnly`;
+    return new Promise((resolve) => {
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                console.warn(`[DoH-Block-Remove] Script error: ${error.message}`);
+                logger.logAudit('doh_block_remove_failed', 'SYSTEM', error.message);
+                return resolve(false);
+            }
+            if (stdout) console.log(`[DoH-Block-Remove] ${stdout.trim()}`);
+            if (stderr) console.warn(`[DoH-Block-Remove] stderr: ${stderr.trim()}`);
+            logger.logAudit('doh_block_remove_success', 'SYSTEM', 'DoH block removed successfully.');
             resolve(true);
         });
     });
@@ -92,4 +130,5 @@ module.exports = {
     applyFilter,
     verifyDNS,
     applyDoHBlock,
+    removeDoHBlock,
 };
