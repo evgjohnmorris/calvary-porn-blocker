@@ -5,6 +5,8 @@
 ![Open Source](https://img.shields.io/badge/Open_Source-%E2%9D%A4-red.svg)
 ![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)
 ![DNS Filtering](https://img.shields.io/badge/Filtering-DNS--Level-orange.svg)
+![GitHub stars](https://img.shields.io/github/stars/evgjohnmorris/calvary-porn-blocker?style=social)
+![GitHub forks](https://img.shields.io/github/forks/evgjohnmorris/calvary-porn-blocker?style=social)
 
 > **A free, open-source content filter built for individuals, families, ministries, and schools — designed to help people break free from pornography addiction and protect those they love.**
 
@@ -62,6 +64,14 @@ Calvary Blocker is a local, privacy-first content filtering tool with:
 - 🚫 **Application-level blocking** — restrict access to specific apps
 - 📋 **Audit logging** — transparent record of activity for accountability
 - 🔒 **No cloud data collection** — everything runs locally on your machine
+
+### Built With Modern Tech 💻
+
+- **Backend**: Node.js, Express, Socket.io
+- **Frontend**: Vanilla JS, Glassmorphism UI, Dark Mode
+- **Security**: Content Security Policy (CSP), Strict Rate Limiting, Local-First Architecture
+- **Automation**: Playwright End-to-End Testing
+- **System**: PowerShell DNS Management
 
 ### Supported Profiles
 
