@@ -12,7 +12,19 @@ audit.log
 PornBlockerAgent/system/credentials.key
 PornBlockerAgent/system/credentials.json
 cert.key
+cert.cer
 *.pem
+
+# Binaries / Installers (use signed GitHub Releases with checksums instead)
+*.exe
+*.msi
+*.dmg
+
+# Temp / one-off scripts (never commit ephemeral ops scripts to source control)
+temp_import.ps1
+temp_*.ps1
+vpn_setup.txt
+
 
 # Runtime / Logs
 PornBlockerAgent/daemon/*.log

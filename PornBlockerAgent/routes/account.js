@@ -7,6 +7,7 @@ const router  = express.Router();
 const { USERS_FILE }                              = require('../config/env');
 const { loadData, saveData }                      = require('../storage/store');
 const { generateRecoveryKey, formatRecoveryKey, logAudit } = require('./auth');
+const validate                                    = require('../middleware/validate');
 
 // ---------------------------------------------------------------------------
 // GET /api/account/profile
@@ -25,7 +26,7 @@ router.get('/profile', (req, res) => {
 // ---------------------------------------------------------------------------
 // POST /api/account/update
 // ---------------------------------------------------------------------------
-router.post('/update', async (req, res) => {
+router.post('/update', validate.accountUpdate, async (req, res) => {
     const users = loadData(USERS_FILE, {});
     const { username, password, name, email } = req.body;
 
@@ -83,7 +84,7 @@ router.get('/recovery-key', async (req, res) => {
 // POST /api/account/reset-password
 // Accepts recovery key ONLY. Security-question path has been removed.
 // ---------------------------------------------------------------------------
-router.post('/reset-password', async (req, res) => {
+router.post('/reset-password', validate.resetPassword, async (req, res) => {
     const users = loadData(USERS_FILE, {});
     const { recoveryKey, newPassword } = req.body;
 
@@ -136,7 +137,7 @@ router.get('/security-question', (req, res) => {
 // ---------------------------------------------------------------------------
 // POST /api/account/delete  (factory reset; requires password confirmation)
 // ---------------------------------------------------------------------------
-router.post('/delete', async (req, res) => {
+router.post('/delete', validate.accountDelete, async (req, res) => {
     const { SETTINGS_FILE } = require('../config/env');
     const { applyFilter }   = require('../system/dns');
 

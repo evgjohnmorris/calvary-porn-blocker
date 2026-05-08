@@ -1,20 +1,20 @@
 {
-  "name": "pornblockeragent",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "calvary-porn-blocker-agent",
+  "version": "2.3.0",
+  "description": "Calvary Sexual Immorality Blocker — server-side agent",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "service:install": "node install-service.js",
     "service:uninstall": "node uninstall-service.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest tests/smoke.test.js tests/seo.smoke.test.js --forceExit",
     "test:smoke": "jest tests/*.smoke.test.js tests/smoke.test.js",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,json,md}\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["content-filter", "parental-control", "dns-blocker", "accountability"],
+  "author": "evgjohnmorris",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "active-win": "^7.7.2",

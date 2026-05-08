@@ -8,6 +8,7 @@ const { loadData, saveData } = require('../storage/store');
 const { applyFilter }        = require('../system/dns');
 const { loadPlugins, togglePlugin } = require('../plugins');
 const logger                 = require('../system/logger');
+const validate               = require('../middleware/validate');
 
 function logAudit(action, ip, details = '') {
     logger.logAudit(action, ip, details);
@@ -37,7 +38,7 @@ router.get('/', (req, res) => {
 // ---------------------------------------------------------------------------
 // POST /api/settings
 // ---------------------------------------------------------------------------
-router.post('/', (req, res) => {
+router.post('/', validate.settings, (req, res) => {
     const {
         filterLevel, lockdownMode, ministry_mode, family_mode,
         pluginId, pluginEnabled,

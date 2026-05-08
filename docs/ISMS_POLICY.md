@@ -1,6 +1,6 @@
 # Information Security Management System (ISMS) Policy
 **Calvary Blocker — Calvary Sexual Immorality Blocker Project**
-Version: 1.2.0 | Effective: 2026-05-08 | Review: Annually or after material change
+Version: 1.3.0 | Effective: 2026-05-08 | Review: Annually or after material change
 
 > **Alignment Notice:** This policy is written with reference to ISO/IEC 27001:2022 principles.
 > The Calvary Blocker project is **ISO 27001-aligned, not certified**. No formal third-party
@@ -57,11 +57,13 @@ All contributors, maintainers, and deployers of this software are bound by this 
 
 | Control | Implementation | Evidence |
 |---|---|---|
-| Authentication | JWT issued on successful login; `bcrypt` password hashing (cost factor 10+) | `auth.js`, `server.js` |
-| Session Management | JWT stored in `sessionStorage`; expires after configurable TTL | `auth.js` |
-| Brute-Force Protection | `express-rate-limit` on `/api/login` (max 10 req/15 min) | `server.js` |
-| Role-Based Access | Admin vs. read-only roles enforced at API layer | `server.js` route guards |
-| Ministry Lockdown | When Ministry Mode is active, settings mutations are cryptographically rejected | `settings.js` |
+| Authentication | JWT issued on successful login; `bcrypt` password hashing (cost factor 10+) | `routes/auth.js` |
+| Session Management | JWT stored in **`httpOnly` Secure cookie** (migrated v2.2.0 — eliminates XSS token theft); expires after configurable TTL | `middleware/auth.js`, `routes/auth.js` |
+| Brute-Force Protection | `express-rate-limit` on `/api/login` (max 10 req/15 min) | `middleware/rateLimiter.js` |
+| CSRF Protection | **Double-Submit Cookie** pattern — `X-CSRF-Token` required on all mutating routes (v2.2.0) | `middleware/csrf.js`, `routes/csrf.js` |
+| Role-Based Access | Admin vs. read-only roles enforced at API layer | `middleware/auth.js` route guards |
+| Ministry Lockdown | When Ministry Mode is active, settings mutations are cryptographically rejected | `routes/settings.js` |
+| Input Schema Validation | All mutating POST bodies validated (type, length, allowlist) before business logic executes (v2.3.0) | `middleware/validate.js` |
 | NTFS Permissions | `settings.json` write-protected for standard Windows users; requires SYSTEM account | `Deploy-DNSBlocker.ps1` |
 
 **Policy:** Credentials must never be stored in plaintext. Shared passwords are prohibited. Each deployment must generate a unique admin credential during onboarding.
@@ -88,7 +90,7 @@ All contributors, maintainers, and deployers of this software are bound by this 
 | Dependency Management | `pnpm` with lockfile; Dependabot alerts monitored on GitHub | `pnpm-lock.yaml`, `.github/` |
 | HTTP Security Headers | `helmet` middleware applied to all responses | `server.js` |
 | XSS Prevention | Content Security Policy (CSP) enabled via helmet with `default-src 'self'`; no `innerHTML` from untrusted input | `server.js` CSP directives |
-| CSRF Protection | JWT-based stateless auth reduces CSRF surface; Bearer token required on all state-mutating endpoints | `auth.js` |
+| CSRF Protection | **Double-Submit Cookie** — `X-CSRF-Token` header validated on all state-mutating endpoints (migrated from Bearer-only in v2.2.0) | `middleware/csrf.js` |
 | Process Hardening | Active process monitor terminates proxy browsers (e.g., Tor Browser) every 5 seconds | `PornBlockerAgent/` |
 | Vulnerability Scanning | GitHub Dependabot; manual `npm audit` before releases | CI/CD pipeline |
 
@@ -208,4 +210,4 @@ By deploying, operating, or contributing to the Calvary Blocker system, you ackn
 
 ---
 
-*Policy Version: 1.2.0 | Effective: 2026-05-08 | Built with faith, for freedom.*
+*Policy Version: 1.3.0 | Effective: 2026-05-08 | Built with faith, for freedom.*
