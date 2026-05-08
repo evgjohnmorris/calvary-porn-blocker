@@ -7,8 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge&color=09090b)](#)
 [![Privacy First](https://img.shields.io/badge/Privacy-100%25%20Local-success.svg?style=for-the-badge&color=10b981)](#)
 [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg?style=for-the-badge&color=0078d7)](#)
-[![React Integration](https://img.shields.io/badge/React-18.2-blue?style=for-the-badge&logo=react&color=0ea5e9)](#)
-[![Modern JavaScript](https://img.shields.io/badge/JavaScript-ES2023-yellow?style=for-the-badge&logo=javascript&color=eab308)](#)
+[![ISO 27001 Ready](https://img.shields.io/badge/Compliance-ISO_27001-purple.svg?style=for-the-badge)](#)
 
 <br/>
 
@@ -62,111 +61,53 @@ Calvary Porn Blocker is designed to run everywhere you need protection.
 
 ---
 
-## 💻 Aesthetic UI & Unique React Engineering
+## ⚙️ Core Features & Capabilities
 
-Our application doesn't just block content; it does so with a **premium, glassmorphic UX/UI** that feels modern, safe, and beautiful. 
-
-### ✨ The Glassmorphic React Dashboard
-
-We leverage modern **React 18** features and unique CSS properties to deliver a stunning dashboard. Here is a glimpse of our UI source code for the animated Lockdown component:
-
-```jsx
-import React, { useState, useCallback } from 'react';
-import { Shield, ShieldCheck, Lock } from 'lucide-react';
-import './AestheticGlass.css';
-
-/**
- * @component AestheticLockdownCard
- * @description A premium glassmorphic UI component for toggling system protection.
- */
-export const AestheticLockdownCard = ({ initialStatus }) => {
-  const [isLocked, setIsLocked] = useState(initialStatus);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const handleToggle = useCallback(async () => {
-    setIsAnimating(true);
-    // Unique Vanilla JS integration bridging React to local Windows Services
-    try {
-      const response = await fetch('http://localhost:4000/api/lockdown', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ state: !isLocked })
-      });
-      
-      if (response.ok) setIsLocked(!isLocked);
-    } catch (err) {
-      console.error("Agent communication failed", err);
-    }
-    setTimeout(() => setIsAnimating(false), 600);
-  }, [isLocked]);
-
-  return (
-    <div className={`calvary-card glass-panel ${isLocked ? 'glow-emerald' : 'glow-rose'}`}>
-      <div className="card-header">
-        {isLocked ? <ShieldCheck className="icon-pulse-safe" size={40} /> : <Shield className="icon-alert" size={40} />}
-        <h2>Calvary Shield</h2>
-      </div>
-      
-      <p className="status-text">
-        {isLocked ? 'Ministry-Grade Protection is Active. Your network is secure.' : 'System Vulnerable. Protection Offline.'}
-      </p>
-
-      <button 
-        className={`premium-btn ${isAnimating ? 'btn-pop' : ''}`} 
-        onClick={handleToggle}
-      >
-        <Lock size={18} />
-        <span>{isLocked ? 'Disable (PIN Required)' : 'Engage Lockdown'}</span>
-      </button>
-    </div>
-  );
-};
-```
-
-### 🧠 Real-Time Vanilla JS Heuristics
-
-Under the hood, Calvary uses blazing fast **Vanilla JavaScript** to perform real-time DOM mutation observations, blurring explicit images before the browser even renders them:
-
-```javascript
-/**
- * Calvary Visual Engine - DOM Heuristic Scanner
- * Runs seamlessly in the background without impacting frame rate.
- */
-const CalvaryObserver = new MutationObserver((mutations) => {
-  requestAnimationFrame(() => {
-    mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(node => {
-        if (node.tagName === 'IMG' || node.tagName === 'VIDEO') {
-          // Instantly apply a gorgeous, frosted glass blur until verified
-          node.style.filter = 'blur(40px) saturate(150%)';
-          node.style.transition = 'filter 0.3s ease-in-out';
-          
-          analyzeMediaContent(node).then(isSafe => {
-            if (isSafe) node.style.filter = 'none';
-          });
-        }
-      });
-    });
-  });
-});
-
-CalvaryObserver.observe(document.documentElement, { 
-  childList: true, subtree: true 
-});
-```
-
----
-
-## ⚙️ Core Architecture
+Calvary Porn Blocker is engineered from the ground up to be resilient against tampering while remaining deeply respectful of your privacy. 
 
 | Feature | Description |
 | :--- | :--- |
-| 🛡️ **DNS-Level Filtering** | Stops explicit content before it reaches your network card |
-| 👨‍👩‍👧 **Multi-Profile** | Individual, Family, Ministry, and School presets |
-| 🤝 **Accountability** | Automated, secure email alerts sent to your trusted partner |
-| 🔍 **Heuristic Blurring** | Real-time DOM scanning to blur explicit imagery gracefully |
-| 🚫 **App Blocker** | Restricts local applications and hidden executables |
-| 🔒 **Local-First** | 100% offline logging. Cryptographically secure. No cloud telemetry |
+| 🛡️ **DNS-Level Filtering** | Blocks explicit domains at the network level, preventing content from ever reaching your device. |
+| 👨‍👩‍👧 **Multi-Profile System** | Choose from Individual, Family, Ministry, and School strictness presets based on your environment. |
+| 🤝 **Accountability Alerts** | Automated, cryptographically secure email alerts sent to your trusted partner if the blocker is disabled or tampered with. |
+| 🔍 **Heuristic Media Blurring** | Real-time page scanning to seamlessly blur potentially explicit imagery until manually verified. |
+| 🚫 **App Executable Blocker** | Restricts local applications, browsers, and hidden executables that are known vectors for adult content. |
+| 🔒 **100% Local-First** | All logs and settings remain entirely offline. No cloud telemetry, zero data harvesting. |
+
+---
+
+## 📥 Getting Started (For Developers & Admins)
+
+If you wish to spin up the local ecosystem from source, follow these instructions:
+
+### 1. The Calvary Dashboard
+
+The central dashboard provides real-time monitoring, profile configuration, and accountability partner management.
+
+```bash
+cd AllyDashboard
+npm install
+npm run dev
+```
+*The dashboard will be available at `http://localhost:4000`.*
+
+### 2. The Core Blocker Agent
+
+The background agent that enforces rules, monitors network traffic, and communicates with the system level.
+
+```bash
+cd PornBlockerAgent
+npm install
+npm start
+```
+
+### 3. Deploy System Enforcement (Windows Only)
+
+Run PowerShell as **Administrator** to enforce network-level DNS protection:
+
+```powershell
+.\Deploy-DNSBlocker.ps1
+```
 
 ---
 
