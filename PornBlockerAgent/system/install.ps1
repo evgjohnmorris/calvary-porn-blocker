@@ -21,7 +21,16 @@ if (Test-Path $hardenScript) {
     Write-Warning "Could not find harden.ps1, skipping hardening."
 }
 
-# 3. Create Windows Scheduled Task to run as SYSTEM at startup
+# 3. Apply DoH (DNS-over-HTTPS) Interception — R-005
+Write-Host "Applying DoH interception (firewall rules + browser policy)..."
+$dohScript = Join-Path $installDir "system\doh-block.ps1"
+if (Test-Path $dohScript) {
+    & $dohScript
+} else {
+    Write-Warning "Could not find doh-block.ps1, skipping DoH interception."
+}
+
+# 4. Create Windows Scheduled Task to run as SYSTEM at startup
 Write-Host "Registering Calvary Blocker as a background service..."
 
 $action = New-ScheduledTaskAction -Execute "node" -Argument "`"$installDir\server.js`"" -WorkingDirectory $installDir

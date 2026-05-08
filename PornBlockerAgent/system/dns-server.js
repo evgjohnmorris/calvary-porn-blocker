@@ -47,6 +47,46 @@ const SAFESEARCH_MAP = {
     'www.youtubei.googleapis.com': '216.239.38.120',
     'youtubei.googleapis.com': '216.239.38.120'
 };
+
+// ---------------------------------------------------------------------------
+// R-005: DoH Hostname Sinkhole (Layer 2 of three-layer DoH mitigation)
+// Any DNS query for a known DoH provider hostname is answered with 0.0.0.0
+// before reaching upstream. This prevents clients that resolve the DoH
+// endpoint by name before connecting to it by IP.
+// Keep in sync with the IP list in system/doh-block.ps1 (Layer 1).
+// ---------------------------------------------------------------------------
+const DOH_SINKHOLE_DOMAINS = new Set([
+    // Cloudflare
+    'cloudflare-dns.com', 'dns.cloudflare.com', '1dot1dot1dot1.cloudflare-dns.com',
+    'mozilla.cloudflare-dns.com',
+    // Google
+    'dns.google', 'dns.google.com', 'dns64.dns.google',
+    // Quad9
+    'dns.quad9.net', 'dns9.quad9.net', 'dns10.quad9.net', 'dns11.quad9.net',
+    'dns12.quad9.net',
+    // NextDNS
+    'dns.nextdns.io',
+    // AdGuard
+    'dns.adguard-dns.com', 'dns-unfiltered.adguard-dns.com', 'family.adguard-dns.com',
+    // OpenDNS / Cisco Umbrella
+    'doh.opendns.com', 'doh.familyshield.opendns.com',
+    // Mullvad
+    'dns.mullvad.net', 'adblock.dns.mullvad.net', 'base.dns.mullvad.net',
+    'extended.dns.mullvad.net', 'family.dns.mullvad.net', 'all.dns.mullvad.net',
+    // Control D
+    'freedns.controld.com', 'p0.freedns.controld.com',
+    // Comodo
+    'doh.comodo.com',
+    // CleanBrowsing (DoH endpoint — distinct from our upstream server address)
+    'doh.cleanbrowsing.org',
+    // Alternate DNS
+    'dns.alternate-dns.com',
+    // LibreDNS
+    'doh.libredns.gr',
+    // Digitalcourage
+    'dns.digitale-gesellschaft.ch',
+]);
+
 let isServerRunning = false;
 let dnsServer = null;
 
@@ -246,6 +286,20 @@ async function startDNSServer() {
                     class: Packet.CLASS.IN,
                     ttl: 300,
                     address: SAFESEARCH_MAP[name]
+                });
+                return send(response);
+            }
+
+            // R-005: DoH Hostname Sinkhole (Layer 2)
+            // Block queries for known DoH provider hostnames before forwarding.
+            if (DOH_SINKHOLE_DOMAINS.has(name)) {
+                console.log(`[DNS] DoH sinkhole: ${name} → 0.0.0.0`);
+                response.answers.push({
+                    name: question.name,
+                    type: Packet.TYPE.A,
+                    class: Packet.CLASS.IN,
+                    ttl: 300,
+                    address: '0.0.0.0'
                 });
                 return send(response);
             }

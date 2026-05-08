@@ -92,11 +92,10 @@ Version: 1.1.0 | Effective: 2026-05-08 | Owner: Project Maintainer
 | **Likelihood** | 4 |
 | **Impact** | 4 |
 | **Raw Score** | 16 (CRITICAL) |
-| **Controls** | VPN layer (WireGuard) intercepts all DNS queries regardless of OS setting; Ministry Mode locks DNS config; NTFS ACL on hosts file |
-| **Residual Score** | 6 (MEDIUM) |
-| **Status** | Mitigated (partial) |
-| **Open Action** | Add DNS-over-HTTPS interception to fully close the gap; test on all target OS versions |
-| **Evidence** | `Deploy-LocalVPN.ps1`; infrastructure DNS config |
+| **Controls** | Three-layer DoH mitigation (v2.4.0): **Layer 1** — Windows Firewall outbound TCP+UDP/443 block to 30+ known DoH provider IPs (`system/doh-block.ps1`); **Layer 2** — DNS sinkhole answers 35+ DoH provider hostnames with `0.0.0.0` in the local resolver (`system/dns-server.js` `DOH_SINKHOLE_DOMAINS`); **Layer 3** — Browser Group Policy registry keys disable DoH in Chrome, Edge, Firefox, Brave. Re-applied automatically on filter level change and lockdown activation via `applyDoHBlock()`. |
+| **Residual Score** | 3 (LOW) — A highly determined attacker using an unknown/private DoH provider IP not in the block list could still bypass. VPN circumvention (R-006) remains a separate risk. |
+| **Status** | ✅ Mitigated (v2.4.0) |
+| **Evidence** | `system/doh-block.ps1`; `system/dns-server.js` `DOH_SINKHOLE_DOMAINS`; `system/dns.js` `applyDoHBlock()`; `routes/settings.js` runtime re-apply |
 
 ---
 

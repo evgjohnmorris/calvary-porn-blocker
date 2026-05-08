@@ -1,4 +1,5 @@
 const { exec } = require('child_process');
+const path = require('path');
 
 // Embedded Local Proxy IP
 const LOCAL_DNS = '127.0.0.1';
@@ -65,7 +66,30 @@ async function verifyDNS(level) {
     }
 }
 
+/**
+ * Applies all three layers of DoH mitigation by running doh-block.ps1.
+ * Requires the process to be running as (or able to elevate to) Administrator.
+ * Non-blocking — fires and forgets with a warning on failure.
+ */
+async function applyDoHBlock() {
+    const scriptPath = path.join(__dirname, 'doh-block.ps1');
+    const cmd = `powershell -NoProfile -ExecutionPolicy Bypass -File "${scriptPath}"`;
+    return new Promise((resolve) => {
+        exec(cmd, (error, stdout, stderr) => {
+            if (error) {
+                console.warn(`[DoH-Block] Script error: ${error.message}`);
+                // Non-fatal — log and continue. DNS filtering still active.
+                return resolve(false);
+            }
+            if (stdout) console.log(`[DoH-Block] ${stdout.trim()}`);
+            if (stderr) console.warn(`[DoH-Block] stderr: ${stderr.trim()}`);
+            resolve(true);
+        });
+    });
+}
+
 module.exports = {
     applyFilter,
-    verifyDNS
+    verifyDNS,
+    applyDoHBlock,
 };
