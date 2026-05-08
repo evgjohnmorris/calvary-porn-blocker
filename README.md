@@ -1,5 +1,9 @@
 # Calvary Blocker 🛡️
 
+<div align="center">
+  <img src="./assets/hero-banner.png" alt="Calvary Blocker Hero Banner" width="100%" />
+</div>
+
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Privacy First](https://img.shields.io/badge/Privacy-100%25%20Local-success.svg)
 ![Open Source](https://img.shields.io/badge/Open_Source-%E2%9D%A4-red.svg)
