@@ -121,7 +121,7 @@ You don't have to fight this battle alone. Join a community of developers, minis
 
 
 <details>
-<summary><kbd>📚 Click to view external support resources and ministries</kbd></summary>
+<summary><kbd>🛡️ Repenting from Sexual Immorality</kbd></summary>
 <br>
 
 | Resource | Link | Contact Information | Description |
@@ -136,7 +136,6 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | CHANGED Movement Stories | [https://www.changedmovement.com/stories](https://www.changedmovement.com/stories) | Contact via website | Support for individuals navigating faith and sexuality. |
 | Desert Stream Ministries | [https://www.desertstream.org/](https://www.desertstream.org/) | Contact via website | Programs focused on relational and sexual healing. |
 | Desert Stream Ministries / Living Waters | [https://desertstream.org/](https://desertstream.org/) | Contact via website | Programs focused on relational and sexual healing. |
-| Living Waters | [https://www.desertstream.org/living-waters](https://www.desertstream.org/living-waters) | Contact via website | Programs focused on relational and sexual healing. |
 | Living Hope Ministries | [https://www.livehope.org/](https://www.livehope.org/) | Contact via website | Christian ministry providing discipleship regarding sexual struggles. |
 | Brothers Road | [https://brothersroad.org/](https://brothersroad.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Joel 2:25 International | [https://joel225.org/](https://joel225.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
@@ -173,6 +172,21 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | New Creation Ministries Fresno | [https://www.ncmfresno.org/](https://www.ncmfresno.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Homosexuals Anonymous | [https://homosexuals-anonymous.com/](https://homosexuals-anonymous.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Jason Ministries | [https://jasonministries.com/](https://jasonministries.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| Person and Identity Project | [https://personandidentity.com/](https://personandidentity.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| Walt Heyer Ministries | [https://waltheyer.com/](https://waltheyer.com/) | Contact via website | Support and resources for detransitioners. |
+| Sex Change Regret | [https://sexchangeregret.com/](https://sexchangeregret.com/) | Contact via website | Support and resources for detransitioners. |
+| Detrans United | [https://www.detransunited.com/](https://www.detransunited.com/) | Contact via website | Support and resources for detransitioners. |
+| Beyond Trans | [https://www.beyondtrans.org/](https://www.beyondtrans.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+
+</details>
+
+<details>
+<summary><kbd>✝️ Pastoral Counseling & Apologetics</kbd></summary>
+<br>
+
+| Resource | Link | Contact Information | Description |
+| :--- | :--- | :--- | :--- |
+| Living Waters | [https://www.desertstream.org/living-waters](https://www.desertstream.org/living-waters) | Contact via website | Programs focused on relational and sexual healing. |
 | Focus on the Family | [https://www.focusonthefamily.com/](https://www.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
 | The Daily Citizen / Focus on the Family | [https://dailycitizen.focusonthefamily.com/](https://dailycitizen.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
 | Family Research Council | [https://www.frc.org/](https://www.frc.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
@@ -199,18 +213,13 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | Christian Medical & Dental Associations | [https://cmda.org/](https://cmda.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | American College of Pediatricians | [https://acpeds.org/](https://acpeds.org/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Ruth Institute | [https://ruthinstitute.org/](https://ruthinstitute.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Person and Identity Project | [https://personandidentity.com/](https://personandidentity.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Theology of the Body Institute | [https://tobinstitute.org/](https://tobinstitute.org/) | Contact via website | Catholic organization promoting orthodox teachings on bioethics and human sexuality. |
-| Walt Heyer Ministries | [https://waltheyer.com/](https://waltheyer.com/) | Contact via website | Support and resources for detransitioners. |
-| Sex Change Regret | [https://sexchangeregret.com/](https://sexchangeregret.com/) | Contact via website | Support and resources for detransitioners. |
 | Genspect | [https://genspect.org/](https://genspect.org/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Genspect USA | [https://genspect.org/usa/](https://genspect.org/usa/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Society for Evidence-Based Gender Medicine | [https://segm.org/](https://segm.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Do No Harm | [https://donoharmmedicine.org/](https://donoharmmedicine.org/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Partners for Ethical Care | [https://www.partnersforethicalcare.com/](https://www.partnersforethicalcare.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Our Duty | [https://ourduty.group/](https://ourduty.group/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Detrans United | [https://www.detransunited.com/](https://www.detransunited.com/) | Contact via website | Support and resources for detransitioners. |
-| Beyond Trans | [https://www.beyondtrans.org/](https://www.beyondtrans.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Parents of ROGD Kids | [https://www.parentsofrogdkids.com/](https://www.parentsofrogdkids.com/) | Contact via website | Parental rights advocacy organization. |
 | Transition Justice | [https://transitionjustice.org/](https://transitionjustice.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Transgender Trend | [https://www.transgendertrend.com/](https://www.transgendertrend.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
@@ -243,7 +252,6 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | Howard Center / Pro-Fam | [https://profam.org/](https://profam.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | World Congress of Families | [https://worldcongress.org/](https://worldcongress.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Local Evangelist, Chaplain, Pastor, or Minister | Local contact | Local contact | Immediate pastoral care, prayer, grief support, family support, hospital or jail support. |
-| Emergency Services (Imminent Danger) | [911 / 988](tel:911) | 911 or 988 | For imminent danger, still use 911 or 988. |
 | Calvary Chapel Association Churches | [https://calvarycca.org/churches/](https://calvarycca.org/churches/) | Contact via website | Church locator for local support. |
 | Calvary Chapel Church Locator | [https://calvarychapel.com/church-locator/](https://calvarychapel.com/church-locator/) | Contact via website | Church locator for local support. |
 | Association of Professional Chaplains | [https://www.apchaplains.org/](https://www.apchaplains.org/) | [info@apchaplains.org](mailto:info@apchaplains.org) | APC supports professional chaplaincy care across health and human-service settings. |
@@ -257,6 +265,16 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | NeedEncouragement.com | [https://needencouragement.com/free-christian-counseling/](https://needencouragement.com/free-christian-counseling/) | Contact via website | Free Christian counseling based on God’s word! |
 | Men of Armor | [https://menofarmor.com/counseling/](https://menofarmor.com/counseling/) | Contact via website | Biblical counseling is simply focused discipleship for any issue in a person’s life. |
 | Family Life | [https://www.familylife.com/](https://www.familylife.com/) | Contact via website | Biblical Counseling Resources to help biblical counselors minister the Word of God. |
+
+</details>
+
+<details>
+<summary><kbd>💍 Marriage & Infidelity</kbd></summary>
+<br>
+
+| Resource | Link | Contact Information | Description |
+| :--- | :--- | :--- | :--- |
+| Emergency Services (Imminent Danger) | [911 / 988](tel:911) | 911 or 988 | For imminent danger, still use 911 or 988. |
 | 911 / Domestic Violence Hotline | [https://www.thehotline.org/](https://www.thehotline.org/) | 911 for immediate danger; 1-800-799-7233 or text START to 88788 | Relationship violence, threats, stalking, coercive control, unsafe home situation. |
 | AAMFT Therapist Locator | [https://www.aamft.org/](https://www.aamft.org/) | Provider-specific | AAMFT's directory helps locate marriage and family therapists. |
 | Psychology Today Therapist Directory | [https://www.psychologytoday.com/](https://www.psychologytoday.com/) | Provider-specific | Directory includes marriage counseling and couples counseling filters. |
