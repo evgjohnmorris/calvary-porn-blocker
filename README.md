@@ -260,6 +260,98 @@ You don't have to fight this battle alone. Join a community of developers, minis
 
 </details>
 
+---
+
+## ✝️ The Gospel Message
+
+The End is near, judgement is coming; Repent and trust in Jesus Christ alone for forgiveness of sin, and salvation from judgement in Hell, unto the Kingdom of Heaven!
+
+---
+
+Those who repent and place their trust and faith in Jesus Christ alone, by His Word, can receive God’s mercy and grace for forgiveness of sin, peace that surpasses all understanding, and salvation for all eternity in the Kingdom of Heaven with God.
+
+---
+
+Jesus died on the cross and rose from the grave on the third day. He shed His blood for the sins of the world, that if they might believe on Him, they may be saved from the wrath of God and an eternity in Hell. Those who believe this may receive salvation from judgement, but our faith must be true. We must trust in Christ and be born-again. We must repent and believe the gospel!
+
+---
+
+### Why?
+
+- **The Gospel is a free gift: PRICE = $0.00; 100% FREE!!!**
+    
+    It is a free gift, and not of ourselves lest any of us can boast in our own-selves rather than God. Works saves nobody, **Jesus Paid it all!**
+    
+    - For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: not of works, lest any man should boast (Ephesians 2:8-10)
+    - Jesus Said “It is finished” (John 19:30) Signifying that He paid our debt that we owe due to our sin against God, and His laws.
+    - The wages of sin is death (Romans 6:23). God’s wrath abides on us because of our sin and evil each and every one of us has done in this world. This evil behavior, called sin, have wages and earnings. These wages and earnings is judgement by God’s wrath in an eternity in hell.
+    - Jesus came in the flesh and died on the cross in our place, shedding His blood for the sin of the world and He rose again the third day He was in the grave! He is God in the flesh. He is the Christ and the Messiah. Because of what He did on the cross, we now have a choice: To trust in Jesus Christ and what He did in our place on the cross, or to receive God’s wrath ourselves. Either choice is eternal.
+    - We are guilty of breaking the law, but Jesus paid our debts!
+
+- **Everyone is a Sinner; Nobody has an Excuse**
+    - It’s appointed once for men to die, and after this, the judgement (Hebrews 9:27).
+    - All have fallen short of the glory of God (Romans 3:23).
+    - God made Himself known to everyone that we have no excuse (Isaiah 45:5-12, Romans 1:20-32, Exodus 34:7).
+    - If anyone says they are without sin, they are liars (1 John 1:8-10).
+    - There is none good, only God is good (Psalm 14:3, Mark 10:18, Luke 18:19, Romans 3:10-23, Romans 14:12, Ecclesiastes 7:20).
+
+- **The Nature and Characteristics of Sin**
+    
+    Therefore to him that knoweth to do good, and doeth it not, to him it is sin (James 4:17). Sin is breaking the 10 commandments in the Old Testament, and the 2 Commandments in the New Testament by which the violation is in both commission and/or omission.
+    
+    - Old Testament 10 Commandments
+        1. You shall have no other God’s but me.
+        2. You shall not make for yourself an idol. You shall not worship them or serve them; for I, the LORD your God, am a jealous God…
+        3. You shall not take the name of the LORD your God in vain, for the LORD will not leave him unpunished.
+        4. Remember the sabbath day, to keep it Holy, in it you shall do no work.
+        5. Honor your father and your mother.
+        6. You shall not murder (or commit hatred).
+        7. You shall not commit adultery (or fornicate or lust).
+        8. You shall not steal.
+        9. You shall not bear false witness.
+        10. You shall not covet.
+    - New Testament 2 Commandments
+        1. You shall love the LORD your God with all thy heart, soul, mind, and strength.
+        2. Love your neighbor, your enemies, your persecutors, and those that hate you as yourself.
+
+- **God’s Warning to Man**
+    - “God will not leave the guilty unpunished” (Exodus 34:7)
+    - “The LORD preserveth all them that love him: But all the wicked will he destroy” (Psalms 145:20, 101:8).
+    - “...Then shall that Wicked be revealed, whom the Lord shall consume with the spirit of his mouth, and shall destroy...them” (2 Thessalonians 2:8-10).
+    - “...But I say unto you, That every idle word that men shall speak, they shall give account thereof in the day of judgment” (Matthew 12:36-37).
+    - “...Their place will be in the fiery lake of burning sulfur. This is the second death” (revelation 21:8).
+    - “He that believeth on the Son hath everlasting life: and he that believeth not the Son shall not see life; but the wrath of God abideth on him” (John 3:36).
+    - “We reap what we sow” (Galations 6).
+    - “And there is salvation in no one else. For there is no other name under heaven, given to men, by which we must be saved” (Acts 2:36).
+    - “The sexually immoral, idol worshippers, adulterers, prostitutes, homosexuals, the greedy, thieves, drunkards, gluttons, murderers, revilers, drug-abusers, slanderers, swindlers, all the unbelieving and wicked… and all liars will be in the lake of fire that burns with fire and brimstone” **(1 Corinthians 6:9-10, Revelation 21:8).**
+    - “If anyone’s name was not found written in the Book of Life, he was thrown into the Lake of Fire” **(Revelation 20:15).**
+
+- **God is Judge**
+    
+    God is right and just to judge every man according to all their evil in open and in secret as God put it on every man's heart to know God, and to do His Will. Because of man's wickedness, and desire to do evil rebelling from doing good, our sin separates us from God.
+    
+- **On the: Godhead, Death and Resurrection of Jesus Christ, Salvation and Forgiveness**
+    
+    But the Godhead (Father, Son, Holy Spirit in agreement with His divine Word) made a way that we can be forgiven of our sin, which is doing wrong and not doing right. The Father sent his Son Jesus Christ to dwell among us in the flesh to die on the cross for the sins of the world. He rose again the third day, that if we repent and believe this, to put our faith and trust in Him and on His name to be our Lord and Savior, we will receive God's mercy and grace for the forgiveness of sin, and salvation unto the Kingdom of Heaven.
+    
+- **The Holy Spirit & Peace**
+    
+    For those who have true and right faith and trust in Jesus Christ, God has sent the Holy Spirit, to those who trust in Him, that they might be filled with the Holy Spirit, that they might also receive the peace of God that surpasses all fear and understanding.
+    
+- **All Glory is God’s**
+    
+    Only God is worthy of all honor, praise, worship, and reverence. The works of the flesh will die as the flesh dies. But the works of the Holy Spirit is life and will be deliverance from the second death unto life in the Kingdom of Heaven.
+    
+- **Message to Christians**
+    - ⚔︎ God commands us all to repent of our sins, in open and in secret, and to pick up our cross and walk in Christ. Love is patient and kind, but love does not love sin. Love without truth and correction without exception, is not love. If we love God, we will agree with God that our sin is evil whether it be open or secret. God hates our sin, whether it is from omission or commission. Those that repent and trust in Christ will believe His Word, and love God above all things including the lust of our flesh, the lust of our eyes, and the pride of life. The same lusts as the pleasures and treasures in the world over heaven. All these will be burned. God commanded us to have no idols above or before Him. Idolatry is this: anything put before and/or above God. God is Lord, not our interests, inclinations, or proclivity. Our family, friends, and jobs also are not Lord. They are gifts, not gods which gifts come second before Him. If we think ourselves of anything great, it is God who gives and decides, not us. None are great, none are good, none have anything of themselves, but all is for God. He alone is the gain, and all else is a loss and vanity or a gift from Him.
+    - ⚔︎ The love of God leads to obedience to His Word, and correction. Those who live for the world are the same who live in disobedience of God's Word. Those that love Christ, preaching Christ to the World that they may be the light of the world. But those that love darkness, do not love Christ as the love of Christ, who is God in the love, is not the love of darkness. There is no darkness in the Lord.
+    - ⚔︎ The love of God is not the love of money, pleasure, works, status, or friendship with the world: those in the world must choose to repent and live in and for Christ, or they will perish. Yet they cannot repent of themselves, it is the gift of God. Friendship with the world is enmity against God, but there is no greater friend than this: The love of Christ who has given His life for you and me. Therefore, those that trust in Jesus Christ will be saved from an everlasting Hellfire, and enter into eternity in the Kingdom of Heaven, where there is no sin or death.
+    - ⚔︎ If anyone says they are without sin, they are a liar. If anyone thinks they are without sin, they are deceived. We're are sinners, but Jesus can redeem our sins if we repent and Trust in Him. There is none good, no not one. God alone is good. The man who believes he must not repent, is a man deceived, as repentance is a gift from God given to them who trust in Jesus Christ wholly.
+    - There are numerous false doctrines in the world, even within our own churches. This is because men sought to steal from God, to make their own rendition. Taking doctrines and adding or removing from scripture. God says, His Word is perfectly preserved. There is a standard outside our own interests, that it would be wise to comply, else false doctrine could have been believed. We know this is true, because God did not only say “Thou shalt not covet our neighbors wife”, but that “though shalt not covet”. We also know that in many trials and tribulations, the will of God may only be evident in our walks when we pray and fast. We also know, that there is no other God but God, who is more than a deity but has fulfilled every Word He preserved, and made certain His Word that we can understand it, if we submit to Him and have the fear of the Lord in our lives and our reasoning. We must be diligent and maintain our position that emotionalism, carnalism, human rationality, perspectivism, experiencialism, nepotism, or any other -isms, including politicalism or patriotism, come in between our souls and the love and will of God in our lives, less we be made like unto a cult in a world that needs truth having removed truth in ourselves for our own interests.
+
+- **BELIEVE AND PRAY!**
+    
+    **“I Believe I am a sinner, and trust that Jesus died and rose again on the third day covering my sins. I trust and on his name with all my heart soul, mind and strength that He is Lord, Savior, and messiah. I repent and turn from my own ways and my sin. Jesus, you are Lord, you are God, and I trust in you, Amen!”**
 
 ---
 
