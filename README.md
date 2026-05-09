@@ -126,27 +126,24 @@ You don't have to fight this battle alone. Join a community of developers, minis
 
 | Resource | Link | Contact Information | Description |
 | :--- | :--- | :--- | :--- |
-| Restored Hope Network | [https://www.restoredhopenetwork.org/](https://www.restoredhopenetwork.org/) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
+| Restored Hope Network | [https://www.restoredhopenetwork.org/](https://www.restoredhopenetwork.org/) | (719) 598-0659 / info@restoredhopenetwork.org | Ministry network for those impacted by sexual and relational brokenness. |
 | Restored Hope Network Ministry Finder | [https://www.restoredhopenetwork.org/ministry-finder](https://www.restoredhopenetwork.org/ministry-finder) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
 | Restored Hope Network Find Help | [https://www.restoredhopenetwork.org/find-help](https://www.restoredhopenetwork.org/find-help) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
 | Restored Hope Network Virtual Support | [https://www.restoredhopenetwork.org/virtual-support](https://www.restoredhopenetwork.org/virtual-support) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
 | Restored Hope Network FAQ | [https://www.restoredhopenetwork.org/frequently-asked-questions](https://www.restoredhopenetwork.org/frequently-asked-questions) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
 | Restored Hope Network External Resources | [https://www.restoredhopenetwork.org/external-resources](https://www.restoredhopenetwork.org/external-resources) | Contact via website | Ministry network for those impacted by sexual and relational brokenness. |
-| CHANGED Movement | [https://www.changedmovement.com/](https://www.changedmovement.com/) | Contact via website | Support for individuals navigating faith and sexuality. |
+| CHANGED Movement | [https://www.changedmovement.com/](https://www.changedmovement.com/) | [contact@changedmovement.com](mailto:contact@changedmovement.com) | Support for individuals navigating faith and sexuality. |
 | CHANGED Movement Stories | [https://www.changedmovement.com/stories](https://www.changedmovement.com/stories) | Contact via website | Support for individuals navigating faith and sexuality. |
-| Desert Stream Ministries | [https://www.desertstream.org/](https://www.desertstream.org/) | Contact via website | Programs focused on relational and sexual healing. |
+| Desert Stream Ministries | [https://www.desertstream.org/](https://www.desertstream.org/) | (816) 608-3428 / [info@desertstream.org](mailto:info@desertstream.org) | Programs focused on relational and sexual healing. |
 | Desert Stream Ministries / Living Waters | [https://desertstream.org/](https://desertstream.org/) | Contact via website | Programs focused on relational and sexual healing. |
 | Living Hope Ministries | [https://www.livehope.org/](https://www.livehope.org/) | Contact via website | Christian ministry providing discipleship regarding sexual struggles. |
 | Brothers Road | [https://brothersroad.org/](https://brothersroad.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Joel 2:25 International | [https://joel225.org/](https://joel225.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Harvest USA | [https://harvestusa.org/](https://harvestusa.org/) | Contact via website | Christian ministry providing discipleship regarding sexual struggles. |
+| Harvest USA | [https://harvestusa.org/](https://harvestusa.org/) | (215) 482-0111 / [info@harvestusa.org](mailto:info@harvestusa.org) | Christian ministry providing discipleship regarding sexual struggles. |
 | Outpost Ministries | [https://outpostministries.org/](https://outpostministries.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Reconciliation Ministries | [https://recmin.org/](https://recmin.org/) | Contact via website | Christian ministry providing discipleship regarding sexual struggles. |
 | Portland Fellowship | [https://www.portlandfellowship.com/](https://www.portlandfellowship.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | First Stone Ministries | [https://firststone.org/](https://firststone.org/) | Contact via website | Christian ministry providing discipleship regarding sexual struggles. |
-| Courage International | [https://couragerc.org/](https://couragerc.org/) | Contact via website | Catholic apostolate supporting same-sex attracted individuals. |
-| Courage International Courage | [https://couragerc.org/courage/](https://couragerc.org/courage/) | Contact via website | Catholic apostolate supporting same-sex attracted individuals. |
-| Courage International EnCourage | [https://couragerc.org/encourage/](https://couragerc.org/encourage/) | Contact via website | Catholic apostolate supporting same-sex attracted individuals. |
 | Alliance for Therapeutic Choice | [https://www.therapeuticchoice.com/](https://www.therapeuticchoice.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | PFOX | [https://pfox.org/](https://pfox.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Voice of the Voiceless | [https://www.voiceofthevoiceless.info/](https://www.voiceofthevoiceless.info/) | Contact via website | Ministry or advocacy organization offering support and resources. |
@@ -187,33 +184,17 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | Resource | Link | Contact Information | Description |
 | :--- | :--- | :--- | :--- |
 | Living Waters | [https://www.desertstream.org/living-waters](https://www.desertstream.org/living-waters) | Contact via website | Programs focused on relational and sexual healing. |
-| Focus on the Family | [https://www.focusonthefamily.com/](https://www.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
-| The Daily Citizen / Focus on the Family | [https://dailycitizen.focusonthefamily.com/](https://dailycitizen.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
-| Family Research Council | [https://www.frc.org/](https://www.frc.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Alliance Defending Freedom | [https://adflegal.org/](https://adflegal.org/) | Contact via website | Legal advocacy organization protecting religious freedom and family values. |
-| ADF Marriage and Family | [https://adflegal.org/issues/marriage-and-family/](https://adflegal.org/issues/marriage-and-family/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Liberty Counsel | [https://www.lc.org/](https://www.lc.org/) | Contact via website | Legal advocacy organization protecting religious freedom and family values. |
-| Family Policy Alliance | [https://familypolicyalliance.com/](https://familypolicyalliance.com/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| American Family Association | [https://www.afa.net/](https://www.afa.net/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Concerned Women for America | [https://concernedwomen.org/](https://concernedwomen.org/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
-| Pacific Justice Institute | [https://pacificjustice.org/](https://pacificjustice.org/) | Contact via website | Legal advocacy organization protecting religious freedom and family values. |
-| First Liberty Institute | [https://firstliberty.org/](https://firstliberty.org/) | Contact via website | Legal advocacy organization protecting religious freedom and family values. |
-| Thomas More Society | [https://thomasmoresociety.org/](https://thomasmoresociety.org/) | Contact via website | Legal advocacy organization protecting religious freedom and family values. |
 | Ethics & Religious Liberty Commission | [https://erlc.com/](https://erlc.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| The Gospel Coalition | [https://www.thegospelcoalition.org/](https://www.thegospelcoalition.org/) | Contact via website | Christian apologetics and theological resource ministry. |
-| Desiring God | [https://www.desiringgod.org/](https://www.desiringgod.org/) | Contact via website | Christian apologetics and theological resource ministry. |
-| Summit Ministries | [https://www.summit.org/](https://www.summit.org/) | Contact via website | Christian apologetics and theological resource ministry. |
-| Stand to Reason | [https://www.str.org/](https://www.str.org/) | Contact via website | Christian apologetics and theological resource ministry. |
+| The Gospel Coalition | [https://www.thegospelcoalition.org/](https://www.thegospelcoalition.org/) | 1-844-448-3842 / [giving@thegospelcoalition.org](mailto:giving@thegospelcoalition.org) | Christian apologetics and theological resource ministry. |
+| Desiring God | [https://www.desiringgod.org/](https://www.desiringgod.org/) | (888) 346-4700 / [email@desiringgod.org](mailto:email@desiringgod.org) | Christian apologetics and theological resource ministry. |
+| Summit Ministries | [https://www.summit.org/](https://www.summit.org/) | (719) 685-9103 / [info@summit.org](mailto:info@summit.org) | Christian apologetics and theological resource ministry. |
+| Stand to Reason | [https://www.str.org/](https://www.str.org/) | (562) 595-7333 / [questions@str.org](mailto:questions@str.org) | Christian apologetics and theological resource ministry. |
 | Colson Center | [https://www.colsoncenter.org/](https://www.colsoncenter.org/) | Contact via website | Christian apologetics and theological resource ministry. |
 | Breakpoint | [https://breakpoint.org/](https://breakpoint.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Got Questions | [https://www.gotquestions.org/](https://www.gotquestions.org/) | Contact via website | Christian apologetics and theological resource ministry. |
-| Catholic Answers | [https://www.catholic.com/](https://www.catholic.com/) | Contact via website | Catholic organization promoting orthodox teachings on bioethics and human sexuality. |
-| National Catholic Bioethics Center | [https://www.ncbcenter.org/](https://www.ncbcenter.org/) | Contact via website | Catholic organization promoting orthodox teachings on bioethics and human sexuality. |
-| Catholic Medical Association | [https://www.cathmed.org/](https://www.cathmed.org/) | Contact via website | Catholic organization promoting orthodox teachings on bioethics and human sexuality. |
 | Christian Medical & Dental Associations | [https://cmda.org/](https://cmda.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | American College of Pediatricians | [https://acpeds.org/](https://acpeds.org/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
-| Ruth Institute | [https://ruthinstitute.org/](https://ruthinstitute.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Theology of the Body Institute | [https://tobinstitute.org/](https://tobinstitute.org/) | Contact via website | Catholic organization promoting orthodox teachings on bioethics and human sexuality. |
 | Genspect | [https://genspect.org/](https://genspect.org/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Genspect USA | [https://genspect.org/usa/](https://genspect.org/usa/) | Contact via website | Advocacy for evidence-based medical care and gender medicine. |
 | Society for Evidence-Based Gender Medicine | [https://segm.org/](https://segm.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
@@ -222,49 +203,25 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | Our Duty | [https://ourduty.group/](https://ourduty.group/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Parents of ROGD Kids | [https://www.parentsofrogdkids.com/](https://www.parentsofrogdkids.com/) | Contact via website | Parental rights advocacy organization. |
 | Transition Justice | [https://transitionjustice.org/](https://transitionjustice.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Transgender Trend | [https://www.transgendertrend.com/](https://www.transgendertrend.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Sex Matters | [https://sex-matters.org/](https://sex-matters.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| LGB Alliance | [https://lgballiance.org.uk/](https://lgballiance.org.uk/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Women’s Declaration USA | [https://womensdeclarationusa.com/](https://womensdeclarationusa.com/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
-| Women’s Declaration International | [https://womensdeclaration.com/](https://womensdeclaration.com/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
-| Women’s Liberation Front | [https://womensliberationfront.org/](https://womensliberationfront.org/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
 | Independent Women’s Forum | [https://www.iwf.org/](https://www.iwf.org/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
 | Independent Women’s Voice | [https://www.iwv.org/](https://www.iwv.org/) | Contact via website | Advocacy group focused on protecting women's rights and sex-based spaces. |
 | Moms for Liberty | [https://www.momsforliberty.org/](https://www.momsforliberty.org/) | Contact via website | Parental rights advocacy organization. |
 | Parents Defending Education | [https://defendinged.org/](https://defendinged.org/) | Contact via website | Parental rights advocacy organization. |
 | No Left Turn in Education | [https://noleftturn.us/](https://noleftturn.us/) | Contact via website | Parental rights advocacy organization. |
-| Child & Parental Rights Campaign | [https://childparentrights.org/](https://childparentrights.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Protect Kids California | [https://protectkidsca.com/](https://protectkidsca.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | MassResistance | [https://www.massresistance.org/](https://www.massresistance.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Mission America | [https://missionamerica.com/](https://missionamerica.com/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Illinois Family Institute | [https://illinoisfamily.org/](https://illinoisfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| California Family Council | [https://www.californiafamily.org/](https://www.californiafamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Texas Values | [https://txvalues.org/](https://txvalues.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| The Family Foundation | [https://www.familyfoundation.org/](https://www.familyfoundation.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| North Carolina Family Policy Council | [https://www.ncfamily.org/](https://www.ncfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Florida Family Policy Council | [https://www.flfamily.org/](https://www.flfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Family Policy Institute of Washington | [https://familypolicyinstitute.com/](https://familypolicyinstitute.com/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Pennsylvania Family Institute | [https://pafamily.org/](https://pafamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Minnesota Family Council | [https://www.mfc.org/](https://www.mfc.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| Wisconsin Family Council | [https://wifamilycouncil.org/](https://wifamilycouncil.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
-| C-Fam | [https://www.c-fam.org/](https://www.c-fam.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Family Watch International | [https://familywatch.org/](https://familywatch.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| Howard Center / Pro-Fam | [https://profam.org/](https://profam.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
-| World Congress of Families | [https://worldcongress.org/](https://worldcongress.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
 | Local Evangelist, Chaplain, Pastor, or Minister | Local contact | Local contact | Immediate pastoral care, prayer, grief support, family support, hospital or jail support. |
 | Calvary Chapel Association Churches | [https://calvarycca.org/churches/](https://calvarycca.org/churches/) | Contact via website | Church locator for local support. |
 | Calvary Chapel Church Locator | [https://calvarychapel.com/church-locator/](https://calvarychapel.com/church-locator/) | Contact via website | Church locator for local support. |
 | Association of Professional Chaplains | [https://www.apchaplains.org/](https://www.apchaplains.org/) | [info@apchaplains.org](mailto:info@apchaplains.org) | APC supports professional chaplaincy care across health and human-service settings. |
 | The Salvation Army Location Finder | [https://www.salvationarmyusa.org/](https://www.salvationarmyusa.org/) | Local offices vary | Local emergency assistance, shelter, food, utility support, spiritual care. |
 | Focus on the Family Counseling Department | [https://www.focusonthefamily.com/](https://www.focusonthefamily.com/) | 1-855-771-HELP / 1-855-771-4357 | Offers a one-time phone consultation and referral support during listed weekday hours. |
-| VA Chaplain Service / VA Spiritual Care | [https://www.patientcare.va.gov/chaplain/](https://www.patientcare.va.gov/chaplain/) | Through local VA facility | Veteran spiritual care, moral injury, grief, PTSD-related pastoral support. |
-| United States Chaplain Corps | [https://uschaplains.us/chaplain-academy/](https://uschaplains.us/chaplain-academy/) | Contact via website | USCC First responders Special Unit. |
 | Better Help (Christian Counseling) | [https://www.betterhelp.com](https://www.betterhelp.com) | Contact via website | Connect with a fellow believer online within our network of licensed, professional therapists. |
 | Christian Counseling & Educational Foundation | [https://www.ccef.org/](https://www.ccef.org/) | Contact via website | Restoring Christ to counseling & counseling to the church. |
 | Free Christian Counseling Online | [https://freechristiancounseling.online/](https://freechristiancounseling.online/) | Contact via website | Free & discounted counseling sessions for pastors, missionaries, and foster/adoptive parents. |
 | NeedEncouragement.com | [https://needencouragement.com/free-christian-counseling/](https://needencouragement.com/free-christian-counseling/) | Contact via website | Free Christian counseling based on God’s word! |
 | Men of Armor | [https://menofarmor.com/counseling/](https://menofarmor.com/counseling/) | Contact via website | Biblical counseling is simply focused discipleship for any issue in a person’s life. |
-| Family Life | [https://www.familylife.com/](https://www.familylife.com/) | Contact via website | Biblical Counseling Resources to help biblical counselors minister the Word of God. |
 
 </details>
 
@@ -280,7 +237,26 @@ You don't have to fight this battle alone. Join a community of developers, minis
 | Psychology Today Therapist Directory | [https://www.psychologytoday.com/](https://www.psychologytoday.com/) | Provider-specific | Directory includes marriage counseling and couples counseling filters. |
 | Gottman Referral Network | [https://gottmanreferralnetwork.com/](https://gottmanreferralnetwork.com/) | Provider-specific | Couples therapy using Gottman Method-trained clinicians. |
 | Focus on the Family Marriage Counseling | [https://www.focusonthefamily.com/](https://www.focusonthefamily.com/) | 1-855-771-HELP / 1-855-771-4357 | Christian marriage counseling referral and one-time consultation. |
-| Military OneSource | [https://www.militaryonesource.mil/](https://www.militaryonesource.mil/) | 800-342-9647 | Confidential non-medical counseling and referrals for eligible military members and families. |
+| Focus on the Family | [https://www.focusonthefamily.com/](https://www.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
+| The Daily Citizen / Focus on the Family | [https://dailycitizen.focusonthefamily.com/](https://dailycitizen.focusonthefamily.com/) | Contact via website | Global Christian ministry dedicated to supporting families. |
+| Family Research Council | [https://www.frc.org/](https://www.frc.org/) | 800-225-4008 | Ministry or advocacy organization offering support and resources. |
+| Family Policy Alliance | [https://familypolicyalliance.com/](https://familypolicyalliance.com/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| American Family Association | [https://www.afa.net/](https://www.afa.net/) | 662-844-5036 / [faq@afa.net](mailto:faq@afa.net) | Ministry or advocacy organization offering support and resources. |
+| Ruth Institute | [https://ruthinstitute.org/](https://ruthinstitute.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| Illinois Family Institute | [https://illinoisfamily.org/](https://illinoisfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| California Family Council | [https://www.californiafamily.org/](https://www.californiafamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Texas Values | [https://txvalues.org/](https://txvalues.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| The Family Foundation | [https://www.familyfoundation.org/](https://www.familyfoundation.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| North Carolina Family Policy Council | [https://www.ncfamily.org/](https://www.ncfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Florida Family Policy Council | [https://www.flfamily.org/](https://www.flfamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Family Policy Institute of Washington | [https://familypolicyinstitute.com/](https://familypolicyinstitute.com/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Pennsylvania Family Institute | [https://pafamily.org/](https://pafamily.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Minnesota Family Council | [https://www.mfc.org/](https://www.mfc.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Wisconsin Family Council | [https://wifamilycouncil.org/](https://wifamilycouncil.org/) | Contact via website | State-level policy organization defending life, family, and religious liberty. |
+| Family Watch International | [https://familywatch.org/](https://familywatch.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| Howard Center / Pro-Fam | [https://profam.org/](https://profam.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| World Congress of Families | [https://worldcongress.org/](https://worldcongress.org/) | Contact via website | Ministry or advocacy organization offering support and resources. |
+| Family Life | [https://www.familylife.com/](https://www.familylife.com/) | Contact via website | Biblical Counseling Resources to help biblical counselors minister the Word of God. |
 
 </details>
 
