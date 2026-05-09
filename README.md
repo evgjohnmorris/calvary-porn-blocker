@@ -270,6 +270,17 @@ You don't have to fight this battle alone. Join a community of developers, minis
 
 </details>
 
+<details>
+<summary><kbd>🏥 Addiction Treatment & Recovery Programs</kbd></summary>
+<br>
+
+| Resource | Link | Contact Information | Description |
+| :--- | :--- | :--- | :--- |
+| Hope Over America | [https://hopeoveramerica.com/](https://hopeoveramerica.com/) | 1-844-467-3777 | Faith-based evangelistic organization uniting churches to address addiction and connect individuals to recovery resources. |
+| Heritage House | [https://heritage.house/](https://heritage.house/) | Contact via website | A faith-based, long-term residential and therapeutic recovery program for men, emphasizing spiritual transformation and work therapy. |
+
+</details>
+
 ---
 
 ## ✝️ The Gospel Message
