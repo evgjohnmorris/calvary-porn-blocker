@@ -260,6 +260,16 @@ You don't have to fight this battle alone. Join a community of developers, minis
 
 </details>
 
+<details>
+<summary><kbd>📖 Pastoral Training</kbd></summary>
+<br>
+
+| Resource | Link | Contact Information | Description |
+| :--- | :--- | :--- | :--- |
+| Pastoral Training of Asia | [https://pastoraltrainingasia.org/](https://pastoraltrainingasia.org/) | Contact via website | "Ministering to ministers" by providing training, tools, and support to pastors and church leaders in Southeast Asia. |
+
+</details>
+
 ---
 
 ## ✝️ The Gospel Message
