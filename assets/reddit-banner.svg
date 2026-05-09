@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 384" width="1200" height="384">
+  <defs>
+    <radialGradient id="bg-grad" cx="40%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </radialGradient>
+    <linearGradient id="metal-text" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f3f4f6"/>
+      <stop offset="100%" stop-color="#9ca3af"/>
+    </linearGradient>
+    <radialGradient id="cyan-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(34,211,238,0.18)"/>
+      <stop offset="100%" stop-color="rgba(34,211,238,0)"/>
+    </radialGradient>
+    <filter id="blur-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="glow-sharp" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="fine-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1f2937" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="0" cy="0" r="1" fill="#374151" opacity="0.8"/>
+    </pattern>
+    <linearGradient id="shield-solid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <mask id="dove-cutout" x="-50%" y="-50%" width="200%" height="200%">
+      <rect x="-200" y="-200" width="400" height="400" fill="white"/>
+      <g transform="translate(0, -10) scale(1.7) translate(-351.75, -227.41)">
+        <path d="m 349.75585,200.60294 c -0.22525,0.0423 -0.42821,0.62712 -0.62042,1.75132 -0.17216,1.00688 -0.82851,3.3 -1.46073,5.09686 -0.63225,1.79687 -1.71399,4.93864 -2.40316,6.97384 l -1.24869,3.69896 -0.87958,0.16493 c -0.48291,0.0906 -1.97226,0.0874 -3.30629,-0.008 -6.38374,-0.45564 -9.68763,-2.10147 -10.07593,-5.01047 -0.10878,-0.81494 -0.25227,-1.05592 -0.66755,-1.11519 -0.44751,-0.0638 -0.55708,0.0866 -0.69895,0.97382 -0.2634,1.64721 -1.66926,4.42361 -4.20943,8.32463 -2.76061,4.23956 -3.47826,5.87678 -3.66755,8.37959 -0.47146,6.23374 2.92882,10.58943 9.39269,12.02359 2.34143,0.5195 6.9557,0.74664 9.57332,0.4712 l 2.0733,-0.2199 0,1.28797 c 0,2.75952 1.1839,4.84321 3.18849,5.6309 1.02987,0.40468 1.43416,1.40188 1.28796,3.16493 -0.1722,2.07647 0.34614,1.76669 1.67277,-0.99739 1.72666,-3.59755 3.26171,-5.07955 6.43981,-6.2042 1.48277,-0.52472 2.0654,-0.57219 7.26441,-0.59686 5.47277,-0.026 5.72003,-0.0501 7.64138,-0.71466 7.49646,-2.59296 12.39141,-8.96692 13.83772,-18.00789 0.54131,-3.38378 0.56766,-3.26702 -0.64398,-3.26702 -0.86387,0 -1.22925,0.1782 -2.25393,1.09948 -2.64898,2.38166 -4.83759,2.90377 -10.34295,2.44241 -3.8546,-0.32302 -6.65193,-0.16475 -8.32463,0.47121 -0.3655,0.13896 -0.66753,0.17527 -0.66753,0.0864 0,-0.61157 4.40328,-7.9512 7.85341,-13.09951 0.95743,-1.4287 1.70272,-2.62913 1.65707,-2.6623 -0.0456,-0.0331 -0.48795,-0.30036 -0.98168,-0.59687 l -0.89529,-0.54189 -1.32722,0.51048 c -8.22025,3.12344 -14.34341,0.2843 -16.32726,-7.56284 -0.34066,-1.34747 -0.6243,-1.99552 -0.87958,-1.94765 z" fill="black"/>
+      </g>
+    </mask>
+  </defs>
+
+  <style>
+    .float { animation: floating 6s ease-in-out infinite alternate; }
+    @keyframes floating { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px); } }
+    .pulse-glow { animation: pulse 3s ease-in-out infinite alternate; }
+    @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+    .status-ping { animation: ping 2s cubic-bezier(0,0,0.2,1) infinite; transform-origin: 0 0; }
+    @keyframes ping { 75%, 100% { transform: scale(2.5); opacity: 0; } }
+  </style>
+
+  <!-- Base -->
+  <rect width="100%" height="100%" fill="url(#bg-grad)"/>
+  <rect width="100%" height="100%" fill="url(#fine-grid)"/>
+
+  <!-- Ambient glows -->
+  <circle cx="920" cy="192" r="220" fill="url(#cyan-glow)" filter="url(#blur-heavy)" class="pulse-glow"/>
+  <circle cx="200" cy="300" r="180" fill="rgba(99,102,241,0.07)" filter="url(#blur-heavy)"/>
+
+  <!-- Shield (right side) -->
+  <g transform="translate(940, 192)">
+    <circle cx="0" cy="-10" r="90" fill="rgba(56,189,248,0.25)" filter="url(#blur-heavy)" class="pulse-glow"/>
+    <g class="float">
+      <path d="M 0 -115 L 96 -86 L 96 19 C 96 77 48 106 0 125 C -48 106 -96 77 -96 19 L -96 -86 Z"
+            fill="url(#shield-solid)" stroke="#38bdf8" stroke-width="2.5" mask="url(#dove-cutout)" filter="url(#glow-sharp)"/>
+      <path d="M 0 -105 L 86 -79 L 86 17 C 86 68 43 95 0 112 C -43 95 -86 68 -86 17 L -86 -79 Z"
+            fill="none" stroke="rgba(56,189,248,0.18)" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- Border lines -->
+  <line x1="0" y1="383" x2="1200" y2="383" stroke="#1e293b" stroke-width="1"/>
+  <line x1="0" y1="1" x2="1200" y2="1" stroke="#1e293b" stroke-width="1"/>
+  <!-- Corner brackets -->
+  <path d="M 20 38 L 20 18 L 40 18" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 1180 38 L 1180 18 L 1160 18" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 20 346 L 20 366 L 40 366" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <path d="M 1180 346 L 1180 366 L 1160 366" fill="none" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Left: Branding text -->
+  <g transform="translate(80, 145)">
+    <!-- Eyebrow -->
+    <text x="0" y="-60" font-family="'SF Mono', Consolas, monospace" font-size="11" fill="#64748b" letter-spacing="2">
+      // V2.3.0 · KERNEL-LEVEL PROTECTION · OPEN SOURCE
+    </text>
+
+    <!-- Main title -->
+    <text x="-3" y="-5" font-family="-apple-system, 'Inter', 'Segoe UI', sans-serif" font-size="68" font-weight="800" fill="url(#metal-text)" letter-spacing="-2">
+      CALVARY
+    </text>
+    <text x="2" y="32" font-family="-apple-system, 'Inter', 'Segoe UI', sans-serif" font-size="22" font-weight="500" fill="#94a3b8" letter-spacing="7">
+      PORN BLOCKER
+    </text>
+
+    <!-- Tagline -->
+    <text font-family="-apple-system, 'Inter', 'Segoe UI', sans-serif" font-size="13" fill="#64748b" letter-spacing="0.3">
+      <tspan x="2" y="65">Christian multi-layered content filtering — SafeSearch, app blocking,</tspan>
+      <tspan x="2" y="83">intelligent media blurring. Free for families, ministries &amp; schools.</tspan>
+    </text>
+
+    <!-- Status pill -->
+    <g transform="translate(0, 110)">
+      <rect width="160" height="28" rx="14" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+      <g transform="translate(16,14)">
+        <circle cx="0" cy="0" r="4" fill="#10b981" filter="url(#glow-sharp)"/>
+        <circle cx="0" cy="0" r="4" fill="#10b981" class="status-ping"/>
+      </g>
+      <text x="30" y="18" font-family="-apple-system, 'Inter', sans-serif" font-size="11" fill="#34d399" font-weight="600" letter-spacing="1">SYSTEM ACTIVE</text>
+    </g>
+
+    <!-- Metric pill -->
+    <g transform="translate(175, 110)">
+      <rect width="150" height="28" rx="4" fill="rgba(30,41,59,0.5)" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="18" font-family="'SF Mono', Consolas, monospace" font-size="11" fill="#94a3b8">
+        github.com/evgjohnmorris
+      </text>
+    </g>
+  </g>
+
+  <!-- Right: Vertical separator accent line -->
+  <line x1="780" y1="60" x2="780" y2="324" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Subreddit label (bottom right area) -->
+  <g transform="translate(800, 330)">
+    <rect width="170" height="22" rx="11" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+    <text x="85" y="15" font-family="'SF Mono', Consolas, monospace" font-size="10" fill="#7dd3fc" text-anchor="middle" letter-spacing="1">r/CalvaryPornBlocker</text>
+  </g>
+</svg>
